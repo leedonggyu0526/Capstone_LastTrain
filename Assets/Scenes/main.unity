@@ -352,7 +352,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 81902642}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &81902642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +805,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 354249207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &354249207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,7 +1074,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 459126797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &459126797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,7 +1516,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56, y: 87, z: -10}
+  m_LocalPosition: {x: 0.40000153, y: 1.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1580,7 +1616,7 @@ Transform:
   m_GameObject: {fileID: 530203429}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 55.9565, y: 87.0262, z: 0}
+  m_LocalPosition: {x: 0.35650253, y: 1.5261993, z: 0}
   m_LocalScale: {x: 1.1736898, y: 1.0052657, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1739,7 +1775,7 @@ Transform:
   m_GameObject: {fileID: 619394800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56, y: 87, z: 0}
+  m_LocalPosition: {x: 0.4, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1828,7 +1864,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662874980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &662874980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,7 +2440,7 @@ Transform:
   m_GameObject: {fileID: 855870500}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 58.5, y: 87, z: 0}
+  m_LocalPosition: {x: 2.9000015, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2721,7 +2769,7 @@ Transform:
   m_GameObject: {fileID: 1225962384}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56, y: 87, z: 0}
+  m_LocalPosition: {x: 0.40000153, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2900,7 +2948,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1327004442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1327004442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3568,7 +3628,7 @@ Transform:
   m_GameObject: {fileID: 1614425846}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56, y: 87, z: 0}
+  m_LocalPosition: {x: 0.40000153, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3943,7 +4003,7 @@ Transform:
   m_GameObject: {fileID: 1714161962}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51, y: 87, z: 0}
+  m_LocalPosition: {x: -4.5999985, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3979,6 +4039,51 @@ MonoBehaviour:
   minSpawn: 1
   maxSpawn: 5
   maxPassengers: 100
+--- !u!1 &1766774552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766774554}
+  - component: {fileID: 1766774553}
+  m_Layer: 0
+  m_Name: GearController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1766774553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766774552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc81805d546eae04bab0a687ff189285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundScrolling: {fileID: 2004816812}
+--- !u!4 &1766774554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766774552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 65.630684, y: 53.136875, z: -0.31846672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1787409405
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,7 +4206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1830610169}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1766774553}
+        m_TargetAssemblyTypeName: GearSpeedController, Assembly-CSharp
+        m_MethodName: SetGearSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1830610169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4503,7 +4620,7 @@ Transform:
   m_GameObject: {fileID: 1971168419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.5, y: 87, z: 0}
+  m_LocalPosition: {x: -2.0999985, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4776,3 +4893,4 @@ SceneRoots:
   - {fileID: 419664207}
   - {fileID: 1940293927}
   - {fileID: 724312882}
+  - {fileID: 1766774554}
