@@ -1,0 +1,30 @@
+# 기본: 모든 파일을 텍스트로 간주하되, Git이 자동으로 바이너리/텍스트를 판별
+* text=auto
+
+# 코드 파일: LF 줄바꿈, C# diff 지원
+*.cs text diff=csharp eol=lf
+
+# Unity YAML 자산: LF 줄바꿈, merge/diff 지원
+*.meta text merge=unityyamlmerge eol=lf
+*.unity text merge=unityyamlmerge eol=lf
+*.asset text merge=unityyamlmerge eol=lf
+*.prefab text merge=unityyamlmerge eol=lf
+*.mat text merge=unityyamlmerge eol=lf
+*.anim text merge=unityyamlmerge eol=lf
+*.controller text merge=unityyamlmerge eol=lf
+
+# 기타 텍스트 파일: LF 줄바꿈
+*.json text eol=lf
+*.txt text eol=lf
+
+# 바이너리 파일: 변환하지 않음
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.fbx binary
+*.zip binary
+*.unitypackage binary
