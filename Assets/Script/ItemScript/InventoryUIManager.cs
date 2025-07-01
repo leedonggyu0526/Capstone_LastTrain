@@ -42,13 +42,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         detailImage.sprite = item.artwork;
         detailName.text = item.itemName;
-
-        // 예시 효과 (아이템 이름에 따라 조건적으로 설정해도 됨)
-        if (item.itemName.Contains("빵"))
-            detailEffect.text = "<color=green>식량 생산량 +35%</color>";
-        else
-            detailEffect.text = item.itemEffect;
-
+        detailEffect.text = item.itemEffect;
         detailDescription.text = item.description;
     }
     // Open/Close

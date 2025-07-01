@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fdf05c0f983047488416ea34576894b, type: 3}
-  m_Name: 0
+  m_Name: Item_2
   m_EditorClassIdentifier: 
-  ID: 0
-  itemName: test
-  itemEffect: 1
-  description: 2
-  artwork: {fileID: 4919500086455055436, guid: 4132ad5fd5952b24680db0a7004c6ac3, type: 3}
+  ID: 2
+  itemName: asdf
+  itemEffect: asdfg12345
+  description: qwert
+  artwork: {fileID: 0}
