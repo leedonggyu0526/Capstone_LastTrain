@@ -22,7 +22,37 @@ public enum CardRarity
 
 public enum CardID
 {
-    Water1, //워터1,2,3 불1,2,3
+    Water1, //워터1,2,3
+    Water2,
+    Water3,
+    umbrella1, //우산
+    umbrella2,
+    umbrella3,
+    track1, //선로
+    track2, 
+    track3,
+    urethane1, 
+    urethane2, 
+    urethane3, //우레탄
+    sprayer1, 
+    sprayer2, 
+    sprayer3, //물 분사기
+    box1, 
+    box2,
+    box3, //미끼상자
+    fire1, 
+    fire2, 
+    fire3, //소화기
+    drill1, 
+    drill2, 
+    drill3, //드릴
+    bed1, 
+    bed2, 
+    bed3, // 매트리스
+    Durability1, 
+    Durability2, 
+    Durability3, //내구도
+
 
 }
 

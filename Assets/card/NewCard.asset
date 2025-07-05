@@ -15,4 +15,6 @@ MonoBehaviour:
   cardName: 
   description: 
   artwork: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: -8838095879787605469, guid: d015e8246c3dbff47ac517ef7a61a7d1, type: 3}
+  rarity: 0
+  cardID: 0
