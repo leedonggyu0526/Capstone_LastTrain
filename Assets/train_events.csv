@@ -1,0 +1,4 @@
+eventID,eventName,eventDescription,eventChoice1,eventChoice1Description,eventChoice2,eventChoice2Description,eventChoice3,eventChoice3Description
+A,첫 번째 이벤트,이것은 첫 번째 테스트 이벤트입니다.,선택지 1,첫 번째 선택지 설명,선택지 2,두 번째 선택지 설명,선택지 3,세 번째 선택지 설명
+B,두 번째 이벤트,이것은 두 번째 테스트 이벤트입니다.,옵션 A,첫 번째 옵션 설명,옵션 B,두 번째 옵션 설명,옵션 C,세 번째 옵션 설명
+C,세 번째 이벤트,이것은 세 번째 테스트 이벤트입니다.,결정 1,첫 번째 결정 설명,결정 2,두 번째 결정 설명,결정 3,세 번째 결정 설명 
