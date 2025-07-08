@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: asdf
   itemEffect: asdfg12345
   description: qwert
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: b967e84266cd56b4ab250bdd32d4de7d, type: 3}

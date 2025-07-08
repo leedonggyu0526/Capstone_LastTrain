@@ -940,6 +940,7 @@ MonoBehaviour:
   detailDescription: {fileID: 998053849}
   ownedItems:
   - {fileID: 11400000, guid: 015abe8837a3f844b934f847099d7299, type: 2}
+  - {fileID: 11400000, guid: 00a318bf85e834845bdb008514c8aec1, type: 2}
 --- !u!4 &969950084
 Transform:
   m_ObjectHideFlags: 0
