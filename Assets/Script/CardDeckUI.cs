@@ -4,34 +4,34 @@ using TMPro;
 
 public class CardDeckUI : MonoBehaviour
 {
-    public CardDeck playerDeck;           // Ä«µå µ¦ Á¤º¸
-    public GameObject cardSlotPrefab;     // Ä«µå ½½·Ô ÇÁ¸®ÆÕ
-    public Transform cardGrid;            // Ä«µåµéÀ» ´ãÀ» Grid
-    public GameObject deckPanel;          // ÀüÃ¼ ÆĞ³Î (ÄÑ°í ²ô´Â ¿ëµµ)
+    public CardDeck playerDeck;           // í”Œë ˆì´ì–´ ë±
+    public GameObject cardSlotPrefab;     // ì¹´ë“œ ìŠ¬ë¡¯ í”„ë¦¬í©
+    public Transform cardGrid;            // ì¹´ë“œ ê·¸ë¦¬ë“œ
+    public GameObject deckPanel;          // ë± íŒ¨ë„
 
-    // µ¦ ¿­±â
+    // ë± ì—´ê¸°
     public void OpenDeck()
     {
         deckPanel.SetActive(true);
         RefreshDeckUI();
     }
 
-    // µ¦ ´İ±â
+    // ë± ë‹«ê¸°
     public void CloseDeck()
     {
         deckPanel.SetActive(false);
     }
 
-    // Ä«µå µ¦ UI °»½Å
+    // ë± UI ìƒˆë¡œê³ ì¹¨
     public void RefreshDeckUI()
     {
-        // ±âÁ¸ Ä«µå ½½·Ô ´Ù Á¦°Å
+        // í”Œë ˆì´ì–´ ë± ì´ˆê¸°í™”
         foreach (Transform child in cardGrid)
         {
             Destroy(child.gameObject);
         }
 
-        // ÇöÀç º¸À¯ ÁßÀÎ Ä«µåµé ½½·Ô »ı¼º
+        // í”Œë ˆì´ì–´ ë± ì¹´ë“œ ìƒì„±
         foreach (CardInstance ci in playerDeck.deck)
         {
             GameObject slot = Instantiate(cardSlotPrefab, cardGrid);
