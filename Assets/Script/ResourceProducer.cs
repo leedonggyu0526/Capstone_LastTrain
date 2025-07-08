@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-// ResourceProducer.cs
 public class ResourceProducer : MonoBehaviour
 {
     [Header("생산 설정")]
-    public ResourceType resourceType;      // 어떤 자원 생산할지
-    public int amountPerCycle = 100;       // 한 사이클당 생산량
-    public float productionInterval = 10f; // 생산 간격(초)
+    public ResourceType resourceType;
+    public int amountPerCycle = 100;
+    public float productionInterval = 5f;
+
+    private float multiplier = 1f;
 
     void Start()
     {
@@ -19,7 +20,14 @@ public class ResourceProducer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(productionInterval);
-            ResourceManager.Instance.AddResource(resourceType, amountPerCycle);
+            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier);
+            ResourceManager.Instance.AddResource(resourceType, finalAmount);
         }
+    }
+
+    // 업그레이드 매니저에서 호출할 함수
+    public void SetMultiplier(float value)
+    {
+        multiplier = value;
     }
 }

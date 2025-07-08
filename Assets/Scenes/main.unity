@@ -1189,7 +1189,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 185489131}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419664209}
+        m_TargetAssemblyTypeName: TrainUpgradeManager, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &185489131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,16 +1920,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a56c7cdfe22c8143b74c00367c3b30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipPanel: {fileID: 574776174}
+  tooltipText: {fileID: 1617708440}
   level: 1
   baseFoodCost: 50
   basePartCost: 50
-  costMultiplier: 2
-  foodProducer: {fileID: 0}
-  partProducer: {fileID: 0}
-  productionMultiplier: 1.2
-  upgradeButton: {fileID: 185489130}
-  tooltipPanel: {fileID: 574776174}
-  tooltipText: {fileID: 1617708440}
+  resourceProducers:
+  - {fileID: 1225962387}
+  - {fileID: 1971168423}
 --- !u!1 &428109706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,7 +2559,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574776174}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

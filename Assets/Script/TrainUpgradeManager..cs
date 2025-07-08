@@ -1,99 +1,80 @@
-using UnityEngine;
-using UnityEngine.UI;
+ï»¿using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class TrainUpgradeManager : MonoBehaviour
 {
-    [Header("¾÷±×·¹ÀÌµå ¼³Á¤")]
-    public int level = 1;                        // ÇöÀç ¾÷±×·¹ÀÌµå ·¹º§
-    public float baseFoodCost = 50f;             // Ã¹ ¾÷±×·¹ÀÌµåÀÇ ½Ä·® ºñ¿ë
-    public float basePartCost = 50f;             // Ã¹ ¾÷±×·¹ÀÌµåÀÇ ¸Ó½Å ÆÄÆ® ºñ¿ë
-    public float costMultiplier = 2f;            // ¾÷±×·¹ÀÌµåÇÒ¼ö·Ï ºñ¿ë ¹è¼ö
+    [Header("Tooltip UI")]
+    public GameObject tooltipPanel;
+    public TextMeshProUGUI tooltipText;
 
-    [Header("»ı»ê ½Ã½ºÅÛ")]
-    public ResourceProducer foodProducer;        // ½Ä·® »ı»ê ¿ÀºêÁ§Æ® ¿¬°á
-    public ResourceProducer partProducer;        // ¸Ó½Å ÆÄÆ® »ı»ê ¿ÀºêÁ§Æ® ¿¬°á
-    public float productionMultiplier = 1.2f;    // ¾÷±×·¹ÀÌµå ½Ã »ı»ê·® 20% Áõ°¡
+    [Header("Upgrade Settings")]
+    public int level = 1;
+    public int baseFoodCost = 50;
+    public int basePartCost = 50;
 
-    [Header("UI ÂüÁ¶")]
-    public Button upgradeButton;                 // ¾÷±×·¹ÀÌµå ¹öÆ°
-    public GameObject tooltipPanel;              // ÅøÆÁ ÆĞ³Î (±âº» ºñÈ°¼ºÈ­)
-    public TMP_Text tooltipText;                 // ÅøÆÁ ¾ÈÀÇ ÅØ½ºÆ®
-
-    private ResourceManager resourceManager;
+    [Header("Linked Resource Producers")]
+    public List<ResourceProducer> resourceProducers; // Inspectorì—ì„œ ì—°ê²°
 
     private void Start()
     {
-        resourceManager = ResourceManager.Instance;
+        UpdateTooltipText();
+        HideTooltip();
+        UpdateProductionMultiplier(); // ì‹œì‘ ì‹œ ì´ˆê¸° multiplier ì ìš©
+    }
 
-        // ÅøÆÁ ±âº» ¼û±â±â
-        tooltipPanel.SetActive(false);
-
-        // ¹öÆ° Å¬¸¯ ÀÌº¥Æ® µî·Ï
-        upgradeButton.onClick.AddListener(Upgrade);
-
-        // ÃÊ±â ÅøÆÁ ÅØ½ºÆ® Ç¥½Ã
+    public void ShowTooltip()
+    {
+        tooltipPanel?.SetActive(true);
         UpdateTooltipText();
     }
 
-    // ÅøÆÁ ÅØ½ºÆ® °»½Å (·¹º§ ¹× ÇöÀç ºñ¿ë Ç¥½Ã)
-    private void UpdateTooltipText()
+    public void HideTooltip()
     {
-        float foodCost = baseFoodCost * Mathf.Pow(costMultiplier, level - 1);
-        float partCost = basePartCost * Mathf.Pow(costMultiplier, level - 1);
-        tooltipText.text = $"Lv.{level}\nFood: {foodCost}\nPart: {partCost}";
+        tooltipPanel?.SetActive(false);
     }
 
-    // ¾÷±×·¹ÀÌµå ½ÇÇà (¹öÆ° Å¬¸¯ ½Ã È£ÃâµÊ)
-    private void Upgrade()
+    public void Upgrade()
     {
-        float foodCost = baseFoodCost * Mathf.Pow(costMultiplier, level - 1);
-        float partCost = basePartCost * Mathf.Pow(costMultiplier, level - 1);
+        int foodCost = baseFoodCost * (int)Mathf.Pow(2, level - 1);
+        int partCost = basePartCost * (int)Mathf.Pow(2, level - 1);
 
-        if (resourceManager.GetResource(ResourceType.Food) >= foodCost &&
-            resourceManager.GetResource(ResourceType.MachinePart) >= partCost)
+        bool hasFood = ResourceManager.Instance.GetResource(ResourceType.Food) >= foodCost;
+        bool hasPart = ResourceManager.Instance.GetResource(ResourceType.MachinePart) >= partCost;
+
+        if (hasFood && hasPart)
         {
-            // ÀÚ¿ø ¼Òºñ
-            resourceManager.AddResource(ResourceType.Food, -(int)foodCost);
-            resourceManager.AddResource(ResourceType.MachinePart, -(int)partCost);
+            ResourceManager.Instance.AddResource(ResourceType.Food, -foodCost);
+            ResourceManager.Instance.AddResource(ResourceType.MachinePart, -partCost);
 
-            level++;  // ·¹º§ Áõ°¡
-            IncreaseProduction(); // »ı»ê·® Áõ°¡ Ã³¸®
-            UpdateTooltipText(); // ÅøÆÁ ³»¿ë °»½Å
+            level++;
+            UpdateTooltipText();
+            UpdateProductionMultiplier(); // â¬…ï¸ ì—…ê·¸ë ˆì´ë“œë§ˆë‹¤ multiplier ì ìš©
+            Debug.Log("Upgrade successful!");
         }
         else
         {
-            Debug.Log("ÀÚ¿øÀÌ ºÎÁ·ÇÕ´Ï´Ù!");
+            Debug.Log("Not enough resources.");
         }
     }
 
-    // »ı»ê·® Áõ°¡ Ã³¸®
-    private void IncreaseProduction()
+    private void UpdateTooltipText()
     {
-        // ½Ä·® »ı»ê ¿ÀºêÁ§Æ®°¡ ¿¬°áµÇ¾î ÀÖ°í, Å¸ÀÔÀÌ FoodÀÏ ¶§
-        if (foodProducer != null && foodProducer.resourceType == ResourceType.Food)
+        if (tooltipText == null) return;
+
+        int foodCost = baseFoodCost * (int)Mathf.Pow(2, level - 1);
+        int partCost = basePartCost * (int)Mathf.Pow(2, level - 1);
+
+        tooltipText.text = $"Level: {level}\nCost:\nFood: {foodCost}, Part: {partCost}";
+    }
+
+    private void UpdateProductionMultiplier()
+    {
+        float multiplier = 1f + (level - 1) * 0.2f;
+        foreach (var producer in resourceProducers)
         {
-            foodProducer.amountPerCycle = Mathf.CeilToInt(foodProducer.amountPerCycle * productionMultiplier);
-            Debug.Log($"[Food] »ı»ê·® Áõ°¡: {foodProducer.amountPerCycle}");
+            if (producer != null)
+                producer.SetMultiplier(multiplier);
         }
-
-        // ¸Ó½Å ÆÄÆ® »ı»ê ¿ÀºêÁ§Æ®°¡ ¿¬°áµÇ¾î ÀÖ°í, Å¸ÀÔÀÌ MachinePartÀÏ ¶§
-        if (partProducer != null && partProducer.resourceType == ResourceType.MachinePart)
-        {
-            partProducer.amountPerCycle = Mathf.CeilToInt(partProducer.amountPerCycle * productionMultiplier);
-            Debug.Log($"[Part] »ı»ê·® Áõ°¡: {partProducer.amountPerCycle}");
-        }
-    }
-
-    // ¸¶¿ì½º¸¦ ¹öÆ°¿¡ ¿Ã·ÈÀ» ¶§ ÅøÆÁ Ç¥½Ã
-    public void ShowTooltip()
-    {
-        tooltipPanel.SetActive(true);
-    }
-
-    // ¸¶¿ì½º¸¦ ¹öÆ°¿¡¼­ ¶ÃÀ» ¶§ ÅøÆÁ ¼û±è
-    public void HideTooltip()
-    {
-        tooltipPanel.SetActive(false);
     }
 }
