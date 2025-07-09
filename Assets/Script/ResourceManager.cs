@@ -1,7 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ResourceManager.cs
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
@@ -27,8 +27,15 @@ public class ResourceManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    //자원량 확인
-    void Update()
+    void Start()
+    {
+#if UNITY_EDITOR
+        // 에디터에서만 5초마다 리소스 로그 출력
+        InvokeRepeating(nameof(LogResources), 1f, 5f);
+#endif
+    }
+
+    void LogResources()
     {
         Debug.Log("=== Current Resources ===");
         foreach (ResourceType type in System.Enum.GetValues(typeof(ResourceType)))
@@ -37,7 +44,6 @@ public class ResourceManager : MonoBehaviour
             int max = maxCapacities.ContainsKey(type) ? maxCapacities[type] : -1;
             Debug.Log($"{type}: {current} / {max}");
         }
-
     }
 
     public void AddResource(ResourceType type, int amount)
@@ -55,11 +61,30 @@ public class ResourceManager : MonoBehaviour
         return resources[type];
     }
 
-    // ← 추가된 메서드: 각 자원의 최대치를 반환
     public int GetMaxCapacity(ResourceType type)
     {
         return maxCapacities.ContainsKey(type)
             ? maxCapacities[type]
             : int.MaxValue;
+    }
+
+    // 자원 소비용 함수
+    public bool ConsumeResources(ResourceType type, int amount)
+    {
+        if (!resources.ContainsKey(type))
+        {
+            Debug.LogWarning($"{type} 리소스가 존재하지 않습니다!");
+            return false;
+        }
+
+        if (resources[type] < amount)
+        {
+            Debug.LogWarning($"{type} 부족! 남은량: {resources[type]}");
+            return false;
+        }
+
+        resources[type] -= amount;
+        Debug.Log($"{type} -{amount} → 총 {resources[type]} (Max {maxCapacities[type]})");
+        return true;
     }
 }
