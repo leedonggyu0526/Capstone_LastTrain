@@ -4637,7 +4637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &826152851
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10885,6 +10885,7 @@ MonoBehaviour:
   detailDescription: {fileID: 1571243865}
   ownedItems:
   - {fileID: 11400000, guid: e08725ebb2c739b46873c8ad71ae98bf, type: 2}
+  - {fileID: 11400000, guid: 6ea78b15ab3fb12438e1a65ff388bb08, type: 2}
 --- !u!1 &1969818469
 GameObject:
   m_ObjectHideFlags: 0
