@@ -2352,6 +2352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6216db1f577fb28498dababc0640c58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardData: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  artworkImage: {fileID: 0}
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!225 &516490175
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2376,6 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737aa352b666b0349975b16e0dbc8eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardID: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +2931,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6216db1f577fb28498dababc0640c58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardData: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  artworkImage: {fileID: 0}
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!225 &573236319
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2949,6 +2960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737aa352b666b0349975b16e0dbc8eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardID: 2
 --- !u!1 &586703075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,6 +4595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737aa352b666b0349975b16e0dbc8eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardID: 4
 --- !u!114 &829141137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4595,6 +4608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6216db1f577fb28498dababc0640c58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardData: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  artworkImage: {fileID: 0}
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &849850721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6138,6 +6156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6216db1f577fb28498dababc0640c58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardData: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  artworkImage: {fileID: 0}
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!225 &1137107121
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6162,6 +6185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737aa352b666b0349975b16e0dbc8eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardID: 1
 --- !u!1 &1214837143
 GameObject:
   m_ObjectHideFlags: 0
@@ -9299,6 +9323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c175e9b52bd42142b8cb8f15465eedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSpawner: {fileID: 318708318}
 --- !u!1 &1765415867
 GameObject:
   m_ObjectHideFlags: 0
