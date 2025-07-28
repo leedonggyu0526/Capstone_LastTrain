@@ -11,7 +11,7 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (droppedCard == null)
         {
-            Debug.LogError("µå¶øµÈ Ä«µå°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("ë“œëëœ ì¹´ë“œê°€ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -19,25 +19,45 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (card != null)
         {
-            // ÀÌº¥Æ®°¡ ¾øÀ» °æ¿ì ¡æ Ä«µå º¹±Í
+            // ì´ë²¤íŠ¸ê°€ ì—†ì„ ê²½ìš° â†’ ì¹´ë“œ ë³µê·€
             if (eventSpawner.currentEventID == -1)
             {
-                Debug.Log("ÀÌº¥Æ®°¡ ¾ø½À´Ï´Ù! Ä«µå º¹±Í.");
-                card.ReturnToOriginalPositionSmooth(); // ¾Ö´Ï¸ŞÀÌ¼Ç º¹±Í ÃßÃµ
+                Debug.Log("ì´ë²¤íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤! ì¹´ë“œ ë³µê·€.");
+                card.ReturnToOriginalPositionSmooth(); // ì• ë‹ˆë©”ì´ì…˜ ë³µê·€ ì¶”ì²œ
                 return;
             }
 
-            // Ä«µå ID°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì ¡æ ¼º°ø
+            // ì¹´ë“œ IDê°€ ì¼ì¹˜í•˜ëŠ” ê²½ìš° â†’ ì„±ê³µ
             if (card.cardID == eventSpawner.currentEventID)
             {
-                Debug.Log("Á¤»óÀûÀÎ Ä«µå »ç¿ë! ÀÌº¥Æ® Á¦°Å");
+                Debug.Log("ì •ìƒì ì¸ ì¹´ë“œ ì‚¬ìš©! ì´ë²¤íŠ¸ ì œê±°");
+
+                // ì´ë²¤íŠ¸ ì œê±°
                 eventSpawner.DestroyCurrentEvent();
+
+                // ì›ë˜ ìœ„ì¹˜ì™€ ë¶€ëª¨ ì €ì¥
+                Vector2 originalPos = card.OriginalPosition;
+                Transform parent = card.parentTransform;
+                GameObject cardPrefab = card.cardPrefab;
+
+                // ì¹´ë“œ ì œê±°
                 Destroy(card.gameObject);
+
+                // ìƒˆë¡œìš´ ì¹´ë“œ ìƒì„±
+                GameObject newCard = Instantiate(cardPrefab, parent);
+                RectTransform rt = newCard.GetComponent<RectTransform>();
+                rt.anchoredPosition = originalPos; // ì›ë˜ ìœ„ì¹˜ì— ë°°ì¹˜
+
+                // ì¹´ë“œì— ì •ë³´ ë‹¤ì‹œ ì„¤ì • (ëœë¤ ID ì˜ˆì‹œ)
+                CardDrag newCardDrag = newCard.GetComponent<CardDrag>();
+                newCardDrag.cardID = Random.Range(0, 100); // ì‹¤ì œ ê²Œì„ì— ë§ëŠ” ID ë¶€ì—¬
+                newCardDrag.cardPrefab = cardPrefab;
+                newCardDrag.parentTransform = parent;
             }
             else
             {
-                // Ä«µå ID°¡ ´Ù¸¦ °æ¿ì ¡æ Ä«µå º¹±Í
-                Debug.Log("Ä«µå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù! Ä«µå º¹±Í.");
+                // ì¹´ë“œ IDê°€ ë‹¤ë¥¼ ê²½ìš° â†’ ì¹´ë“œ ë³µê·€
+                Debug.Log("ì¹´ë“œê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤! ì¹´ë“œ ë³µê·€.");
                 card.ReturnToOriginalPositionSmooth();
             }
         }
