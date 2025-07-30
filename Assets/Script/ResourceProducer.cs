@@ -3,11 +3,12 @@ using System.Collections;
 
 public class ResourceProducer : MonoBehaviour
 {
-    [Header("»ı»ê ¼³Á¤")]
+    [Header("ìƒì‚° ì„¤ì •")]
     public ResourceType resourceType;
     public int amountPerCycle = 100;
     public float productionInterval = 5f;
 
+    public float correction = 1f; 
     private float multiplier = 1f;
 
     void Start()
@@ -20,12 +21,12 @@ public class ResourceProducer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(productionInterval);
-            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier);
+            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier * correction);
             ResourceManager.Instance.AddResource(resourceType, finalAmount);
         }
     }
 
-    // ¾÷±×·¹ÀÌµå ¸Å´ÏÀú¿¡¼­ È£ÃâÇÒ ÇÔ¼ö
+    // ì—…ê·¸ë ˆì´ë“œ ë§¤ë‹ˆì €ì—ì„œ í˜¸ì¶œí•  í•¨ìˆ˜
     public void SetMultiplier(float value)
     {
         multiplier = value;
