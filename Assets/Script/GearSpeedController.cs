@@ -1,19 +1,27 @@
 using UnityEngine;
-
 public class GearSpeedController : MonoBehaviour
 {
     public BackgroundScrolling backgroundScrolling;
+    public CrossroadUI crossroadUI;
 
-    /// <summary>
-    /// 기어 단계 (0 ~ 5)을 받아서 속도 조절
-    /// </summary>
+    private float totalDistance = 0f;
+
     public void SetGearSpeed(int gearLevel)
     {
-        float[] speeds = { 1f, 2f, 3f, 4f, 5f, 6f }; // 원하는 속도
+        float[] speeds = { 1f, 2f, 3f, 4f, 5f, 6f };
         if (gearLevel >= 0 && gearLevel < speeds.Length)
         {
             backgroundScrolling.speed = speeds[gearLevel];
-            Debug.Log($"기어 {gearLevel + 1}단 → 속도 {speeds[gearLevel]}");
         }
+    }
+
+    private void Update()
+    {
+        float distanceThisFrame = backgroundScrolling.speed * Time.deltaTime;
+        totalDistance += distanceThisFrame;
+
+        crossroadUI.CheckDistance(totalDistance);
+
+        Debug.Log($"[이동 거리] {totalDistance:F2}m");
     }
 }
