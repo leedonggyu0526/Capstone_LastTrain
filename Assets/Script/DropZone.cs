@@ -3,10 +3,12 @@ using UnityEngine.EventSystems;
 
 public class DropZone : MonoBehaviour, IDropHandler
 {
-    public EventSpawner eventSpawner;
+    public EventSpawner eventSpawner;      // 현재 발생한 이벤트를 관리하는 컴포넌트
+    public CardSpawner spawner;            // 카드 덱에서 새 카드를 생성해주는 컴포넌트
 
     public void OnDrop(PointerEventData eventData)
     {
+        // 드래그된 오브젝트(카드)를 가져옴
         GameObject droppedCard = eventData.pointerDrag;
 
         if (droppedCard == null)
@@ -15,48 +17,37 @@ public class DropZone : MonoBehaviour, IDropHandler
             return;
         }
 
+        // 카드 드래그 컴포넌트 가져오기
         CardDrag card = droppedCard.GetComponent<CardDrag>();
 
         if (card != null)
         {
-            // 이벤트가 없을 경우 → 카드 복귀
+            // 이벤트가 아직 존재하지 않을 경우
             if (eventSpawner.currentEventID == -1)
             {
                 Debug.Log("이벤트가 없습니다! 카드 복귀.");
-                card.ReturnToOriginalPositionSmooth(); // 애니메이션 복귀 추천
+                card.ReturnToOriginalPositionSmooth();
                 return;
             }
 
-            // 카드 ID가 일치하는 경우 → 성공
+            // 카드 ID가 이벤트와 일치하는 경우: 카드 사용 성공
             if (card.cardID == eventSpawner.currentEventID)
             {
-                Debug.Log("정상적인 카드 사용! 이벤트 제거");
+                Debug.Log("정상적인 카드 사용! 이벤트 제거 및 새 카드 보충");
 
                 // 이벤트 제거
                 eventSpawner.DestroyCurrentEvent();
 
-                // 원래 위치와 부모 저장
-                Vector2 originalPos = card.OriginalPosition;
-                Transform parent = card.parentTransform;
-                GameObject cardPrefab = card.cardPrefab;
-
-                // 카드 제거
+                // 카드를 제거하고 위치 저장
+                Vector2 spawnPos = card.OriginalPosition;
                 Destroy(card.gameObject);
 
-                // 새로운 카드 생성
-                GameObject newCard = Instantiate(cardPrefab, parent);
-                RectTransform rt = newCard.GetComponent<RectTransform>();
-                rt.anchoredPosition = originalPos; // 원래 위치에 배치
-
-                // 카드에 정보 다시 설정 (랜덤 ID 예시)
-                CardDrag newCardDrag = newCard.GetComponent<CardDrag>();
-                newCardDrag.cardID = Random.Range(0, 100); // 실제 게임에 맞는 ID 부여
-                newCardDrag.cardPrefab = cardPrefab;
-                newCardDrag.parentTransform = parent;
+                // 덱에서 무작위 카드 생성
+                spawner.SpawnRandomCard(spawnPos);
             }
             else
             {
-                // 카드 ID가 다를 경우 → 카드 복귀
+                // 카드가 이벤트와 맞지 않을 경우: 원래 위치로 복귀
                 Debug.Log("카드가 맞지 않습니다! 카드 복귀.");
                 card.ReturnToOriginalPositionSmooth();
             }

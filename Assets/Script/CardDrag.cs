@@ -35,6 +35,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         // 부모 중 가장 가까운 Canvas 탐색
         canvas = GetComponentInParent<Canvas>();
+
+        // 자동 연결
+        if (cardPrefab == null)
+            cardPrefab = this.gameObject;
+
+        if (parentTransform == null)
+            parentTransform = transform.parent;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

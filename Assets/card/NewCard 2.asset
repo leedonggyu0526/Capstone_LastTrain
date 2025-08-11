@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b7d1bfcd2ff2d49afd078357b92a3f, type: 3}
-  m_Name: NewCard
+  m_Name: NewCard 2
   m_EditorClassIdentifier: 
-  cardName: "\uBB3C"
-  description: "\uBB3C \uC774\uBCA4\uD2B8 \uB300\uC751\uCE74\uB4DC"
-  artwork: {fileID: 5230911077920879800, guid: a8069d3bdad095c4484507c5fc629175, type: 3}
-  background: {fileID: -2384459870373602998, guid: 83823ade8a7c6f843b152a427e45283e, type: 3}
-  rarity: 0
-  cardID: 0
+  cardName: gold
+  description: gold card
+  artwork: {fileID: -6379066497812312220, guid: c3d54037baa554941b24b5973f53bcdb, type: 3}
+  background: {fileID: -909499429113436276, guid: 4a8c8604f345081429d2bdcaeb19aa98, type: 3}
+  rarity: 2
+  cardID: 2
