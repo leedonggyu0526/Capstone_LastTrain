@@ -10,14 +10,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 최초 위치 저장용
     private Vector2 originalPosition;
     public Vector2 OriginalPosition => originalPosition;// 최초 위치 저장용
-
     private Canvas canvas;
-
-    // 마우스와 카드 사이의 거리
-    private Vector2 offset;
+    private Vector2 offset; // 마우스와 카드 사이의 거리
 
     public int cardID; // 카드 ID
-
     public static bool isDragging = false; // 전체에서 드래그 중인지 여부 공유
 
     // 카드 프리팹 참조 (Inspector에서 연결)
