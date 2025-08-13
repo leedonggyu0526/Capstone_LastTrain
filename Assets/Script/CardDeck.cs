@@ -5,7 +5,7 @@ public class CardDeck : MonoBehaviour
 {
     public List<CardInstance> deck = new List<CardInstance>();
 
-    // Ä«µå Ãß°¡
+    // ì¹´ë“œ ì¶”ê°€
     public void AddCard(CardData cardData, int amount = 1)
     {
         CardInstance existing = deck.Find(c => c.cardData == cardData);
@@ -19,7 +19,7 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    // Ä«µå Á¦°Å
+    // ì¹´ë“œ ì œê±°
     public void RemoveCard(CardData cardData, int amount = 1)
     {
         CardInstance existing = deck.Find(c => c.cardData == cardData);
@@ -31,7 +31,7 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    // º¸À¯ ÁßÀÎ Ä«µå Áß ·£´ıÇÏ°Ô 1Àå ¹İÈ¯
+    // ì¹´ë“œ ëœë¤ ì¶”ì¶œ
     public CardData GetRandomCard()
     {
         List<CardData> expandedList = new List<CardData>();

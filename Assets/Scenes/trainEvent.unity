@@ -208,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 182661829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6369a1da8c6054a9854eb8e6edb627, type: 3}
+  m_Script: {fileID: 11500000, guid: c250ec3098307ec48ba581e2cdf68f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   trainEventCSV: {fileID: 4900000, guid: fe3550fde07872e4baedec0c921a8f68, type: 3}
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182941512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15dc88bd24284094598297eff9ddfa7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eb6d691501f36c4c83420801d170142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eventPanel: {fileID: 496071753}
@@ -413,7 +413,7 @@ MonoBehaviour:
   choice2Text: {fileID: 2097614872}
   choice3Text: {fileID: 1994189924}
   defaultEventImage: {fileID: 4091005629594397538, guid: 3f5ea633f4e56cf4bbf941cbdd13dd98, type: 3}
-  loadingImage: {fileID: -3549493382825583616, guid: 6d2eb0025547c3d44b11e6833fa02fd8, type: 3}
+  loadingImage: {fileID: 0}
   typingSpeed: 0.1
   fadeSpeed: 0.5
   enableDynamicImageLoading: 1

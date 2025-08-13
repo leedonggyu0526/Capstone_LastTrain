@@ -9,19 +9,19 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 originalPosition;
     private Canvas canvas;
 
-    // ¸¶¿ì½º¿Í Ä«µå »çÀÌÀÇ °Å¸®
+    // ë“œë˜ê·¸ ì˜¤í”„ì…‹
     private Vector2 offset;
 
-    public int cardID; // Ä«µå ID
+    public int cardID; // ì¹´ë“œ ID
 
-    public static bool isDragging = false; // ÀüÃ¼¿¡¼­ µå·¡±× ÁßÀÎÁö ¿©ºÎ °øÀ¯
+    public static bool isDragging = false; // ë“œë˜ê·¸ ì¤‘ì¸ì§€ í™•ì¸
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        // ºÎ¸ğ Áß °¡Àå °¡±î¿î Canvas Å½»ö
+        // ì¹´ë“œ ë¶€ëª¨ ìº”ë²„ìŠ¤ ì°¾ê¸°
         canvas = GetComponentInParent<Canvas>();
     }
 
@@ -32,7 +32,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         isDragging = true;
         originalPosition = rectTransform.anchoredPosition;
 
-        // ºÎ¸ğ ±âÁØÀ¸·Î ¸¶¿ì½º À§Ä¡ ¹Ş¾Æ offset °è»ê
+        // ì¹´ë“œ ì›ë˜ ìœ„ì¹˜ì—ì„œ ë“œë˜ê·¸ ì‹œì‘ ìœ„ì¹˜ ì°¨ì´ ê³„ì‚°
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform.parent as RectTransform,
             eventData.position,
@@ -42,7 +42,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         offset = rectTransform.anchoredPosition - localMousePosition;
 
-        // µå·¡±× Áß raycast ¸·Áö ¾Êµµ·Ï
+        // ë“œë˜ê·¸ ì¤‘ì—ëŠ” ì¹´ë“œ ë ˆì´ìºìŠ¤íŠ¸ ë¹„í™œì„±í™”
         canvasGroup.blocksRaycasts = false;
     }
 
@@ -50,7 +50,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (!isDragging) return;
 
-        // ¸¶¿ì½º À§Ä¡¸¦ ºÎ¸ğ ±âÁØÀ¸·Î º¯È¯
+        // ë“œë˜ê·¸ ì‹œì‘ ìœ„ì¹˜ì—ì„œ í˜„ì¬ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ ê³„ì‚°
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform.parent as RectTransform,
             eventData.position,
@@ -58,7 +58,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             out Vector2 localMousePosition
         );
 
-        // ¸¶¿ì½º À§Ä¡ + offsetÀ¸·Î Ä«µå ÀÌµ¿
+        // ë“œë˜ê·¸ ì‹œì‘ ìœ„ì¹˜ + ì°¨ì´ ë§Œí¼ ì¹´ë“œ ì´ë™
         rectTransform.anchoredPosition = localMousePosition + offset;
     }
 
@@ -68,7 +68,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         canvasGroup.blocksRaycasts = true;
 
-        // µå·ÓÁ¸ÀÌ ¾Æ´Ï¸é ¿øÀ§Ä¡·Î ºÎµå·´°Ô º¹±Í
+        // ë“œë˜ê·¸ ì¢…ë£Œ ì‹œ ë“œë ì˜ì—­ì— ë“¤ì–´ê°€ì§€ ì•Šìœ¼ë©´ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
         if (eventData.pointerEnter == null || !eventData.pointerEnter.CompareTag("DropZone"))
         {
             ReturnToOriginalPositionSmooth();
@@ -79,7 +79,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void ReturnToOriginalPositionSmooth()
     {
-        StopAllCoroutines(); // Áßº¹ ÀÌµ¿ ¹æÁö
+        StopAllCoroutines(); // ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
         StartCoroutine(SmoothMove());
     }
 

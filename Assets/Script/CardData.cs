@@ -5,9 +5,9 @@ public class CardData : ScriptableObject
 {
     public string cardName;
     [TextArea(2, 4)] public string description;
-    public Sprite artwork;       // Ä«µå ÀÏ·¯½ºÆ®
-    public Sprite background;    // Ä«µå µŞ¹è°æ ÀÌ¹ÌÁö (Ãß°¡µÊ)
-    public CardRarity rarity; //Ä«µå µî±Ş
+    public Sprite artwork;       // ì¹´ë“œ ì´ë¯¸ì§€
+    public Sprite background;    // ì¹´ë“œ ë°°ê²½ ì´ë¯¸ì§€
+    public CardRarity rarity; //ì¹´ë“œ ë“±ê¸‰
 
 }
 

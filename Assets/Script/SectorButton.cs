@@ -1,16 +1,16 @@
 using UnityEngine;
 
 /// <summary>
-/// Áß½É°¢ÀÌ 30µµÀÎ ºÎÃ¤²Ã Mesh¸¦ ¸¸µé¾îÁÖ´Â ÄÄÆ÷³ÍÆ®
+/// ì¤‘ì‹¬ê°ì´ 30ë„ì¸ ë¶€ì±„ê¼´ Meshë¥¼ ìƒì„±í•˜ëŠ” ì»´í¬ë„ŒíŠ¸
 /// </summary>
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(PolygonCollider2D))]
 public class SectorButton : MonoBehaviour
 {
-    public float radius = 100f; // ¹İÁö¸§
-    public int segments = 10; // ºÎÃ¤²ÃÀ» ³ª´­ Á¶°¢ ¼ö
-    public float angleDegree = 30f; // Áß½É°¢
+    public float radius = 100f; // ë°˜ì§€ë¦„
+    public int segments = 10; // ë¶€ì±„ê¼´ì˜ ë¶€ë“œëŸ¬ìš´ ì •ë„ ìˆ˜
+    public float angleDegree = 30f; // ì¤‘ì‹¬ê°
 
-    public int buttonIndex; // ¹öÆ° °íÀ¯ ¹øÈ£
+    public int buttonIndex; // ë²„íŠ¼ ì‹ë³„ ë²ˆí˜¸
 
     
     void Start()
@@ -23,7 +23,7 @@ public class SectorButton : MonoBehaviour
         MeshFilter mf = GetComponent<MeshFilter>();
         Mesh mesh = new Mesh();
 
-        int vertCount = segments + 2; // Áß½ÉÁ¡ + ¿Ü°û Á¡µé
+        int vertCount = segments + 2; // ì¤‘ì‹¬ì  + ì™¸ê° ì •ì 
         Vector3[] vertices = new Vector3[vertCount];
         int[] triangles = new int[segments * 3];
 
@@ -31,7 +31,7 @@ public class SectorButton : MonoBehaviour
         float anglePerSegment = angleRad / segments;
 
 
-        vertices[0] = Vector3.zero; // Áß½ÉÁ¡
+        vertices[0] = Vector3.zero; // ì¤‘ì‹¬ì 
 
 
 
@@ -57,7 +57,7 @@ public class SectorButton : MonoBehaviour
 
         mf.mesh = mesh;
 
-        // PolygonCollider2D Ãæµ¹ ¿µ¿ª ÁöÁ¤
+        // PolygonCollider2D ì¶©ëŒ ì˜ì—­ ì„¤ì •
         PolygonCollider2D collider = GetComponent<PolygonCollider2D>();
         Vector2[] colliderPoints = new Vector2[vertCount];
         for (int i = 0; i < vertCount; i++)
@@ -71,12 +71,12 @@ public class SectorButton : MonoBehaviour
 
         switch (buttonIndex)
         {
-            case 0: Debug.Log("±â¾î 1´Ü ¼³Á¤"); break;
-            case 1: Debug.Log("±â¾î 2´Ü ¼³Á¤"); break;
-            case 2: Debug.Log("±â¾î 3´Ü ¼³Á¤"); break;
-            case 3: Debug.Log("±â¾î 4´Ü ¼³Á¤"); break;
-            case 4: Debug.Log("±â¾î 5´Ü ¼³Á¤"); break;
-            case 5: Debug.Log("±â¾î 6´Ü ¼³Á¤"); break;
+            case 0: Debug.Log("ì„¹í„° 1ë²ˆ í´ë¦­"); break;
+            case 1: Debug.Log("ì„¹í„° 2ë²ˆ í´ë¦­"); break;
+            case 2: Debug.Log("ì„¹í„° 3ë²ˆ í´ë¦­"); break;
+            case 3: Debug.Log("ì„¹í„° 4ë²ˆ í´ë¦­"); break;
+            case 4: Debug.Log("ì„¹í„° 5ë²ˆ í´ë¦­"); break;
+            case 5: Debug.Log("ì„¹í„° 6ë²ˆ í´ë¦­"); break;
         }
     }
 }

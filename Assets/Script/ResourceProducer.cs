@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ResourceProducer : MonoBehaviour
 {
-    [Header("»ı»ê ¼³Á¤")]
+    [Header("ìƒì‚° ì„¤ì •")]
     public ResourceType resourceType;
     public int amountPerCycle = 100;
     public float productionInterval = 5f;
@@ -25,7 +25,7 @@ public class ResourceProducer : MonoBehaviour
         }
     }
 
-    // ¾÷±×·¹ÀÌµå ¸Å´ÏÀú¿¡¼­ È£ÃâÇÒ ÇÔ¼ö
+    // ì—…ê·¸ë ˆì´ë“œ ë§¤ë‹ˆì €ì—ì„œ í˜¸ì¶œí•  í•¨ìˆ˜
     public void SetMultiplier(float value)
     {
         multiplier = value;

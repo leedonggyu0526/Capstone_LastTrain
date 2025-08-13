@@ -5,15 +5,15 @@ public class GearSpeedController : MonoBehaviour
     public BackgroundScrolling backgroundScrolling;
 
     /// <summary>
-    /// ±â¾î ´Ü°è (0 ~ 5)À» ¹Ş¾Æ¼­ ¼Óµµ Á¶Àı
+    /// ê¸°ì–´ ì†ë„ (0 ~ 5) ì„¤ì •
     /// </summary>
     public void SetGearSpeed(int gearLevel)
     {
-        float[] speeds = { 1f, 2f, 3f, 4f, 5f, 6f }; // ¿øÇÏ´Â ¼Óµµ
+        float[] speeds = { 1f, 2f, 3f, 4f, 5f, 6f }; // ê¸°ì–´ ì†ë„
         if (gearLevel >= 0 && gearLevel < speeds.Length)
         {
             backgroundScrolling.speed = speeds[gearLevel];
-            Debug.Log($"±â¾î {gearLevel + 1}´Ü ¡æ ¼Óµµ {speeds[gearLevel]}");
+            Debug.Log($"ê¸°ì–´ {gearLevel + 1}ë²ˆ ì†ë„ {speeds[gearLevel]}");
         }
     }
 }

@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class EventObject : MonoBehaviour
 {
-    public int eventID; // ÀÌº¥Æ® ID
+    public int eventID; // ì´ë²¤íŠ¸ ID
 
-    // Ã³À½¿¡´Â ºñÈ°¼ºÈ­
+    // ì´ë²¤íŠ¸ í™œì„±í™”
     void Start()
     {
         gameObject.SetActive(false);
     }
 
-    // ÀÌº¥Æ® ½ÃÀÛ ½Ã È£Ãâ
+    // ì´ë²¤íŠ¸ í™œì„±í™”
     public void ActivateEvent()
     {
         gameObject.SetActive(true);
     }
 
-    // ÀÌº¥Æ® Á¾·á ½Ã È£Ãâ
+    // ì´ë²¤íŠ¸ ë¹„í™œì„±í™”
     public void DeactivateEvent()
     {
         gameObject.SetActive(false);

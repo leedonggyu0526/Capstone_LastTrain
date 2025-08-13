@@ -1,8 +1,8 @@
 // TrainResource.cs
 public enum ResourceType
 {
-    Fuel,        // ¿¬·á
-    Food,        // ½Ä·®
-    MachinePart, // ±â°èºÎÇ°
-    Passenger    // ½Â°´
+    Fuel,        // ì—°ë£Œ
+    Food,        // ì‹ëŸ‰
+    MachinePart, // ê¸°ê³„ë¶€í’ˆ
+    Passenger    // ìŠ¹ê°
 }

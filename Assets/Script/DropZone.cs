@@ -11,7 +11,7 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (droppedCard == null)
         {
-            Debug.LogError("µå¶øµÈ Ä«µå°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("ì¹´ë“œê°€ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -19,25 +19,25 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (card != null)
         {
-            // ÀÌº¥Æ®°¡ ¾øÀ» °æ¿ì ¡æ Ä«µå º¹±Í
+            // ì´ë²¤íŠ¸ ìŠ¤í¬ë„ˆê°€ ì—†ìœ¼ë©´ ì¹´ë“œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
             if (eventSpawner.currentEventID == -1)
             {
-                Debug.Log("ÀÌº¥Æ®°¡ ¾ø½À´Ï´Ù! Ä«µå º¹±Í.");
-                card.ReturnToOriginalPositionSmooth(); // ¾Ö´Ï¸ŞÀÌ¼Ç º¹±Í ÃßÃµ
+                Debug.Log("ì´ë²¤íŠ¸ ìŠ¤í¬ë„ˆê°€ ì—†ìŠµë‹ˆë‹¤! ì¹´ë“œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™.");
+                card.ReturnToOriginalPositionSmooth(); // ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
                 return;
             }
 
-            // Ä«µå ID°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì ¡æ ¼º°ø
+            // ì¹´ë“œ IDì™€ ì´ë²¤íŠ¸ IDê°€ ì¼ì¹˜í•˜ë©´ ì´ë²¤íŠ¸ ì œê±°
             if (card.cardID == eventSpawner.currentEventID)
             {
-                Debug.Log("Á¤»óÀûÀÎ Ä«µå »ç¿ë! ÀÌº¥Æ® Á¦°Å");
+                Debug.Log("ì´ë²¤íŠ¸ ìŠ¤í¬ë„ˆê°€ ìˆìŠµë‹ˆë‹¤! ì´ë²¤íŠ¸ ì œê±°");
                 eventSpawner.DestroyCurrentEvent();
                 Destroy(card.gameObject);
             }
             else
             {
-                // Ä«µå ID°¡ ´Ù¸¦ °æ¿ì ¡æ Ä«µå º¹±Í
-                Debug.Log("Ä«µå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù! Ä«µå º¹±Í.");
+                // ì¹´ë“œ IDì™€ ì´ë²¤íŠ¸ IDê°€ ì¼ì¹˜í•˜ì§€ ì•Šìœ¼ë©´ ì¹´ë“œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
+                Debug.Log("ì¹´ë“œ IDì™€ ì´ë²¤íŠ¸ IDê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤! ì¹´ë“œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™.");
                 card.ReturnToOriginalPositionSmooth();
             }
         }
