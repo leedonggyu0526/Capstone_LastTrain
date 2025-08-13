@@ -1,44 +1,70 @@
+// CrossroadUI.cs
 using UnityEngine;
 
 public class CrossroadUI : MonoBehaviour
 {
-    public GameObject uiPopup;
-    public float[] possibleDistances = { 200f, 300f, 400f, 500f };
+    [Header("UI")]
+    public CrossroadUIController uiController;
 
-    private float nextTriggerDistance;
-    private bool hasInitialized = false;
+    [Header("Offsets")]
+    public float[] possibleDistances = { 200f, 300f, 400f, 600f };
 
-    private void Start()
+    [Header("State")]
+    [SerializeField] private float nextTriggerDistance = 0f;
+    [SerializeField] private bool initialized = false;
+
+    // 읽기용
+    public bool IsInitialized => initialized;
+    public float CurrentTarget => nextTriggerDistance;
+
+    void Start()
     {
         SetNextTriggerDistance(0f);
+        Debug.Log($"[CrossroadUI] Start → 다음 목표: {nextTriggerDistance}");
+        if (uiController == null) Debug.LogError("[CrossroadUI] uiController가 NULL 입니다. (CrossroadUIController 연결 필수)");
     }
 
-    public void CheckDistance(float distance)
+    public void CheckDistance(float totalDistance)
     {
-        if (!hasInitialized) return;
-
-        if (distance >= nextTriggerDistance)
+        if (!initialized)
         {
-            ShowPopup();
-            SetNextTriggerDistance(distance);
+            Debug.LogWarning("[CrossroadUI] 초기화 전(CheckDistance 호출됨).");
+            return;
+        }
+
+        // 디버그: 매 1초에 한 번쯤만 찍고 싶으면 타이머로 감싸도 됨
+        Debug.Log($"[CrossroadUI] CheckDistance 호출: 현재={totalDistance:F1}, 목표={nextTriggerDistance:F1}, 패널활성={(uiController?.panel != null && uiController.panel.activeSelf)}");
+
+        // (원하면) 패널 열려있을 때 중복 방지
+        if (uiController != null && uiController.panel != null && uiController.panel.activeSelf)
+            return;
+
+        if (totalDistance >= nextTriggerDistance)
+        {
+            Debug.Log($"[CrossroadUI] 목표 {nextTriggerDistance:F1} 도달 → UI 오픈 시도");
+            if (uiController != null)
+            {
+                uiController.Show();
+            }
+            else
+            {
+                Debug.LogError("[CrossroadUI] uiController가 NULL이라 Show() 호출 불가");
+            }
+            SetNextTriggerDistance(totalDistance);
         }
     }
 
-    void SetNextTriggerDistance(float currentDistance)
+    private void SetNextTriggerDistance(float currentDistance)
     {
+        if (possibleDistances == null || possibleDistances.Length == 0)
+            possibleDistances = new float[] { 200f, 300f, 400f, 600f };
+
         float offset = possibleDistances[Random.Range(0, possibleDistances.Length)];
         nextTriggerDistance = currentDistance + offset;
-        hasInitialized = true;
-        Debug.Log($"���� �̺�Ʈ �Ÿ�: {nextTriggerDistance}");
+        initialized = true;
+
+        Debug.Log($"[CrossroadUI] 다음 목표 설정: {nextTriggerDistance:F1} (오프셋 {offset})");
     }
 
-    void ShowPopup()
-    {
-        uiPopup.SetActive(true);
-    }
-
-    public void ClosePopup()
-    {
-        uiPopup.SetActive(false);
-    }
+    public void ResetFrom(float fromDistance = 0f) => SetNextTriggerDistance(fromDistance);
 }
