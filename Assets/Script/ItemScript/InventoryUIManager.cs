@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class InventoryUIManager : MonoBehaviour
 {
@@ -13,15 +14,29 @@ public class InventoryUIManager : MonoBehaviour
     public TextMeshProUGUI detailName;
     public TextMeshProUGUI detailEffect;
     public TextMeshProUGUI detailDescription;
-    // °¡Áö°í ÀÖ´Â ÅÛ ¸®½ºÆ®
+    // ê°€ì§€ê³  ìˆëŠ” í…œ ë¦¬ìŠ¤íŠ¸
     public List<Item> ownedItems;
 
+    public static InventoryUIManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // ì”¬ ì „í™˜ì‹œ íŒŒê´´ ë°©ì§€
+        }
+        else
+        {
+            Destroy(gameObject); // ì¤‘ë³µ ì¸ìŠ¤í„´ìŠ¤ ì œê±°
+        }
+    }
     void Start()
     {
         PopulateInventory();
     }
     /// <summary>
-    /// gridParent ¾È¿¡ ÀÖ´Â ÀÌÀü¿¡ ¸¸µé¾îÁø ½½·ÔµéÀ» ÀüºÎ »èÁ¦ ¹× ownedItems ¼øÈ¸ ÇÁ¸®ÆÕ »ı¼º
+    /// gridParent ì•ˆì— ìˆëŠ” ì´ì „ì— ë§Œë“¤ì–´ì§„ ìŠ¬ë¡¯ë“¤ì„ ì „ë¶€ ì‚­ì œ ë° ownedItems ìˆœíšŒ í”„ë¦¬íŒ¹ ìƒì„±
     /// </summary>
     void PopulateInventory()
     {
@@ -51,7 +66,7 @@ public class InventoryUIManager : MonoBehaviour
         if (inventoryPanel != null)
         {
             inventoryPanel.SetActive(true);
-            PopulateInventory(); // ¿­ ¶§ »õ·Î°íÄ§ÇÒ °æ¿ì
+            PopulateInventory(); // ì—´ ë•Œ ìƒˆë¡œê³ ì¹¨í•  ê²½ìš°
         }
     }
     public void CloseInventoryPanel()
@@ -65,22 +80,22 @@ public class InventoryUIManager : MonoBehaviour
         if (!ownedItems.Contains(newItem))
         {
             ownedItems.Add(newItem);
-            Debug.Log($"¾ÆÀÌÅÛ '{newItem.itemName}'À»(¸¦) È¹µæÇß½À´Ï´Ù.");
+            Debug.Log($"ì•„ì´í…œ '{newItem.itemName}'ì„(ë¥¼) íšë“í–ˆìŠµë‹ˆë‹¤.");
         }
         else
         {
-            Debug.Log($"ÀÌ¹Ì '{newItem.itemName}' ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ½À´Ï´Ù.");
+            Debug.Log($"ì´ë¯¸ '{newItem.itemName}' ì•„ì´í…œì„ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤.");
         }
 
-        PopulateInventory(); // UI »õ·Î°íÄ§
+        PopulateInventory(); // UI ìƒˆë¡œê³ ì¹¨
     }
     /// <summary>
-    /// ¾ÆÀÌÅÛ ¼ÒÀ¯ ÆÇÁ¤
+    /// ì•„ì´í…œ ì†Œìœ  íŒì •
     /// </summary>
     /// <param name="itemID"></param>
     /// <returns></returns>
     public bool HasItemByID(int itemID)
     {
-        return ownedItems.Exists(item => item.ID == itemID);
+        return ownedItems.Any(item => item.ID == itemID);
     }
 }

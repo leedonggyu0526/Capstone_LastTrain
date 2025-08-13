@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public GameObject pauseMenuUI; // PauseMenuCanvas ¿¬°á
+    public GameObject pauseMenuUI; // PauseMenuCanvas ì—°ê²°
     private bool isPaused = false;
-    public bool isESCPaused = false;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -22,7 +22,6 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        isESCPaused = false;
     }
 
     void PauseGame()
@@ -30,17 +29,16 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-        isESCPaused = true;
     }
 
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartScene"); // ½ÃÀÛÈ­¸é ¾À ÀÌ¸§ Á¤È®È÷ ½á¾ß ÇÔ
+        SceneManager.LoadScene("StartScene"); // ì‹œì‘í™”ë©´ ì”¬ ì´ë¦„ ì •í™•íˆ ì¨ì•¼ í•¨
     }
 
     public void ExitGame()
     {
-        Application.Quit(); // ºôµåµÈ °ÔÀÓ¿¡¼­ ÀÛµ¿
+        Application.Quit(); // ë¹Œë“œëœ ê²Œì„ì—ì„œ ì‘ë™
     }
 }

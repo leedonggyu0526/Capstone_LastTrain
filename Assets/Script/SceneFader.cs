@@ -5,9 +5,9 @@ using System.Collections;
 
 public class SceneFader : MonoBehaviour
 {
-    public Image fadeImage; // È­¸é µ¤À» ÀÌ¹ÌÁö ÇÒ´ç
+    public Image fadeImage; // í™”ë©´ ë®ì„ ì´ë¯¸ì§€ í• ë‹¹
     public float fadeDuration = 1.0f;
-    [Header("ÀÌµ¿ÇÒ ¾À ÀÌ¸§(´ë¼Ò¹®ÀÚ ±¸º°)")]
+    [Header("ì´ë™í•  ì”¬ ì´ë¦„(ëŒ€ì†Œë¬¸ì êµ¬ë³„)")]
     public string sceneName;
 
     public void FadeAndLoadScene()
@@ -15,13 +15,13 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(FadeOutAndLoad(sceneName));
     }
     /// <summary>
-    /// ÇÒ´çÇÑ ÀÌ¹ÌÁö¸¦ ÆäÀÌµå¾Æ¿ô ½ÃÅ°´Â IEnumerator
+    /// í• ë‹¹í•œ ì´ë¯¸ì§€ë¥¼ í˜ì´ë“œì•„ì›ƒ ì‹œí‚¤ëŠ” IEnumerator
     /// </summary>
     /// <param name="sceneName"></param>
     /// <returns></returns>
     IEnumerator FadeOutAndLoad(string sceneName)
     {
-        // ¾ÏÀü(fadeout)
+        // ì•”ì „(fadeout)
         float t = 0;
         Color color = fadeImage.color;
         while (t < fadeDuration)
@@ -29,12 +29,11 @@ public class SceneFader : MonoBehaviour
             t += Time.deltaTime;
             color.a = Mathf.Lerp(0, 1, t / fadeDuration);
             fadeImage.color = color;
-            yield return null;
+            yield return null;  
         }
         color.a = 1;
         fadeImage.color = color;
-
-        // ¾À ÀüÈ¯ (ºñµ¿±â·Î ÇÏ¸é ´õ ºÎµå·¯¿ò)
+        // ì”¬ ì „í™˜ (ë¹„ë™ê¸°ë¡œ í•˜ë©´ ë” ë¶€ë“œëŸ¬ì›€)
         yield return SceneManager.LoadSceneAsync(sceneName);
     }
 }
