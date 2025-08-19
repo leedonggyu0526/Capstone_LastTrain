@@ -1579,7 +1579,7 @@ GameObject:
   - component: {fileID: 419664208}
   - component: {fileID: 419664209}
   m_Layer: 0
-  m_Name: Trian
+  m_Name: Train
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
