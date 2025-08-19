@@ -1,3 +1,4 @@
+using Coffee.UIExtensions;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Canvas canvas;
     public Animator animator;
     public string triggerName = "Split";
+    public UIParticle splitEffect;
 
 
     // 마우스와 카드 사이의 거리
@@ -108,10 +110,15 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         rectTransform.anchoredPosition = endPos;
     }
+    /// <summary>
+    /// 카드 사용 애니메이션 실행
+    /// </summary>
     public void PlaySplitAnimation()
     {
         if (animator != null)
         {
+            splitEffect.Play();
+            
             animator.SetTrigger("Split");
         }
         else
