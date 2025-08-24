@@ -13,7 +13,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Canvas canvas;
     private Vector2 offset; // 마우스와 카드 사이의 거리
 
-    public int cardID; // 카드 ID
+    public string cardID; // 카드 ID
     public static bool isDragging = false; // 전체에서 드래그 중인지 여부 공유
 
     // 카드 프리팹 참조 (Inspector에서 연결)

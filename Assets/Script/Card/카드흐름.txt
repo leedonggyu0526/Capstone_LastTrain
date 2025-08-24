@@ -1,0 +1,4 @@
+CardData.csv에서 카드 내용 정의
+CardCsvLoader에서 csv 데이터를 추출함
+CardData.cs로 csv파일을 가져감
+New Card SO(Scriptable Object)와 CardData.cs 연동
