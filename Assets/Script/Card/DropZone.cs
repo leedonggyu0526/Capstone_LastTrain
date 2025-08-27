@@ -1,56 +1,54 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 드롭존 판정 처리:
+/// - 카드 드랍 시 이벤트 ID와 카드 ID 비교
+/// - 일치하면 이벤트 종료 + 카드 소모 + 덱에서 보충
+/// - 불일치하면 카드 원위치 복귀
+/// </summary>
 public class DropZone : MonoBehaviour, IDropHandler
 {
-    public EventSpawner eventSpawner;   // 현재 발생한 이벤트를 관리하는 컴포넌트
-    public CardSpawner spawner;         // 카드 덱에서 새 카드를 생성해주는 컴포넌트
+    public EventSpawner eventSpawner;  // 이벤트 관리
+    public CardSpawner spawner;        // 카드 생성
+    public CardDeck playerDeck;        // 플레이어 덱 (보유 상태)
 
     public void OnDrop(PointerEventData eventData)
     {
-        // 드래그된 오브젝트(카드)
         GameObject droppedCard = eventData.pointerDrag;
-        if (droppedCard == null)
-        {
-            Debug.LogError("드랍된 카드가 없습니다.");
-            return;
-        }
+        if (droppedCard == null) return;
 
-        // 카드 드래그 컴포넌트
         CardDrag card = droppedCard.GetComponent<CardDrag>();
         if (card == null) return;
 
-        // 이벤트가 없으면 복귀
+        // 이벤트 없음
         if (eventSpawner.currentEventID == -1)
         {
-            Debug.Log("이벤트가 없습니다! 카드 복귀.");
             card.ReturnToOriginalPositionSmooth();
             return;
         }
 
-        // 문자열로 단순 비교 (예전 방식)
-        string required = eventSpawner.currentEventID.ToString();
-        // 디버그: 실제 비교 값 확인
-        Debug.Log($"[DropZone] 비교: cardID={card.cardID} vs required={required}");
-
-        // 카드ID(string) vs 이벤트ID(int) → 문자열로 변환하여 비교
-        if (card.cardID == required)
+        // 카드ID와 이벤트ID 비교
+        if (card.cardID == eventSpawner.currentEventID.ToString())
         {
-            // 이벤트 종료
+            Debug.Log("정상적인 카드 사용! 이벤트 제거 + 보충");
+
             eventSpawner.DestroyCurrentEvent();
 
-            // 같은 자리 새 카드 보충을 위해 위치 저장
-            Vector2 spawnPos = card.OriginalPosition;
-
-            // 사용한 카드 제거
+            Vector2 pos = card.OriginalPosition;
             Destroy(card.gameObject);
 
-            // 새 카드 보충 (CardSpawner에 SpawnRandomCard(Vector2) 구현되어 있어야 함)
-            spawner.SpawnRandomCard(spawnPos);
+            // 덱에서 보충
+            string newID = playerDeck.GetRandomCardID();
+            if (newID != null)
+            {
+                CardData data = CardDatabase.Instance.Get(newID);
+                spawner.SpawnAtPosition(pos, data);
+            }
         }
         else
         {
-            Debug.Log("카드가 맞지 않습니다! 카드 복귀.");
+            // 잘못된 카드 → 복귀
             card.ReturnToOriginalPositionSmooth();
         }
     }

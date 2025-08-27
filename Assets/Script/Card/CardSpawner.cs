@@ -1,57 +1,39 @@
-//CSV 한 줄 → CardData 생성 → CardDisplay에 적용 → UI 카드 프리팹 표시.
-//drag.cardID도 문자열(string)로 통일.
-using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 카드 프리팹을 화면에 생성하고 UI를 채워주는 역할.
+/// CardData를 받아서 카드 UI를 표시하는 "표시 전용" 클래스.
+/// </summary>
 public class CardSpawner : MonoBehaviour
 {
-    public GameObject cardPrefab;
-    public Transform parentTransform;
+    public GameObject cardPrefab;      // 카드 프리팹 (CardDisplay, CardDrag 붙어 있어야 함)
+    public Transform parentTransform;  // 카드가 배치될 부모 (예: CardPanel)
 
-    private string[] allLines; //csv에서 읽어온 카드 데이터
-
-    private void Awake()
+    /// <summary>
+    /// 지정된 위치(pos)에 CardData를 가진 카드를 생성
+    /// </summary>
+    public GameObject SpawnAtPosition(Vector2 pos, CardData data)
     {
-        // Resources/CardData.csv (헤더 1줄 + 데이터 N줄)
-        var csv = Resources.Load<TextAsset>("CardData");
-        if (csv != null)
+        if (data == null)
         {
-            allLines = csv.text.Split('\n').Skip(1).ToArray(); // 헤더 빼고 저장
-        }
-    }
-
-    // 카드 덱에서 무작위 카드 1장을 뽑아서 지정된 위치(pos)에 생성
-    public void SpawnRandomCard(Vector2 pos)
-    {
-        if (allLines == null || allLines.Length == 0)
-        {
-            Debug.LogError("CSV에서 카드 데이터를 불러오지 못했습니다!");
-            return;
+            Debug.LogWarning("[CardSpawner] CardData가 null입니다.");
+            return null;
         }
 
-        // 랜덤 한 줄 뽑기
-        string line = allLines[Random.Range(0, allLines.Length)].Trim();
-        if (string.IsNullOrEmpty(line)) return;
-
-        SpawnFromCsvLine(line, pos); //카드생성
-    }
-
-    // CSV 한 줄 데이터를 CardData로 변환해서 카드 오브젝트 생성
-    public void SpawnFromCsvLine(string line, Vector2 pos)
-    {
-        var cols = line.Split(','); //,로 나누기
-        var data = CardCsvLoader.CreateFromCsvRow(cols);//CardData ScriptableObject 생성 및 채우기
-
-        var go = Instantiate(cardPrefab, parentTransform);//카드 프리팹 생성, parentTransform 지정
-
-        var rt = go.GetComponent<RectTransform>();//RectTransform 가져와서 위치 저장
+        // 프리팹 생성
+        GameObject card = Instantiate(cardPrefab, parentTransform);
+        RectTransform rt = card.GetComponent<RectTransform>();
         rt.anchoredPosition = pos;
 
-        var display = go.GetComponent<CardDisplay>(); //카드ui 표시
+        // UI 적용
+        CardDisplay display = card.GetComponent<CardDisplay>();
         display.cardData = data;
         display.RefreshUI();
 
-        var drag = go.GetComponent<CardDrag>(); //CardDrag에 cardID넘기기
-        drag.cardID = data.cardID; // 문자열 ID 직접 저장
+        // 드래그 설정
+        CardDrag drag = card.GetComponent<CardDrag>();
+        drag.cardID = data.cardID;
+
+        return card;
     }
 }
