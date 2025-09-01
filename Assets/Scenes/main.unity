@@ -2917,7 +2917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.50891, y: -91.4}
+  m_AnchoredPosition: {x: 90.9, y: -91.4}
   m_SizeDelta: {x: 49.1933, y: 69.9516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145219721
@@ -2991,8 +2991,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 0}
-  m_SizeDelta: {x: -120, y: -80}
+  m_AnchoredPosition: {x: -2.873993, y: 3.6054993}
+  m_SizeDelta: {x: -85.748, y: -87.211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214163829
 MonoBehaviour:
@@ -3011,13 +3011,13 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 250}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
-  m_ConstraintCount: 2
+  m_ConstraintCount: 3
 --- !u!1 &1225962384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4505,7 +4505,6 @@ MonoBehaviour:
   - 6
   defaultGearIndex: 0
   totalDistance: 0
-  logEverySecond: 1
   showProgressLog: 1
   progressLogInterval: 1
 --- !u!4 &1766774554

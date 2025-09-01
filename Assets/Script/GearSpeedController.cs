@@ -16,8 +16,6 @@ public class GearSpeedController : MonoBehaviour
 
     [Header("Distance")]
     [SerializeField] private float totalDistance = 0f;
-    [SerializeField] private bool logEverySecond = true;
-    private float logTimer = 0f;
 
     [SerializeField] private bool showProgressLog = true;   // 인스펙터에서 켜기/끄기
     [SerializeField] private float progressLogInterval = 1f;

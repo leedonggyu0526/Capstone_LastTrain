@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -22,7 +23,27 @@ public class CrossroadUIController : MonoBehaviour
     {
         // 인스펙터에 넣지 않았다면 Resources에서 찾음
         if (csvAsset == null)
-            csvAsset = Resources.Load<TextAsset>("CrossRoad/CrossRoadSelect"); // 경로: Assets/Resources/CrossRoad/CrossRoadSelect.csv
+        {
+            csvAsset = Resources.Load<TextAsset>("CrossRoad/CrossRoadSelect"); // 기본 경로: Assets/Resources/CrossRoad/CrossRoadSelect.csv
+            if (csvAsset == null)
+            {
+                // 폴백: Assets/Resources/CrossRoadSelect.csv 도 지원
+                csvAsset = Resources.Load<TextAsset>("CrossRoadSelect");
+                if (csvAsset != null)
+                    Debug.LogWarning("[CrossroadUI] CSV를 폴백 경로(CrossRoadSelect)에서 로드했습니다. 폴더 구조를 CrossRoad/로 정리하는 것을 권장합니다.");
+            }
+        }
+
+        // panel이 비어 있으면 현재 오브젝트를 패널로 사용 (일반적으로 컨트롤러가 패널 루트에 붙어 있음)
+        if (panel == null) panel = this.gameObject;
+
+        // optionPrefab이 비어 있으면 Resources에서 시도 로드
+        if (optionPrefab == null)
+        {
+            optionPrefab = Resources.Load<GameObject>("CrossRoad/CrossRoadSelectPrefab");
+            if (optionPrefab == null)
+                Debug.LogError("[CrossroadUI] optionPrefab이 비었고 Resources/CrossRoad/CrossRoadSelectPrefab 로드에도 실패했습니다. 인스펙터에 프리팹을 연결하세요.");
+        }
 
         LoadCSV();
         HideImmediate();
@@ -44,7 +65,7 @@ public class CrossroadUIController : MonoBehaviour
         ClearChildren();
 
         // 2~3개 가중치 랜덤 픽
-        int count = Mathf.Clamp(Random.Range(minCount, maxCount + 1), 1, 10);
+        int count = Mathf.Clamp(UnityEngine.Random.Range(minCount, maxCount + 1), 1, 10);
         var picks = WeightedPick(allOptions, count);
 
         foreach (var opt in picks)
@@ -121,14 +142,31 @@ public class CrossroadUIController : MonoBehaviour
         }
 
         var lines = csvAsset.text.Split('\n');
-        if (lines.Length <= 1)
+        if (lines.Length == 0)
         {
-            Debug.LogWarning("[CrossroadUI] CSV가 비어있거나 헤더만 있습니다.");
+            Debug.LogWarning("[CrossroadUI] CSV가 비어 있습니다.");
             return;
         }
 
-        // 첫 줄 헤더 스킵
-        for (int i = 1; i < lines.Length; i++)
+        // 첫 유효 라인이 헤더인지 자동 판별 (id가 정수면 데이터로 간주)
+        int startIndex = 0;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var probe = lines[i].Trim();
+            if (string.IsNullOrEmpty(probe)) continue;
+            var cols0 = SplitCsv(probe);
+            bool firstIsHeader = true;
+            if (cols0.Count > 0)
+            {
+                int tmpId;
+                if (int.TryParse(cols0[0], out tmpId))
+                    firstIsHeader = false;
+            }
+            startIndex = firstIsHeader ? i + 1 : i;
+            break;
+        }
+
+        for (int i = startIndex; i < lines.Length; i++)
         {
             var line = lines[i].Trim();
             if (string.IsNullOrEmpty(line)) continue;
@@ -194,7 +232,37 @@ public class CrossroadUIController : MonoBehaviour
     private Sprite LoadSpriteSafe(string resPath)
     {
         if (string.IsNullOrWhiteSpace(resPath)) return null;
-        return Resources.Load<Sprite>(resPath);
+        string cleaned = SanitizeResourcePath(resPath);
+        Sprite s = Resources.Load<Sprite>(cleaned);
+        if (s == null)
+        {
+            Debug.LogWarning($"[CrossroadUI] Sprite 로드 실패: '{resPath}' → 변환 '{cleaned}'");
+        }
+        return s;
+    }
+
+    private string SanitizeResourcePath(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return input;
+
+        string p = input.Trim();
+
+        // 경로 구분자 통일
+        p = p.Replace("\\", "/");
+
+        // 선행 Assets/ 제거
+        if (p.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase))
+            p = p.Substring("Assets/".Length);
+
+        // 선행 Resources/ 제거 (Resources 상대 경로로 맞춤)
+        if (p.StartsWith("Resources/", StringComparison.OrdinalIgnoreCase))
+            p = p.Substring("Resources/".Length);
+
+        // 파일 확장자 제거
+        int dot = p.LastIndexOf('.');
+        if (dot >= 0) p = p.Substring(0, dot);
+
+        return p;
     }
 
     // 가중치 랜덤, 중복 없이 N개 뽑기
@@ -210,7 +278,7 @@ public class CrossroadUIController : MonoBehaviour
             int totalWeight = 0;
             foreach (var o in pool) totalWeight += Mathf.Max(1, o.weight);
 
-            int r = Random.Range(1, totalWeight + 1);
+            int r = UnityEngine.Random.Range(1, totalWeight + 1);
             int acc = 0;
             CrossRoadOption chosen = pool[0];
 
