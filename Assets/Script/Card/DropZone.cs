@@ -3,10 +3,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 
+/// <summary>
+/// 드롭 처리:
+/// - 카드ID == 현재 이벤트ID면: 이벤트 종료 후 같은 카드 오브젝트에 새 카드 데이터로 교체
+/// - 불일치/이벤트 없음/셋업 미완: 카드 원위치 복귀
+/// - 교체 연출: 페이드 아웃 → 데이터 교체 → 원위치 스냅 → 페이드 인
+/// </summary>
 public class DropZone : MonoBehaviour, IDropHandler
 {
-    public EventSpawner eventSpawner;   // 현재 이벤트 관리
+    [Header("References")]
+    public EventSpawner eventSpawner;   // 현재 이벤트 관리자
     public CardDeck playerDeck;         // 플레이어 보유 덱
+
+    [Header("Effect")]
     public float fadeDuration = 0.15f;  // 페이드 연출 시간
 
     public void OnDrop(PointerEventData eventData)
@@ -17,41 +26,39 @@ public class DropZone : MonoBehaviour, IDropHandler
         var card = droppedCard.GetComponent<CardDrag>();
         if (card == null) return;
 
-        // (안전) eventSpawner 연결 확인
+        // 필수 레퍼런스 확인 실패 → 복귀
         if (eventSpawner == null)
         {
-            Debug.LogError("[DropZone] eventSpawner가 연결되지 않았습니다.");
             card.ReturnToOriginalPositionSmooth();
             return;
         }
 
-        // 이벤트 없음 → 원위치 복귀
+        // 이벤트 없음 → 복귀
         if (eventSpawner.currentEventID == -1)
         {
             card.ReturnToOriginalPositionSmooth();
             return;
         }
 
-        // 카드ID와 이벤트ID(문자열) 비교
+        // 카드ID와 이벤트ID 일치 시: 교체 진행
         if (card.cardID == eventSpawner.currentEventID.ToString())
         {
-            // 성공: 이벤트 종료 + 같은 오브젝트에 "내용만 교체"
             eventSpawner.DestroyCurrentEvent();
             StartCoroutine(ReplaceCardInPlace(card));
         }
         else
         {
-            // 불일치 → 부드럽게 원위치
+            // 불일치 → 복귀
             card.ReturnToOriginalPositionSmooth();
         }
     }
 
-    // 같은 카드 오브젝트 재사용: 숨김 → 데이터 교체 → 원위치 → 표시
+    /// <summary>
+    /// 같은 카드 오브젝트 재사용: 페이드 아웃 → 덱/DB에서 새 데이터 적용 → 원위치 스냅 → 페이드 인
+    /// </summary>
     private IEnumerator ReplaceCardInPlace(CardDrag card)
     {
-        // 디버그: 현재 참조상태 출력
-        Debug.Log($"[DropZone] playerDeck={(playerDeck ? playerDeck.name : "null")} db={(CardDatabase.Instance ? "OK" : "NULL")}");
-
+        // 페이드 아웃 준비
         var cg = card.GetComponent<CanvasGroup>();
         if (cg == null) cg = card.gameObject.AddComponent<CanvasGroup>();
 
@@ -66,11 +73,10 @@ public class DropZone : MonoBehaviour, IDropHandler
         }
         cg.alpha = 0f;
 
-        // 2) 덱에서 새 카드 ID 선택 (현재와 다른 ID 우선)
+        // 2) 새 카드ID 선택 (가능하면 현재와 다른 ID)
         string currentID = card.cardID;
         string newID = null;
 
-        // (안전) playerDeck 널가드
         if (playerDeck != null)
         {
             for (int i = 0; i < 10; i++)
@@ -79,14 +85,8 @@ public class DropZone : MonoBehaviour, IDropHandler
                 if (!string.IsNullOrEmpty(newID) && newID != currentID) break;
             }
         }
-        else
-        {
-            Debug.LogError("[DropZone] playerDeck이 연결되지 않았습니다.");
-        }
 
-        Debug.Log($"[DropZone] currentID={currentID}, picked newID={newID}");
-
-        // 3) DB에서 데이터 조회 (없으면 폴백)
+        // 3) DB에서 새 데이터 조회(실패 시 폴백)
         CardData newData = null;
         if (CardDatabase.Instance != null)
         {
@@ -95,37 +95,26 @@ public class DropZone : MonoBehaviour, IDropHandler
 
             // 덱이 비었거나 조회 실패 시 DB 랜덤 폴백
             if (newData == null)
-            {
-                Debug.LogWarning("[DropZone] 덱이 비었거나 DB 조회 실패. DB 랜덤으로 폴백 시도");
                 newData = CardDatabase.Instance.GetRandom();
-            }
-        }
-        else
-        {
-            Debug.LogError("[DropZone] CardDatabase.Instance == null (씬에 CardDatabase 배치 필요)");
         }
 
-        // 4) UI/ID 교체
+        // 4) UI/ID 교체(데이터가 있을 때만)
         var display = card.GetComponent<CardDisplay>();
         if (display != null && newData != null)
         {
             display.cardData = newData;
             display.RefreshUI();
-            card.cardID = newData.cardID;      // 드랍 판정용 ID도 교체
-            Debug.Log($"[DropZone] Replaced to '{newData.cardName}'");
-        }
-        else
-        {
-            Debug.LogWarning("[DropZone] display 또는 newData가 null. 교체 실패 → 원위치로만");
+            card.cardID = newData.cardID;   // 이후 드랍 판정에 사용
         }
 
-        // 5) 보이지 않는 상태에서 원위치로 스냅
+        // 5) 원위치 스냅 (비표시 상태에서)
         card.ResetToOriginalPositionInstant();
 
         // 6) 페이드 인
         yield return FadeIn(cg);
     }
 
+    /// <summary>카드를 천천히 다시 보이게 함</summary>
     private IEnumerator FadeIn(CanvasGroup cg)
     {
         float t = 0f;

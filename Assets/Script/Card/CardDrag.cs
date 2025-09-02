@@ -3,27 +3,32 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// (이전 안정 버전) 카드 드래그 전용 스크립트
-/// - 드래그 시작 시 현재 anchoredPosition을 originalPosition에 저장
+/// 카드 드래그 전용 스크립트(안정 버전)
+/// - 드래그 시작 시 현재 위치 저장
 /// - 드랍 실패 시 부드럽게 원위치 복귀
-/// - 필요 시 즉시 스냅 복귀(ResetToOriginalPositionInstant)
-/// - DropZone과의 호환을 위해 OriginalPosition 프로퍼티 제공
+/// - DropZone과의 연동을 위해 OriginalPosition, Reset 메서드 제공
 /// </summary>
 public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    // 위치/상호작용 제어용
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Canvas canvas;                 // 부모 캔버스 (좌표 변환용)
+    private Canvas canvas;                 // 좌표 변환용(부모 캔버스)
 
-    private Vector2 originalPosition;      // 드래그 시작 시점의 위치 저장
-    public Vector2 OriginalPosition => originalPosition; // DropZone에서 참조
+    // 드래그 시작 시점의 위치(원위치)
+    private Vector2 originalPosition;
+    public Vector2 OriginalPosition => originalPosition;
 
-    private Vector2 offset;                // 마우스와 카드 사이의 거리 보정
+    // 마우스-카드 거리 보정
+    private Vector2 offset;
 
-    public string cardID;                  // 카드 ID (CSV의 cardID 사용)
-    public static bool isDragging = false; // 전역 드래그 플래그
+    // 판정/매칭용 카드 ID (CSV의 cardID 문자열 사용)
+    public string cardID;
 
-    // (예전 호환용) 필요 시 인스펙터에서 연결 가능하지만 현재 로직에선 필수 아님
+    // 다른 카드와 동시 드래그 방지 플래그
+    public static bool isDragging = false;
+
+    // (호환용) 필수는 아니지만 인스펙터에서 연결 가능
     public GameObject cardPrefab;
     public Transform parentTransform;
 
@@ -38,43 +43,43 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (parentTransform == null) parentTransform = transform.parent;
     }
 
+    /// <summary>드래그 시작: 원위치 저장 + 오프셋 계산 + 레이캐스트 허용</summary>
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (isDragging) return;
         isDragging = true;
 
-        // 드래그 시작 시점 위치 저장
         originalPosition = rectTransform.anchoredPosition;
 
-        // 부모 기준 마우스 위치 계산 → offset 산출
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform.parent as RectTransform,
             eventData.position,
             eventData.pressEventCamera,
             out Vector2 localMouse
         );
-
         offset = rectTransform.anchoredPosition - localMouse;
 
-        // 드래그 동안 다른 UI에 레이캐스트 허용 (드롭 감지 위해)
         if (canvasGroup != null) canvasGroup.blocksRaycasts = false;
     }
 
+    /// <summary>드래그 중: 부모 기준 마우스 좌표 + 오프셋만큼 이동</summary>
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
 
-        // 부모 기준 마우스 좌표로 이동
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform.parent as RectTransform,
             eventData.position,
             eventData.pressEventCamera,
             out Vector2 localMouse
         );
-
         rectTransform.anchoredPosition = localMouse + offset;
     }
 
+    /// <summary>
+    /// 드래그 종료: DropZone 위가 아니면 원위치 복귀
+    /// DropZone 위라면 후속 처리는 DropZone.OnDrop에서 수행
+    /// </summary>
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
@@ -82,19 +87,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if (canvasGroup != null) canvasGroup.blocksRaycasts = true;
 
-        //  디버그: 마우스 아래 오브젝트 확인
-        string under = eventData.pointerEnter ? eventData.pointerEnter.name : "null";
-        Debug.Log($"[CardDrag] OnEndDrag pointerEnter={under}");
-
-        //  부모까지 타고 올라가며 DropZone 태그 있는지 확인 (자식 히트도 허용)
         if (!IsPointerOverDropZone(eventData.pointerEnter))
         {
             ReturnToOriginalPositionSmooth();
         }
-        // 드롭존 위면 후속 처리는 DropZone.OnDrop에서 실행됨
     }
 
-    // 부모 체인을 타고 올라가며 DropZone 태그를 가진 오브젝트가 있는지 확인
+    /// <summary>부모 체인을 타고 올라가며 DropZone 태그 존재 여부 확인</summary>
     private bool IsPointerOverDropZone(GameObject go)
     {
         while (go != null)
@@ -113,12 +112,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         StartCoroutine(SmoothMove());
     }
 
-    /// <summary>즉시 원위치 스냅 (DropZone 교체 시 사용)</summary>
+    /// <summary>즉시 원위치로 스냅(교체/실패 처리 시 사용)</summary>
     public void ResetToOriginalPositionInstant()
     {
         rectTransform.anchoredPosition = originalPosition;
     }
 
+    /// <summary>Lerp 보간으로 자연스러운 복귀 연출</summary>
     private IEnumerator SmoothMove()
     {
         Vector2 startPos = rectTransform.anchoredPosition;

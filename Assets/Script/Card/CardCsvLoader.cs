@@ -1,27 +1,31 @@
-//CSV → CardData 변환 로더(CardCsvLoader) 작성
-//경로는 Resources/... 로 통일.
 using UnityEngine;
 
 public static class CardCsvLoader
 {
-    // 한 줄을 읽어서 CardData 인스턴스로 반환
+    /// <summary>
+    /// CSV 한 줄을 읽어서 CardData ScriptableObject 인스턴스로 변환한다.
+    /// cols 순서: cardID, cardName, description, background, artwork, rarity
+    /// </summary>
     public static CardData CreateFromCsvRow(string[] cols)
     {
+        // 런타임용 CardData 인스턴스 생성
         var data = ScriptableObject.CreateInstance<CardData>();
 
-        data.cardID = cols[0].Trim();
-        data.cardName = cols[1].Trim();
-        data.description = cols[2].Trim();
+        // 기본 정보
+        data.cardID = cols[0].Trim();       // 카드 고유 ID
+        data.cardName = cols[1].Trim();     // 카드 이름
+        data.description = cols[2].Trim();  // 카드 설명
 
-        string bgKey = cols[3].Trim(); // 예: UI_image/goldCard
-        string artKey = cols[4].Trim(); // 예: UI_image/food
+        // 리소스 경로 (Resources 폴더 기준)
+        string bgKey = cols[3].Trim();  // 배경 이미지 경로
+        string artKey = cols[4].Trim(); // 아트워크 이미지 경로
+
+        // 스프라이트 로드 (없으면 null)
         data.background = string.IsNullOrEmpty(bgKey) ? null : Resources.Load<Sprite>(bgKey);
         data.artwork = string.IsNullOrEmpty(artKey) ? null : Resources.Load<Sprite>(artKey);
 
+        // 희귀도 (문자열 그대로 저장)
         data.rarity = cols[5].Trim();
-
-        if (data.background == null) Debug.LogWarning($"배경 로드 실패: {bgKey}");
-        if (data.artwork == null) Debug.LogWarning($"아트워크 로드 실패: {artKey}");
 
         return data;
     }
