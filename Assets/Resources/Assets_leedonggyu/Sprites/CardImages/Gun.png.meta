@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 941b99d20df98b741b2e499dc7d77d97
+guid: 22b38fc777fbf1d43b075a2bb1641d69
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6238373547613239143
-    second: FirefightingTools_0
+      213: 6879118450950661895
+    second: Gun_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FirefightingTools_0
+      name: Gun_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7673ea170b7239650800000000000000
-      internalID: 6238373547613239143
+      spriteID: 707efb4b8c9877f50800000000000000
+      internalID: 6879118450950661895
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gun_0: 6879118450950661895
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

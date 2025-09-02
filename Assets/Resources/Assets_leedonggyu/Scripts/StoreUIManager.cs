@@ -47,6 +47,7 @@ public class StoreUIManager : UIManager
     protected override void OnCloseButtonClick()
     {
         // 상점 닫기
+        Debug.Log("[StoreUI] Close 버튼 클릭");
         HideStore();
     }
     

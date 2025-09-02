@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8e459598bc987f84fbe3ab77c29c031c
+guid: 35ae7ccf1195a8a4eb15d1d9dfd93543
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1818541625063229167
-    second: FireExtinguisher_0
+      213: 2860006914309871096
+    second: Tools_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FireExtinguisher_0
+      name: Tools_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 852
+        height: 868
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 11938dce60e33c6e0800000000000000
-      internalID: -1818541625063229167
+      spriteID: 8f5d996b229c0b720800000000000000
+      internalID: 2860006914309871096
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 03d9c1391d1c88743b0dbdb5884f16ad
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FireExtinguisher_0: -1818541625063229167
+      Tools_0: 2860006914309871096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
