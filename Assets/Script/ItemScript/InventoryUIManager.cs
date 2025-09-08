@@ -19,6 +19,7 @@ public class InventoryUIManager : MonoBehaviour
 
     public static InventoryUIManager Instance { get; private set; }
 
+
     private void Awake()
     {
         if (Instance == null)
@@ -81,10 +82,12 @@ public class InventoryUIManager : MonoBehaviour
         {
             ownedItems.Add(newItem);
             Debug.Log($"아이템 '{newItem.itemName}'을(를) 획득했습니다.");
+            GetComponent<ItemNoticer>().ShowNotification(newItem.itemName);
         }
         else
         {
             Debug.Log($"이미 '{newItem.itemName}' 아이템을 가지고 있습니다.");
+            GetComponent<ItemNoticer>().ShowNotification($"이미 '{newItem.itemName}' 아이템을 가지고 있습니다.");
         }
 
         PopulateInventory(); // UI 새로고침

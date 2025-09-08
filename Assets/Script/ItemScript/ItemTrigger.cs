@@ -10,7 +10,7 @@ public class ItemTrigger : MonoBehaviour
     public ResourceProducer[] rp_factory;
     public GameObject factory;
     /// <summary>
-    /// 아이템 ID별 효과 적용여부 저장
+    /// 아이템 ID별 효과가 적용되었는지 기억하는 딕셔너리 
     /// </summary>
     private Dictionary<int, bool> effectAppliedDict = new Dictionary<int, bool>();
 
@@ -63,13 +63,13 @@ public class ItemTrigger : MonoBehaviour
                 ItemEffectManager.ApplyEffect(effect3);
                 break;
             default:
-                Debug.Log("아이템 소지 3번 이외");
+                Debug.Log("예외 : 미지정 아이템 획득 판정");
                 break;
         }
     }
 
     void RemoveMyEffect(int id)
-        {//TODO : 해제, 복구 처리
+        {//TODO : 해제, 복구 처리 (필요할 경우 제작)
 
             Debug.Log($"{id}아이템 소실로 효과 해제!");
         }

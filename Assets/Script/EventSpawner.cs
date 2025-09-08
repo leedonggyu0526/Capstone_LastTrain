@@ -2,59 +2,59 @@ using UnityEngine;
 
 public class EventSpawner : MonoBehaviour
 {
-    public EventObject[] eventObjects; // Inspector¿¡ µî·ÏÇÒ ÀÌº¥Æ® ¿ÀºêÁ§Æ® ¹è¿­
-    public int currentEventID = -1;    // ÇöÀç ÀÌº¥Æ® ID (-1ÀÌ¸é ÀÌº¥Æ® ¾øÀ½)
+    public EventObject[] eventObjects; // Inspectorì— ë“±ë¡í•  ì´ë²¤íŠ¸ ì˜¤ë¸Œì íŠ¸ ë°°ì—´
+    public int currentEventID = -1;    // í˜„ì¬ ì´ë²¤íŠ¸ ID (-1ì´ë©´ ì´ë²¤íŠ¸ ì—†ìŒ)
 
-    private float timer = 0f;          // Å¸ÀÌ¸Ó º¯¼ö
-    private float spawnInterval = 5f;  // 5ÃÊ ÁÖ±â
+    private float timer = 0f;          // íƒ€ì´ë¨¸ ë³€ìˆ˜
+    private float spawnInterval = 5f;  // 5ì´ˆ ì£¼ê¸°
 
     void Update()
     {
-        // Å¸ÀÌ¸Ó Áõ°¡
+        // íƒ€ì´ë¨¸ ì¦ê°€
         timer += Time.deltaTime;
 
-        // ÁÖ±â¸¶´Ù ÀÌº¥Æ® ¹ß»ı ½Ãµµ
+        // ì£¼ê¸°ë§ˆë‹¤ ì´ë²¤íŠ¸ ë°œìƒ ì‹œë„
         if (timer >= spawnInterval)
         {
             TrySpawnEvent();
-            timer = 0f; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+            timer = 0f; // íƒ€ì´ë¨¸ ì´ˆê¸°í™”
         }
 
-        // P Å°¸¦ ´©¸£¸é Áï½Ã ÀÌº¥Æ® ¹ß»ı ½Ãµµ
+        // P í‚¤ë¥¼ ëˆ„ë¥´ë©´ ì¦‰ì‹œ ì´ë²¤íŠ¸ ë°œìƒ ì‹œë„
         if (Input.GetKeyDown(KeyCode.P))
         {
             TrySpawnEvent();
         }
     }
 
-    // ÀÌº¥Æ® ¹ß»ı ÇÔ¼ö
+    // ì´ë²¤íŠ¸ ë°œìƒ í•¨ìˆ˜
     public void TrySpawnEvent()
     {
-        // ÇöÀç ÀÌº¥Æ®°¡ Á¸ÀçÇÏ¸é »õ·Î ¹ß»ıÇÏÁö ¾ÊÀ½
+        // í˜„ì¬ ì´ë²¤íŠ¸ê°€ ì¡´ì¬í•˜ë©´ ìƒˆë¡œ ë°œìƒí•˜ì§€ ì•ŠìŒ
         if (currentEventID != -1)
         {
-            Debug.Log("ÀÌ¹Ì ÀÌº¥Æ®°¡ ¹ß»ı ÁßÀÔ´Ï´Ù.");
+            Debug.Log("ì´ë¯¸ ì´ë²¤íŠ¸ê°€ ë°œìƒ ì¤‘ì…ë‹ˆë‹¤.");
             return;
         }
 
-        // ·£´ı ÀÌº¥Æ® ¼±ÅÃ
+        // ëœë¤ ì´ë²¤íŠ¸ ì„ íƒ
         int randomIndex = Random.Range(0, eventObjects.Length);
 
-        // ÀÌº¥Æ® È°¼ºÈ­
+        // ì´ë²¤íŠ¸ í™œì„±í™”
         eventObjects[randomIndex].ActivateEvent();
 
-        // ÇöÀç ÀÌº¥Æ® ID ÀúÀå
+        // í˜„ì¬ ì´ë²¤íŠ¸ ID ì €ì¥
         currentEventID = eventObjects[randomIndex].eventID;
 
-        Debug.Log($"ÀÌº¥Æ® ¹ß»ı: {currentEventID}");
+        Debug.Log($"ì´ë²¤íŠ¸ ë°œìƒ: {currentEventID}");
     }
 
-    // ÀÌº¥Æ® »èÁ¦ ÇÔ¼ö
+    // ì´ë²¤íŠ¸ ì‚­ì œ í•¨ìˆ˜
     public void DestroyCurrentEvent()
     {
         if (currentEventID == -1) return;
 
-        // ÇöÀç ÀÌº¥Æ® ºñÈ°¼ºÈ­
+        // í˜„ì¬ ì´ë²¤íŠ¸ ë¹„í™œì„±í™”
         foreach (var evt in eventObjects)
         {
             if (evt.eventID == currentEventID)
@@ -66,6 +66,6 @@ public class EventSpawner : MonoBehaviour
 
         currentEventID = -1;
 
-        Debug.Log("ÀÌº¥Æ®°¡ Á¾·áµÇ¾ú½À´Ï´Ù.");
+        Debug.Log("ì´ë²¤íŠ¸ê°€ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
 }

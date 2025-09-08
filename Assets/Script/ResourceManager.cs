@@ -30,7 +30,7 @@ public class ResourceManager : MonoBehaviour
     void Start()
     {
 #if UNITY_EDITOR
-        // ¿¡µğÅÍ¿¡¼­¸¸ 5ÃÊ¸¶´Ù ¸®¼Ò½º ·Î±× Ãâ·Â
+        // ì—ë””í„°ì—ì„œë§Œ 5ì´ˆë§ˆë‹¤ ë¦¬ì†ŒìŠ¤ ë¡œê·¸ ì¶œë ¥
         InvokeRepeating(nameof(LogResources), 1f, 5f);
 #endif
     }
@@ -53,7 +53,7 @@ public class ResourceManager : MonoBehaviour
             newAmount = Mathf.Clamp(newAmount, 0, maxCapacities[type]);
 
         resources[type] = newAmount;
-        Debug.Log($"{type} {(amount >= 0 ? "+" : "")}{amount} ¡æ ÃÑ {resources[type]} (Max {maxCapacities[type]})");
+        Debug.Log($"{type} {(amount >= 0 ? "+" : "")}{amount} â†’ ì´ {resources[type]} (Max {maxCapacities[type]})");
     }
 
     public int GetResource(ResourceType type)
@@ -68,23 +68,23 @@ public class ResourceManager : MonoBehaviour
             : int.MaxValue;
     }
 
-    // ÀÚ¿ø ¼Òºñ¿ë ÇÔ¼ö
+    // ìì› ì†Œë¹„ìš© í•¨ìˆ˜
     public bool ConsumeResources(ResourceType type, int amount)
     {
         if (!resources.ContainsKey(type))
         {
-            Debug.LogWarning($"{type} ¸®¼Ò½º°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!");
+            Debug.LogWarning($"{type} ë¦¬ì†ŒìŠ¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!");
             return false;
         }
 
         if (resources[type] < amount)
         {
-            Debug.LogWarning($"{type} ºÎÁ·! ³²Àº·®: {resources[type]}");
+            Debug.LogWarning($"{type} ë¶€ì¡±! ë‚¨ì€ëŸ‰: {resources[type]}");
             return false;
         }
 
         resources[type] -= amount;
-        Debug.Log($"{type} -{amount} ¡æ ÃÑ {resources[type]} (Max {maxCapacities[type]})");
+        Debug.Log($"{type} -{amount} â†’ ì´ {resources[type]} (Max {maxCapacities[type]})");
         return true;
     }
 }
