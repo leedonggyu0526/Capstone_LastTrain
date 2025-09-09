@@ -6,10 +6,10 @@ public class DestroyCall : MonoBehaviour
 {
     public CardDrag cd;
 
-    public void CardDestroyCall()
-    {
-        cd.DestroyMe();
-    }
+    // public void CardDestroyCall()
+    // {
+    //     cd.DestroyMe();
+    // }
 
 
 }

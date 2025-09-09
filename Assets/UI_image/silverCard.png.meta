@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 770201a40adb442699a7d0c1829def18
+guid: 369c033db5f1f41ff9f7a35b24f7b226
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4942973117404418426
-    second: Description_0
+      213: -8854226108235955375
+    second: silverCard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Description_0
+      name: silverCard_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 368
-        height: 84
+        x: 0
+        y: 8
+        width: 1024
+        height: 1480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68eedc28328076bb0800000000000000
-      internalID: -4942973117404418426
+      spriteID: 1534b9924487f1580800000000000000
+      internalID: -8854226108235955375
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Description_0: -4942973117404418426
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
