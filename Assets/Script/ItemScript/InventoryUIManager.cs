@@ -87,7 +87,6 @@ public class InventoryUIManager : MonoBehaviour
         else
         {
             Debug.Log($"이미 '{newItem.itemName}' 아이템을 가지고 있습니다.");
-            GetComponent<ItemNoticer>().ShowNotification($"이미 '{newItem.itemName}' 아이템을 가지고 있습니다.");
         }
 
         PopulateInventory(); // UI 새로고침

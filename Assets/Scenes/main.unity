@@ -9265,7 +9265,9 @@ MonoBehaviour:
   ItemEffectManager: {fileID: 1940293931}
   rp_factory:
   - {fileID: 0}
+  rp_plant: {fileID: 0}
   factory: {fileID: 1971168419}
+  plant: {fileID: 1225962384}
 --- !u!114 &1940293931
 MonoBehaviour:
   m_ObjectHideFlags: 0
