@@ -24,7 +24,7 @@ public class ItemTrigger : MonoBehaviour
 
     void Awake()
     {
-        rp_factory = factory.GetComponents<ResourceProducer>(); //팩토리 같은 스크립트 2개여서 배열로 접근 
+        rp_factory = factory.GetComponents<ResourceProducer>(); //팩토리는 동일 스크립트 2개여서 배열로 접근 
     }
 
     void Update()
@@ -55,12 +55,24 @@ public class ItemTrigger : MonoBehaviour
 
     }
 
+    /// <summary>
+    ///     switch문으로 ID별 효과 적용
+    /// </summary>
+    /// <param name="id">아이템 ID</param>
     void ApplyMyEffect(int id)
     {
         switch (id) {
-            case 2:
-                IItemEffect effect3 = new ResourceIncrease(rp_factory[1]);
-                ItemEffectManager.ApplyEffect(effect3);
+            case 0: // 식량 생산량 증가
+                IItemEffect effect0 = new ResourceIncrease(rp_factory[0]);
+                ItemEffectManager.ApplyEffect(effect0);
+                break;
+            case 1: // 부품 생산량 증가
+                IItemEffect effect1 = new ResourceIncrease(rp_factory[0]);
+                ItemEffectManager.ApplyEffect(effect1);
+                break;
+            case 2: // 연료 생산량 증가
+                IItemEffect effect2 = new ResourceIncrease(rp_factory[1]);
+                ItemEffectManager.ApplyEffect(effect2);
                 break;
             default:
                 Debug.Log("예외 : 미지정 아이템 획득 판정");
