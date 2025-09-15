@@ -11,7 +11,7 @@ public class DepartureUIManager : UIManager
     public GameObject departurePanel;
     public Button departureButton;
     public TextMeshProUGUI departureText;
-    
+
     // 자동으로 찾은 CanvasGroup
     private CanvasGroup departureCanvasGroup;
     

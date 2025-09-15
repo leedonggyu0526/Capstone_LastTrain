@@ -153,11 +153,6 @@ public class RepairUIManager : UIManager
             // 수리 실행
             ExecuteRepair();
         }
-        else
-        {
-            // 수리 완료 후 패널 닫기
-            HideRepairPanel();
-        }
     }
     
     /// <summary>

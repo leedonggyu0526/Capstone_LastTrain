@@ -2685,8 +2685,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 250}
-  m_Spacing: {x: 20, y: 20}
+  m_CellSize: {x: 500, y: 700}
+  m_Spacing: {x: 100, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &1225962384
@@ -2924,6 +2924,7 @@ MonoBehaviour:
   csvAsset: {fileID: 4900000, guid: 0faf0de0639f81249b4d4e01c81e1fbe, type: 3}
   minCount: 3
   maxCount: 3
+  trainObject: {fileID: 419664206}
 --- !u!114 &1288777918
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CrossroadUIController : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class CrossroadUIController : MonoBehaviour
     [Header("Spawn Count")]
     public int minCount = 2;
     public int maxCount = 3;
+
+    [Header("UnDestroyOnLoad")]
+    public GameObject trainObject;
 
     private void Awake()
     {
@@ -93,6 +97,7 @@ public class CrossroadUIController : MonoBehaviour
                     // TODO: 선택 결과(보상/패널티) 처리 지점
                     Debug.Log($"[Crossroad] 선택됨: {opt.id} - {opt.title}");
                     Hide(); // 선택하면 이벤트 종료
+                    SceneManager.LoadScene("Settlement");
                 }
             );
         }
