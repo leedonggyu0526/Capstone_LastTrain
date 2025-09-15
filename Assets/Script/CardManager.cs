@@ -2,39 +2,45 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public CardData[] availableCards; // ì¹´ë“œ ë°ì´í„° ë°°ì—´
-    public CardDisplay[] cardSlots;   // Card1~Card3 ì¹´ë“œ ìŠ¬ë¡¯
+    [Header("Ä«µå µ¦ ÂüÁ¶")]
+    public CardDeck cardDeck; // ÇÃ·¹ÀÌ¾î°¡ º¸À¯ÇÑ Ä«µå µ¥ÀÌÅÍ
+
+    [Header("Ä«µå UI ½½·Ô")]
+    public CardDisplay[] cardSlots; // È­¸é¿¡ Ç¥½ÃÇÒ Ä«µå 3°³ (Card1 ~ Card3)
 
     void Start()
     {
-        AssignRandomCards();
+        ShowRandomCards(); // °ÔÀÓ ½ÃÀÛ ½Ã ·£´ı Ä«µå Ç¥½Ã
     }
 
-    void AssignRandomCards()
+    /// <summary>
+    /// cardDeck¿¡¼­ ¹«ÀÛÀ§·Î 3Àå °¡Á®¿Í UI ½½·Ô¿¡ Ç¥½Ã
+    /// </summary>
+    public void ShowRandomCards()
     {
-        // ëœë¤ìœ¼ë¡œ 3ì¥ì˜ ì¹´ë“œ ì„ íƒ
-        CardData[] selectedCards = GetRandomCards(3);
-
-        // ì¹´ë“œ ìŠ¬ë¡¯ì— ì¹´ë“œ í• ë‹¹
         for (int i = 0; i < cardSlots.Length; i++)
         {
-            cardSlots[i].cardData = selectedCards[i];
-            cardSlots[i].RefreshUI(); // ì¹´ë“œ UI ìƒˆë¡œê³ ì¹¨
+            CardData randomCard = cardDeck.GetRandomCard();
+            cardSlots[i].cardData = randomCard;
+            cardSlots[i].RefreshUI();
         }
     }
 
-    // ëœë¤ìœ¼ë¡œ Nì¥ì˜ ì¹´ë“œ ì„ íƒ
-    CardData[] GetRandomCards(int count)
+    /// <summary>
+    /// ¿ÜºÎ¿¡¼­ Ä«µå Ãß°¡ÇÒ ¶§ È£Ãâ ¿¹½Ã
+    /// </summary>
+    public void AddCard(CardData card)
     {
-        CardData[] result = new CardData[count];
-        System.Collections.Generic.List<CardData> list = new System.Collections.Generic.List<CardData>(availableCards);
+        cardDeck.AddCard(card, 1);
+        ShowRandomCards(); // UI °»½Å
+    }
 
-        for (int i = 0; i < count; i++)
-        {
-            int randIndex = Random.Range(0, list.Count);
-            result[i] = list[randIndex];
-            list.RemoveAt(randIndex); // ì¹´ë“œ ì œê±°
-        }
-        return result;
+    /// <summary>
+    /// ¿ÜºÎ¿¡¼­ Ä«µå »ç¿ëÇÒ ¶§ È£Ãâ ¿¹½Ã
+    /// </summary>
+    public void UseCard(CardData card)
+    {
+        cardDeck.RemoveCard(card, 1);
+        ShowRandomCards(); // UI °»½Å
     }
 }

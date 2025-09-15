@@ -25,16 +25,16 @@ public class BackgroundScrolling : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÌ¹ÌÁö Á¤·Ä (¿ŞÂÊ ½ºÅ©·Ñ¿ë: Å¬·ĞÀ» ¿À¸¥ÂÊ¿¡ ¹èÄ¡)
+    /// ì´ë¯¸ì§€ ì •ë ¬ (ë°°ê²½ ìŠ¤í¬ë¡¤ë§: í´ë¡ ì„ ì›ë³¸ ì˜¤ë¥¸ìª½ì— ë°°ì¹˜)
     /// </summary>
     private void SortImage()
     {
-        // 0: ¿øº», 1: Å¬·Ğ
+        // 0: ì›ë³¸, 1: í´ë¡ 
         for (int i = 0; i < spriteRenderers.Count; i++)
         {
             spriteRenderers[i].transform.localPosition = Vector3.right * interval * i;
         }
-        // Ã¹ ¹øÂ°·Î ¡°±âÁØÁ¡¡±ÀÌ µÉ ÀÎµ¦½º¸¦ Ç×»ó Å¬·Ğ(1)À¸·Î
+        // ì²« ë²ˆì§¸ë¡œ ë³´ì´ëŠ” ìŠ¤í”„ë¼ì´íŠ¸ëŠ” í•­ìƒ í´ë¡ (1)ë¶€í„° ì‹œì‘
         firstIndex = 1;
     }
 
@@ -44,7 +44,7 @@ public class BackgroundScrolling : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÌ¹ÌÁö ÀÌµ¿ ¾÷µ¥ÀÌÆ®
+    /// ì´ë¯¸ì§€ ì´ë™ ì—…ë°ì´íŠ¸
     /// </summary>
     private void UpdateMoveImages()
     {
@@ -52,13 +52,13 @@ public class BackgroundScrolling : MonoBehaviour
         for (int i = 0; i < spriteRenderers.Count; i++)
         {
             var sr = spriteRenderers[i];
-            // ¡ç ¹æÇâÀ¸·Î ÀÌµ¿
+            // ì™¼ìª½ ë°©í–¥ìœ¼ë¡œ ì´ë™
             sr.transform.localPosition += Vector3.left * move;
 
-            // ¿ŞÂÊÀ¸·Î ÀÏÁ¤ °Å¸®(-interval) ³Ñ¾î°¡¸é ¸Ç ¿À¸¥ÂÊÀ¸·Î ºÙÀÌ±â
+            // í™”ë©´ì˜ ì™¼ìª½ ë°”ê¹¥(-interval)ìœ¼ë¡œ ë‚˜ê°€ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì¬ë°°ì¹˜
             if (sr.transform.localPosition.x <= -interval)
             {
-                // firstIndexÀÇ x À§Ä¡¿¡¼­ +interval À§Ä¡·Î ¿Å°Ü¼­ ÀÌ¾î ºÙÀÓ
+                // firstIndexì˜ x ìœ„ì¹˜ì—ì„œ +interval í•œ ìœ„ì¹˜ë¡œ ì¬ë°°ì¹˜
                 float newX = spriteRenderers[firstIndex].transform.localPosition.x + interval;
                 sr.transform.localPosition = new Vector3(newX, 0f, 0f);
                 firstIndex = spriteRenderers.IndexOf(sr);

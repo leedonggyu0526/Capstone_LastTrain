@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class DepartureUIManager : UIManager
 {
@@ -73,20 +74,7 @@ public class DepartureUIManager : UIManager
             // 출발 텍스트 설정
             if (departureText != null)
             {
-                departureText.text = "정말로 출발하시겠습니까?\n\n" +
-                    "현재 정착지에서 나가면\n" +
-                    "다시 돌아올 수 없습니다.";
-                departureText.color = Color.black;
-            }
-            
-            // 버튼 텍스트 설정
-            if (departureButton != null)
-            {
-                TextMeshProUGUI buttonText = departureButton.GetComponentInChildren<TextMeshProUGUI>();
-                if (buttonText != null)
-                {
-                    buttonText.text = "출발하기";
-                }
+                SetDepartureText();
             }
             
             // 페이드인 애니메이션
@@ -136,47 +124,21 @@ public class DepartureUIManager : UIManager
     private void OnDepartureButtonClick()
     {
         // main 씬으로 이동
+        Debug.Log("[DepartureUIManager] 출발 버튼 클릭됨: 'main' 씬 로드 시도");
         SceneManager.LoadScene("main");
-    }
-    
-    /// <summary>
-    /// 출발 패널 토글 (표시/숨김)
-    /// </summary>
-    public void ToggleDeparturePanel()
-    {
-        if (departurePanel != null && departurePanel.activeSelf)
-        {
-            HideDeparturePanel();
-        }
-        else
-        {
-            ShowDeparturePanel();
-        }
     }
     
     /// <summary>
     /// 출발 텍스트 설정
     /// </summary>
-    public void SetDepartureText(string text)
+    public void SetDepartureText()
     {
         if (departureText != null)
         {
-            departureText.text = text;
-        }
-    }
-    
-    /// <summary>
-    /// 출발 버튼 텍스트 설정
-    /// </summary>
-    public void SetDepartureButtonText(string text)
-    {
-        if (departureButton != null)
-        {
-            TextMeshProUGUI buttonText = departureButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null)
-            {
-                buttonText.text = text;
-            }
+            departureText.text = "정말로 출발하시겠습니까?\n\n" +
+                    "현재 정착지에서 나가면\n" +
+                    "다시 돌아올 수 없습니다.";
+                departureText.color = Color.black;
         }
     }
 }

@@ -3,30 +3,30 @@ using UnityEngine;
 // PassengerSpawner.cs
 public class PassengerSpawner : MonoBehaviour
 {
-    [Header("승객 생성 설정")]
-    public int minSpawn = 1;           // 최소 생성 수
-    public int maxSpawn = 5;           // 최대 생성 수
-    public int maxPassengers = 100;    // 최대 승객 수
+    [Header("승객 스폰 설정")]
+    public int minSpawn = 1;           // 최소 스폰 수
+    public int maxSpawn = 5;           // 최대 스폰 수
+    public int maxPassengers = 100;    // 총 승객 수 한도
 
     void Update()
     {
-        // 테스트: P 키 입력 시 승객 생성
+        // 테스트용: P 키 입력으로 승객 스폰 시도
         if (Input.GetKeyDown(KeyCode.P))
         {
             TrySpawnPassengers();
-            Debug.Log("테스트: P 키 입력 시 승객 생성");
+            Debug.Log("테스트: P 키로 승객 스폰 시도");
         }
     }
 
     /// <summary>
-    /// 승객 생성 함수
+    /// 조건을 확인한 뒤 호출되는 승객 스폰 로직
     /// </summary>
     public void TrySpawnPassengers()
     {
         int current = ResourceManager.Instance.GetResource(ResourceType.Passenger);
         if (current >= maxPassengers)
         {
-            Debug.Log("승객이 최대 수에 도달했습니다.");
+            Debug.Log("승객이 이미 최대치에 도달했습니다.");
             return;
         }
 
@@ -35,6 +35,6 @@ public class PassengerSpawner : MonoBehaviour
         int amount = Mathf.Min(spawnAmount, availableSpace);
 
         ResourceManager.Instance.AddResource(ResourceType.Passenger, amount);
-        Debug.Log($"승객 +{amount} 추가 후 {current + amount}/{maxPassengers}");
+        Debug.Log($"승객 +{amount} → 총 {current + amount}/{maxPassengers}");
     }
 }

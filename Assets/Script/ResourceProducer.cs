@@ -1,14 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
+// ResourceProducer.cs
 public class ResourceProducer : MonoBehaviour
 {
-    [Header("ìƒì‚° ì„¤ì •")]
-    public ResourceType resourceType;
-    public int amountPerCycle = 100;
-    public float productionInterval = 5f;
-
-    private float multiplier = 1f;
+    [Header("»ı»ê ¼³Á¤")]
+    public ResourceType resourceType;      // ¾î¶² ÀÚ¿ø »ı»êÇÒÁö
+    public int amountPerCycle = 100;       // ÇÑ »çÀÌÅ¬´ç »ı»ê·®
+    public float productionInterval = 10f; // »ı»ê °£°İ(ÃÊ)
 
     void Start()
     {
@@ -20,14 +19,7 @@ public class ResourceProducer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(productionInterval);
-            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier);
-            ResourceManager.Instance.AddResource(resourceType, finalAmount);
+            ResourceManager.Instance.AddResource(resourceType, amountPerCycle);
         }
-    }
-
-    // ì—…ê·¸ë ˆì´ë“œ ë§¤ë‹ˆì €ì—ì„œ í˜¸ì¶œí•  í•¨ìˆ˜
-    public void SetMultiplier(float value)
-    {
-        multiplier = value;
     }
 }

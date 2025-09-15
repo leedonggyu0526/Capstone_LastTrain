@@ -31,7 +31,7 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    // 카드 랜덤 추출
+    // 수량만큼 카드 목록을 확장하고 1장 반환
     public CardData GetRandomCard()
     {
         List<CardData> expandedList = new List<CardData>();

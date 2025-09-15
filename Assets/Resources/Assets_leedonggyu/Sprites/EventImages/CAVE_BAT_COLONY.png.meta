@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CAVE_BAT_COLONY_0: -7977869304838508923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

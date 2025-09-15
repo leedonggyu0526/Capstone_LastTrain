@@ -8,8 +8,8 @@ public class AlphaClickLimiter : MonoBehaviour
         Image img = GetComponent<Image>();
         if (img != null)
         {
-            img.alphaHitTestMinimumThreshold = 0.5f; // ì•ŒíŒŒê°’ì´ 50% ì´ìƒì¼ ë•Œ í´ë¦­ ê°€ëŠ¥
-            Debug.Log($"[AlphaClickLimiter] ì ìš©ë¨: {gameObject.name}");
+            img.alphaHitTestMinimumThreshold = 0.5f; // ¾ËÆÄ°ª 50% ÀÌ»ó¸¸ Å¬¸¯µÊ
+            Debug.Log($"[AlphaClickLimiter] Àû¿ëµÊ: {gameObject.name}");
         }
     }
 }
