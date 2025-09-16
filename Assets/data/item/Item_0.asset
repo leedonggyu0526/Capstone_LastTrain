@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: twice
   itemEffect: 1234
   description: asdf
-  artwork: {fileID: 0}
+  artwork: {fileID: 4919500086455055436, guid: b398c3997f6e9467e9471e072dc25896, type: 3}
