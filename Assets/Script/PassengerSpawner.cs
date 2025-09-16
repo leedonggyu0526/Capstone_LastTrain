@@ -3,30 +3,30 @@ using UnityEngine;
 // PassengerSpawner.cs
 public class PassengerSpawner : MonoBehaviour
 {
-    [Header("½Â°´ »ı¼º ¼³Á¤")]
-    public int minSpawn = 1;           // ÃÖ¼Ò »ı¼º ¼ö
-    public int maxSpawn = 5;           // ÃÖ´ë »ı¼º ¼ö
-    public int maxPassengers = 100;    // ÀüÃ¼ ½Â°´ ¼ö¿ë ÇÑ°è
+    [Header("ìŠ¹ê° ìƒì„± ì„¤ì •")]
+    public int minSpawn = 1;           // ìµœì†Œ ìƒì„± ìˆ˜
+    public int maxSpawn = 5;           // ìµœëŒ€ ìƒì„± ìˆ˜
+    public int maxPassengers = 100;    // ì „ì²´ ìŠ¹ê° ìˆ˜ìš© í•œê³„
 
     void Update()
     {
-        // Å×½ºÆ®¿ë: P Å° ´©¸£¸é ½Â°´ ½ºÆù ½Ãµµ
+        // í…ŒìŠ¤íŠ¸ìš©: P í‚¤ ëˆ„ë¥´ë©´ ìŠ¹ê° ìŠ¤í° ì‹œë„
         if (Input.GetKeyDown(KeyCode.P))
         {
             TrySpawnPassengers();
-            Debug.Log("Å×½ºÆ®: P Å°·Î ½Â°´ ½ºÆù ½Ãµµ");
+            Debug.Log("í…ŒìŠ¤íŠ¸: P í‚¤ë¡œ ìŠ¹ê° ìŠ¤í° ì‹œë„");
         }
     }
 
     /// <summary>
-    /// Á¶°Ç ÃæÁ· ½Ã È£ÃâµÇ´Â ½Â°´ »ı¼º ·ÎÁ÷
+    /// ì¡°ê±´ ì¶©ì¡± ì‹œ í˜¸ì¶œë˜ëŠ” ìŠ¹ê° ìƒì„± ë¡œì§
     /// </summary>
     public void TrySpawnPassengers()
     {
         int current = ResourceManager.Instance.GetResource(ResourceType.Passenger);
         if (current >= maxPassengers)
         {
-            Debug.Log("½Â°´ÀÌ ÀÌ¹Ì ÃÖ´ëÄ¡¿¡ µµ´ŞÇß½À´Ï´Ù.");
+            Debug.Log("ìŠ¹ê°ì´ ì´ë¯¸ ìµœëŒ€ì¹˜ì— ë„ë‹¬í–ˆìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -35,6 +35,6 @@ public class PassengerSpawner : MonoBehaviour
         int amount = Mathf.Min(spawnAmount, availableSpace);
 
         ResourceManager.Instance.AddResource(ResourceType.Passenger, amount);
-        Debug.Log($"½Â°´ +{amount} ¡æ ÇöÀç {current + amount}/{maxPassengers}");
+        Debug.Log($"ìŠ¹ê° +{amount} â†’ í˜„ì¬ {current + amount}/{maxPassengers}");
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cf0c19e8de359466b93ee9e47e231e44
+guid: f9dffefb27ae448899c084104f4d8a85
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3698297041941899089
-    second: copperCard_0
+      213: 3059998042034853302
+    second: copperCard_b_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: copperCard_0
+      name: copperCard_b_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
-        width: 1024
-        height: 1480
+        y: 0
+        width: 616
+        height: 373
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 15723d2b09df25330800000000000000
-      internalID: 3698297041941899089
+      spriteID: 6b5d0e4b10c477a20800000000000000
+      internalID: 3059998042034853302
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      copperCard_0: 3698297041941899089
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

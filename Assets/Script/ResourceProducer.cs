@@ -7,7 +7,9 @@ public class ResourceProducer : MonoBehaviour
     public ResourceType resourceType;
     public int amountPerCycle = 100;
     public float productionInterval = 5f;
-
+    /// <summary>
+    /// 보정값 : 일단 아이템 소지시 증가량 ++
+    /// </summary>
     public float correction = 1f; 
     private float multiplier = 1f;
 
