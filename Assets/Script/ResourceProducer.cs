@@ -8,6 +8,7 @@ public class ResourceProducer : MonoBehaviour
     public int amountPerCycle = 100;
     public float productionInterval = 5f;
 
+    public float correction = 1f; 
     private float multiplier = 1f;
 
     void Start()
@@ -20,7 +21,7 @@ public class ResourceProducer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(productionInterval);
-            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier);
+            int finalAmount = Mathf.RoundToInt(amountPerCycle * multiplier * correction);
             ResourceManager.Instance.AddResource(resourceType, finalAmount);
         }
     }

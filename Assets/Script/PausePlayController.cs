@@ -7,7 +7,7 @@ public class PausePlayController : MonoBehaviour
     [Header("UI Button 및 라벨")]
     public Button toggleButton;      // Inspector에 드래그할 UI Button
     public TMP_Text buttonText;        // 버튼 위에 올릴 Text (TextMeshPro 사용 시 TMP_Text)
-    public PauseMenuManager pmm;
+
     private bool isPaused = false;
 
     void Start()
@@ -23,7 +23,7 @@ public class PausePlayController : MonoBehaviour
     void Update()
     {
         // 스페이스바 토글
-        if (Input.GetKeyDown(KeyCode.Space) && (!pmm.isESCPaused))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             TogglePause();
         }
