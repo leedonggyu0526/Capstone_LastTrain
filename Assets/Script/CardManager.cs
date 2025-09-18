@@ -2,39 +2,45 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public CardData[] availableCards; // 에디터에서 카드 데이터 여러 개 등록
-    public CardDisplay[] cardSlots;   // Card1~Card3 오브젝트를 넣어줌
+    [Header("카드 덱 참조")]
+    public CardDeck cardDeck; // 플레이어가 보유한 카드 데이터
+
+    [Header("카드 UI 슬롯")]
+    public CardDisplay[] cardSlots; // 화면에 표시할 카드 3개 (Card1 ~ Card3)
 
     void Start()
     {
-        AssignRandomCards();
+        ShowRandomCards(); // 게임 시작 시 랜덤 카드 표시
     }
 
-    void AssignRandomCards()
+    /// <summary>
+    /// cardDeck에서 무작위로 3장 가져와 UI 슬롯에 표시
+    /// </summary>
+    public void ShowRandomCards()
     {
-        // 랜덤하게 3개의 서로 다른 카드 선택
-        CardData[] selectedCards = GetRandomCards(3);
-
-        // 카드 슬롯에 랜덤 카드 배정
         for (int i = 0; i < cardSlots.Length; i++)
         {
-            cardSlots[i].cardData = selectedCards[i];
-            cardSlots[i].RefreshUI(); // 카드 UI 업데이트 함수 호출
+            CardData randomCard = cardDeck.GetRandomCard();
+            cardSlots[i].cardData = randomCard;
+            cardSlots[i].RefreshUI();
         }
     }
 
-    // 중복 없이 N개의 카드 뽑기
-    CardData[] GetRandomCards(int count)
+    /// <summary>
+    /// 외부에서 카드 추가할 때 호출 예시
+    /// </summary>
+    public void AddCard(CardData card)
     {
-        CardData[] result = new CardData[count];
-        System.Collections.Generic.List<CardData> list = new System.Collections.Generic.List<CardData>(availableCards);
+        cardDeck.AddCard(card, 1);
+        ShowRandomCards(); // UI 갱신
+    }
 
-        for (int i = 0; i < count; i++)
-        {
-            int randIndex = Random.Range(0, list.Count);
-            result[i] = list[randIndex];
-            list.RemoveAt(randIndex); // 중복 방지
-        }
-        return result;
+    /// <summary>
+    /// 외부에서 카드 사용할 때 호출 예시
+    /// </summary>
+    public void UseCard(CardData card)
+    {
+        cardDeck.RemoveCard(card, 1);
+        ShowRandomCards(); // UI 갱신
     }
 }

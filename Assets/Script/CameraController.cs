@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class CameraHorizontalMove : MonoBehaviour
 {
-    [Header("ÀÌµ¿ ¼Óµµ")]
-    [Tooltip("A/B Å° ÀÔ·Â ½Ã ÁÂ¿ì ÀÌµ¿ ¼Óµµ")]
+    [Header("ì´ë™ ì†ë„")]
+    [Tooltip("A/D í‚¤ ì…ë ¥ ì‹œ ì¢Œìš° ì´ë™ ì†ë„")]
     public float moveSpeed = 5f;
 
     void Update()
     {
         Vector3 dir = Vector3.zero;
 
-        // A Å°¸¦ ´©¸£¸é ¿ŞÂÊÀ¸·Î, B Å°¸¦ ´©¸£¸é ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+        // A í‚¤ë¥¼ ëˆ„ë¥´ë©´ ì™¼ìª½ìœ¼ë¡œ, D í‚¤ë¥¼ ëˆ„ë¥´ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
         if (Input.GetKey(KeyCode.A))
         {
             dir += Vector3.left;
@@ -20,7 +20,7 @@ public class CameraHorizontalMove : MonoBehaviour
             dir += Vector3.right;
         }
 
-        // ÇÁ·¹ÀÓ µ¶¸³ÀûÀÎ ÀÌµ¿ Àû¿ë
+        // ì›”ë“œ ì¢Œí‘œê³„ ê¸°ì¤€ìœ¼ë¡œ ì´ë™ ì ìš©
         transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
     }
 }
