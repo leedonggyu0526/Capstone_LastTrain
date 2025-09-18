@@ -24,6 +24,22 @@ public class BackgroundScrolling : MonoBehaviour
         SortImage();
     }
 
+    public void SetBackground(Sprite newSprite)
+    {
+        if (newSprite == null)
+        {
+            Debug.LogError("[BackgroundScrolling] SetBackground: newSprite=NULL");
+            return;
+        }
+
+        // 원본 + 복제본 모두 스프라이트 교체
+        if (spriteRenderer != null) spriteRenderer.sprite = newSprite;
+        foreach (var sr in spriteRenderers)
+            if (sr != null) sr.sprite = newSprite;
+
+        Debug.Log($"[BackgroundScrolling] 배경 교체: {newSprite.name}");
+    }
+
     /// <summary>
     /// 이미지 정렬 (배경 스크롤링: 클론을 원본 오른쪽에 배치)
     /// </summary>

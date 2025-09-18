@@ -2921,10 +2921,9 @@ MonoBehaviour:
   panel: {fileID: 1288777915}
   optionsParent: {fileID: 1214163828}
   optionPrefab: {fileID: 3694347877008513339, guid: afa23c04ed431604aba442f583d5f893, type: 3}
-  csvAsset: {fileID: 4900000, guid: 0faf0de0639f81249b4d4e01c81e1fbe, type: 3}
+  crossroadSelect: {fileID: 4900000, guid: 0faf0de0639f81249b4d4e01c81e1fbe, type: 3}
   minCount: 3
   maxCount: 3
-  trainObject: {fileID: 419664206}
 --- !u!114 &1288777918
 MonoBehaviour:
   m_ObjectHideFlags: 0

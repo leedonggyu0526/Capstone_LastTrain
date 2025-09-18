@@ -13,31 +13,28 @@ public class CrossroadUIController : MonoBehaviour
     public GameObject optionPrefab; // CrossRoadSelectPrefab (루트에 Button + CrossroadOptionView)
 
     [Header("CSV")]
-    public TextAsset csvAsset;      // 비워두면 Resources.Load로 로딩
+    public TextAsset crossroadSelect;      // 비워두면 Resources.Load로 로딩
     private readonly List<CrossRoadOption> allOptions = new List<CrossRoadOption>();
 
     [Header("Spawn Count")]
     public int minCount = 2;
     public int maxCount = 3;
 
-    [Header("UnDestroyOnLoad")]
-    public GameObject trainObject;
+    private bool _initialized = false;
+
+    private void Start()
+    {
+        // 첫 프레임에 CSV 미리 로드(실패해도 Show에서 재시도함)
+        LoadCSV();
+        _initialized = true;
+
+        // ⭐ 안전하게 패널만 꺼두기(씬에서 켜놔도 여기서 한 번 꺼주니 상태 일관)
+        if (panel != null && panel.activeSelf)
+            panel.SetActive(false);
+    }
 
     private void Awake()
     {
-        // 인스펙터에 넣지 않았다면 Resources에서 찾음
-        if (csvAsset == null)
-        {
-            csvAsset = Resources.Load<TextAsset>("CrossRoad/CrossRoadSelect"); // 기본 경로: Assets/Resources/CrossRoad/CrossRoadSelect.csv
-            if (csvAsset == null)
-            {
-                // 폴백: Assets/Resources/CrossRoadSelect.csv 도 지원
-                csvAsset = Resources.Load<TextAsset>("CrossRoadSelect");
-                if (csvAsset != null)
-                    Debug.LogWarning("[CrossroadUI] CSV를 폴백 경로(CrossRoadSelect)에서 로드했습니다. 폴더 구조를 CrossRoad/로 정리하는 것을 권장합니다.");
-            }
-        }
-
         // panel이 비어 있으면 현재 오브젝트를 패널로 사용 (일반적으로 컨트롤러가 패널 루트에 붙어 있음)
         if (panel == null) panel = this.gameObject;
 
@@ -45,12 +42,10 @@ public class CrossroadUIController : MonoBehaviour
         if (optionPrefab == null)
         {
             optionPrefab = Resources.Load<GameObject>("CrossRoad/CrossRoadSelectPrefab");
-            if (optionPrefab == null)
-                Debug.LogError("[CrossroadUI] optionPrefab이 비었고 Resources/CrossRoad/CrossRoadSelectPrefab 로드에도 실패했습니다. 인스펙터에 프리팹을 연결하세요.");
         }
 
         LoadCSV();
-        HideImmediate();
+        Hide();
     }
 
     /// <summary>
@@ -58,15 +53,11 @@ public class CrossroadUIController : MonoBehaviour
     /// </summary>
     public void Show()
     {
-        if (panel == null) { Debug.LogError("[CrossroadUIController] panel=NULL"); return; }
-        if (optionsParent == null) { Debug.LogError("[CrossroadUIController] optionsParent=NULL"); return; }
-        if (optionPrefab == null) { Debug.LogError("[CrossroadUIController] optionPrefab=NULL(프로젝트 프리팹 에셋 연결 필요)"); return; }
-        if (allOptions.Count == 0) { Debug.LogWarning("[CrossroadUIController] CSV에서 로드된 옵션이 0개입니다."); }
-
-        Debug.Log("[CrossroadUIController] Show() 호출됨 → 카드 생성 시작");
-        if (!ValidateRefs()) return;
-
         ClearChildren();
+
+        if (allOptions.Count == 0){
+            Debug.LogWarning("[CrossroadUI] CSV에서 로드된 옵션이 0개입니다.");
+        }
 
         // 2~3개 가중치 랜덤 픽
         int count = Mathf.Clamp(UnityEngine.Random.Range(minCount, maxCount + 1), 1, 10);
@@ -77,11 +68,6 @@ public class CrossroadUIController : MonoBehaviour
             var go = Instantiate(optionPrefab, optionsParent);
 
             var view = go.GetComponent<CrossroadOptionView>();
-            if (view == null)
-            {
-                Debug.LogError("[CrossroadUI] optionPrefab에 CrossroadOptionView가 없습니다.");
-                continue;
-            }
 
             // 리소스 로드 (경로는 CSV의 iconPath/bgPath, ex: CrossRoad/Icons/crate)
             Sprite bgSprite = LoadSpriteSafe(opt.bgPath);
@@ -94,6 +80,9 @@ public class CrossroadUIController : MonoBehaviour
                 opt.desc,
                 () =>
                 {
+                    Sprite sceneBgSprite = LoadSpriteSafe(opt.sceneBgPath);
+                    var bgScroll = FindObjectOfType<BackgroundScrolling>();
+                    bgScroll.SetBackground(sceneBgSprite);
                     // TODO: 선택 결과(보상/패널티) 처리 지점
                     Debug.Log($"[Crossroad] 선택됨: {opt.id} - {opt.title}");
                     Hide(); // 선택하면 이벤트 종료
@@ -112,12 +101,6 @@ public class CrossroadUIController : MonoBehaviour
         ClearChildren();
     }
 
-    private void HideImmediate()
-    {
-        if (panel) panel.SetActive(false);
-        ClearChildren();
-    }
-
     private void ClearChildren()
     {
         if (!optionsParent) return;
@@ -125,28 +108,20 @@ public class CrossroadUIController : MonoBehaviour
             Destroy(optionsParent.GetChild(i).gameObject);
     }
 
-    private bool ValidateRefs()
-    {
-        bool ok = true;
-        if (!panel) { Debug.LogError("[CrossroadUI] panel이 비었습니다."); ok = false; }
-        if (!optionsParent) { Debug.LogError("[CrossroadUI] optionsParent가 비었습니다."); ok = false; }
-        if (!optionPrefab) { Debug.LogError("[CrossroadUI] optionPrefab이 비었습니다."); ok = false; }
-        if (allOptions.Count == 0) { Debug.LogWarning("[CrossroadUI] CSV에서 로드된 옵션이 0개입니다."); }
-        return ok;
-    }
-
     // -------- CSV 로딩/파싱 --------
     private void LoadCSV()
     {
+        if (_initialized) return;
+
         allOptions.Clear();
 
-        if (csvAsset == null)
+        if (crossroadSelect == null)
         {
             Debug.LogWarning("[CrossroadUI] csvAsset이 없습니다. Assets/Resources/CrossRoad/CrossRoadSelect.csv 확인!");
             return;
         }
 
-        var lines = csvAsset.text.Split('\n');
+        var lines = crossroadSelect.text.Split('\n');
         if (lines.Length == 0)
         {
             Debug.LogWarning("[CrossroadUI] CSV가 비어 있습니다.");
@@ -159,7 +134,7 @@ public class CrossroadUIController : MonoBehaviour
         {
             var probe = lines[i].Trim();
             if (string.IsNullOrEmpty(probe)) continue;
-            var cols0 = SplitCsv(probe);
+            var cols0 = SplitCsvFlexible(probe);
             bool firstIsHeader = true;
             if (cols0.Count > 0)
             {
@@ -171,39 +146,64 @@ public class CrossroadUIController : MonoBehaviour
             break;
         }
 
+        int added = 0;
         for (int i = startIndex; i < lines.Length; i++)
-        {
+        {   
             var line = lines[i].Trim();
             if (string.IsNullOrEmpty(line)) continue;
 
-            var cols = SplitCsv(line); // 큰따옴표 지원
-            // 기대: id,title,desc,iconPath,bgPath,weight = 6개
-            if (cols.Count < 6) continue;
-
+            var cols = SplitCsvFlexible(line); // 큰따옴표 지원
+            
+            // 4열 전용: id,title,desc,weight → 경로는 SetPath()로 자동 설정
             var opt = new CrossRoadOption();
-            int.TryParse(cols[0], out opt.id);
+            if (cols.Count < 4)
+            {
+                Debug.LogWarning($"[CrossroadUI] 라인 {i + 1}: 컬럼 수({cols.Count}) < 4 → 스킵. 원문: {line}");
+                continue;
+            }
+            if (!int.TryParse(cols[0], out opt.id))
+            {
+                Debug.LogWarning($"[CrossroadUI] 라인 {i + 1}: id 파싱 실패 → 스킵. 원문: {line}");
+                continue;
+            }
             opt.title = cols[1];
             opt.desc = cols[2];
-            opt.iconPath = cols[3];
-            opt.bgPath = cols[4];
-            int.TryParse(cols[5], out opt.weight);
+            if (!int.TryParse(cols[3], out opt.weight))
+            {
+                Debug.LogWarning($"[CrossroadUI] 라인 {i + 1}: weight 파싱 실패 → 기본값 1 사용. 원문: {line}");
+                opt.weight = 1;
+            }
+            // 경로는 id 기반으로 자동 설정
+            opt.SetPath();
+
             if (opt.weight < 1) opt.weight = 1;
 
-            // (선택) 유효성 검사
             if (!opt.IsValid(out var reason))
             {
-                Debug.LogWarning($"[CrossroadUI] 옵션 무시(id={opt.id}): {reason}");
+                Debug.LogWarning($"[CrossroadUI] 라인 {i + 1} 옵션 무시(id={opt.id}): {reason}");
                 continue;
             }
 
             allOptions.Add(opt);
+            added++;
+
         }
 
         Debug.Log($"[CrossroadUI] CSV 로드 완료: {allOptions.Count}개");
     }
 
-    // 큰따옴표("...") 내의 쉼표를 보존하는 간이 파서
-    private List<string> SplitCsv(string line)
+    private List<string> SplitCsvFlexible(string line)
+    {
+        bool hasQuote = line.IndexOf('\"') >= 0;
+        if (hasQuote)
+            return SplitCsvQuoted(line);
+
+        if (line.IndexOf('\t') >= 0) return new List<string>(line.Split('\t'));
+        if (line.IndexOf(';') >= 0) return new List<string>(line.Split(';'));
+        return new List<string>(line.Split(',')); // 기본 콤마
+    }
+
+    private List<string> SplitCsvQuoted(string line)
     {
         List<string> result = new List<string>();
         bool inQuotes = false;
@@ -215,11 +215,20 @@ public class CrossroadUIController : MonoBehaviour
 
             if (c == '\"')
             {
-                inQuotes = !inQuotes;
+                // "" → " 로 처리
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '\"')
+                {
+                    sb.Append('\"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
                 continue;
             }
 
-            if (c == ',' && !inQuotes)
+            if (!inQuotes && (c == ',' || c == ';' || c == '\t'))
             {
                 result.Add(sb.ToString());
                 sb.Clear();
@@ -229,7 +238,7 @@ public class CrossroadUIController : MonoBehaviour
                 sb.Append(c);
             }
         }
-        result.Add(sb.ToString()); // 마지막 필드
+        result.Add(sb.ToString());
         return result;
     }
 
@@ -237,37 +246,13 @@ public class CrossroadUIController : MonoBehaviour
     private Sprite LoadSpriteSafe(string resPath)
     {
         if (string.IsNullOrWhiteSpace(resPath)) return null;
-        string cleaned = SanitizeResourcePath(resPath);
+        string cleaned = resPath;
         Sprite s = Resources.Load<Sprite>(cleaned);
         if (s == null)
         {
             Debug.LogWarning($"[CrossroadUI] Sprite 로드 실패: '{resPath}' → 변환 '{cleaned}'");
         }
         return s;
-    }
-
-    private string SanitizeResourcePath(string input)
-    {
-        if (string.IsNullOrWhiteSpace(input)) return input;
-
-        string p = input.Trim();
-
-        // 경로 구분자 통일
-        p = p.Replace("\\", "/");
-
-        // 선행 Assets/ 제거
-        if (p.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase))
-            p = p.Substring("Assets/".Length);
-
-        // 선행 Resources/ 제거 (Resources 상대 경로로 맞춤)
-        if (p.StartsWith("Resources/", StringComparison.OrdinalIgnoreCase))
-            p = p.Substring("Resources/".Length);
-
-        // 파일 확장자 제거
-        int dot = p.LastIndexOf('.');
-        if (dot >= 0) p = p.Substring(0, dot);
-
-        return p;
     }
 
     // 가중치 랜덤, 중복 없이 N개 뽑기

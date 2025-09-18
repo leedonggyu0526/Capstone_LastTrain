@@ -10,6 +10,7 @@ public class CrossRoadOption
     public string iconPath;   // Resources 경로 예: "CrossRoad/Icons/crate"
     public string bgPath;     // Resources 경로 예: "CrossRoad/Backgrounds/blue"
     public int weight = 1;    // 가중치(1 이상)
+    public string sceneBgPath; // 씬 배경 경로
 
     // (선택) 간단 유효성 검사
     public bool IsValid(out string reason)
@@ -19,7 +20,14 @@ public class CrossRoadOption
         if (string.IsNullOrWhiteSpace(iconPath)) { reason = "iconPath가 비어 있음"; return false; }
         if (string.IsNullOrWhiteSpace(bgPath)) { reason = "bgPath가 비어 있음"; return false; }
         if (weight < 1) { reason = "weight는 1 이상"; return false; }
+        if (string.IsNullOrWhiteSpace(sceneBgPath)) { reason = "sceneBgPath가 비어 있음"; return false; }
         reason = null; return true;
+    }
+
+    public void SetPath(){
+        iconPath = "CrossRoad/Icons/" + id;
+        bgPath = "CrossRoad/Backgrounds/" + id;
+        sceneBgPath = "CrossRoad/SceneBackgrounds/" + id;
     }
 }
 
