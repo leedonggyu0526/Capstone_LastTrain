@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class CrossroadOptionView : MonoBehaviour
 {
     [Header("Refs")]
-    public Image bg;
-    public Image icon;
+    public Image bgImage;
+    public Image iconImage;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descText;
 
@@ -15,8 +15,8 @@ public class CrossroadOptionView : MonoBehaviour
 
     public void Bind(Sprite bgSprite, Sprite iconSprite, string title, string desc, UnityAction clickAction)
     {
-        if (bg) bg.sprite = bgSprite;
-        if (icon) icon.sprite = iconSprite;
+        if (bgImage) bgImage.sprite = bgSprite;
+        if (iconImage) iconImage.sprite = iconSprite;
         if (titleText) titleText.text = title;
         if (descText) descText.text = desc;
 

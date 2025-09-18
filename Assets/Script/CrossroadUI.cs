@@ -1,5 +1,6 @@
 // CrossroadUI.cs
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CrossroadUI : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class CrossroadUI : MonoBehaviour
         }
 
         // 디버그: 매 1초에 한 번쯤만 찍고 싶으면 타이머로 감싸도 됨
-        Debug.Log($"[CrossroadUI] CheckDistance 호출: 현재={totalDistance:F1}, 목표={nextTriggerDistance:F1}, 패널활성={(uiController?.panel != null && uiController.panel.activeSelf)}");
+        // Debug.Log($"[CrossroadUI] CheckDistance 호출: 현재={totalDistance:F1}, 목표={nextTriggerDistance:F1}, 패널활성={(uiController?.panel != null && uiController.panel.activeSelf)}");
 
         // (원하면) 패널 열려있을 때 중복 방지
         if (uiController != null && uiController.panel != null && uiController.panel.activeSelf)

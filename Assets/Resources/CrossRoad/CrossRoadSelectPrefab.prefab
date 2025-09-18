@@ -350,8 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdab36e289a2bd47bfddd0f541874d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bg: {fileID: 1290610829071346820}
-  icon: {fileID: 9196524025836448971}
+  bgImage: {fileID: 1290610829071346820}
+  iconImage: {fileID: 9196524025836448971}
   titleText: {fileID: 8822000022999793487}
   descText: {fileID: 2180304907773798807}
 --- !u!1 &6079523494571412310

@@ -4,30 +4,35 @@ using UnityEngine;
 [System.Serializable]
 public class CrossRoadOption
 {
-    public int id;            // 고유 번호
+    public string id;            // 고유 번호
     public string title;      // 카드 제목
-    public string desc;       // 설명(쉼표 있으면 CSV에서 "따옴표"로 감싸기)
-    public string iconPath;   // Resources 경로 예: "CrossRoad/Icons/crate"
-    public string bgPath;     // Resources 경로 예: "CrossRoad/Backgrounds/blue"
+    public string desc;       // 설명
     public int weight = 1;    // 가중치(1 이상)
-    public string sceneBgPath; // 씬 배경 경로
+    public Sprite sceneBg; // 씬 배경
+    public Sprite icon; // 아이콘
+    public Sprite bg; // 배경
+
 
     // (선택) 간단 유효성 검사
     public bool IsValid(out string reason)
     {
-        if (id <= 0) { reason = "id가 1 이상이어야 함"; return false; }
+        if (string.IsNullOrWhiteSpace(id)) { reason = "id가 비어 있음"; return false; }
         if (string.IsNullOrWhiteSpace(title)) { reason = "title이 비어 있음"; return false; }
-        if (string.IsNullOrWhiteSpace(iconPath)) { reason = "iconPath가 비어 있음"; return false; }
-        if (string.IsNullOrWhiteSpace(bgPath)) { reason = "bgPath가 비어 있음"; return false; }
+        if (icon == null) { reason = "icon이 비어 있음"; return false; }
+        if (bg == null) { reason = "bg가 비어 있음"; return false; }
         if (weight < 1) { reason = "weight는 1 이상"; return false; }
-        if (string.IsNullOrWhiteSpace(sceneBgPath)) { reason = "sceneBgPath가 비어 있음"; return false; }
+        if (sceneBg == null) { reason = "sceneBg가 비어 있음"; return false; }
         reason = null; return true;
     }
 
-    public void SetPath(){
-        iconPath = "CrossRoad/Icons/" + id;
-        bgPath = "CrossRoad/Backgrounds/" + id;
-        sceneBgPath = "CrossRoad/SceneBackgrounds/" + id;
+    public void SetSprites(){
+        icon = Resources.Load<Sprite>("CrossRoad/Icons/" + id);
+        bg = Resources.Load<Sprite>("CrossRoad/Backgrounds/" + id);
+        sceneBg = Resources.Load<Sprite>("CrossRoad/SceneBackgrounds/" + id);
+
+        if (icon == null) Debug.LogWarning($"[CrossRoadOption] 아이콘 로드 실패: CrossRoad/Icons/{id}");
+        if (bg == null) Debug.LogWarning($"[CrossRoadOption] 배경 로드 실패: CrossRoad/Backgrounds/{id}");
+        if (sceneBg == null) Debug.LogWarning($"[CrossRoadOption] 씬배경 로드 실패: CrossRoad/SceneBackgrounds/{id}");
     }
 }
 

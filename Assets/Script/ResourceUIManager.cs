@@ -7,36 +7,50 @@ using TMPro;
 public struct ResourceUI
 {
     public ResourceType type;   // Fuel, Food, MachinePart, Passenger
-    public Image icon;          // Inspector¿¡ µå·Ó´Ù¿îÀ¸·Î ÇÒ´ç
-    public TMP_Text countText;      // ¡°500/1000¡± À» Ç¥½ÃÇÒ Text
+    public Image icon;          // Inspectorï¿½ï¿½ ï¿½ï¿½Ó´Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
+    public TMP_Text countText;      // ï¿½ï¿½500/1000ï¿½ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ Text
 }
 
 public class ResourceUIManager : MonoBehaviour
 {
-    [Header("ÀÚ¿øº° UI ¾ÆÀÌÄÜ°ú ÅØ½ºÆ®")]
+    [Header("ï¿½Ú¿ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½Ü°ï¿½ ï¿½Ø½ï¿½Æ®")]
     public List<ResourceUI> resourceUIs = new List<ResourceUI>();
 
     void Start()
     {
-        // ÃÊ±â ÇÑ¹ø ·»´õ
+        // ï¿½Ê±ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½ï¿½
         UpdateAllUI();
     }
 
     void Update()
     {
-        // ½Ç½Ã°£ º¯µ¿ÀÌ ÀæÀ¸¸é ¸Å ÇÁ·¹ÀÓ¸¶´Ù °»½ÅÇØµµ µÇ°í,
-        // º¯µ¿ÀÌ Àû´Ù¸é ÀÌº¥Æ® ±â¹İ(UpdateAllUI() È£Ãâ)À¸·Îµµ ÃæºĞÇÕ´Ï´Ù.
+        // ï¿½Ç½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½Ç°ï¿½,
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½(UpdateAllUI() È£ï¿½ï¿½)ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         UpdateAllUI();
     }
 
     private void UpdateAllUI()
     {
-        foreach (var rui in resourceUIs)
-        {
-            int current = ResourceManager.Instance.GetResource(rui.type);
-            int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
-            rui.countText.text = $"{current}/{max}";
-            // ¾ÆÀÌÄÜ´Â ¹Ì¸® Inspector¿¡¼­ ÇÒ´çÇØ µÎ¾ú´Ù¸é º°µµ ¾÷µ¥ÀÌÆ® ºÒÇÊ¿ä
-        }
+		// ResourceManagerê°€ ì•„ì§ ì´ˆê¸°í™”ë˜ì§€ ì•Šì•˜ë‹¤ë©´ ëŒ€ê¸°
+		if (ResourceManager.Instance == null)
+		{
+			Debug.LogWarning("[ResourceUIManager] ResourceManager.Instanceê°€ ì—†ìŠµë‹ˆë‹¤. ì”¬ì— ResourceManagerê°€ ìˆëŠ”ì§€ í™•ì¸í•˜ì„¸ìš”.");
+			return;
+		}
+
+		foreach (var rui in resourceUIs)
+		{
+			// UI ì°¸ì¡°ê°€ ë¹„ì–´ ìˆìœ¼ë©´ ê±´ë„ˆë›°ê³  ê²½ê³ 
+			if (rui.countText == null)
+			{
+				Debug.LogWarning($"[ResourceUIManager] {rui.type} ì˜ countTextê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤. Inspectorì—ì„œ í• ë‹¹í•˜ì„¸ìš”.");
+				continue;
+			}
+
+			int current = ResourceManager.Instance.GetResource(rui.type);
+			int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
+			rui.countText.text = $"{current}/{max}";
+			// ì°¸ì¡°ê°€ ë¹„ì–´ ìˆìœ¼ë©´ ê±´ë„ˆë›°ê³  ê²½ê³ 
+		}
     }
 }

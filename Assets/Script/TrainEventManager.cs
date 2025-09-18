@@ -17,33 +17,6 @@ public class TrainEventManager : MonoBehaviour
                 // trainEventManagerInstance가 없으면 생성
                 Debug.Log("TrainEventManager 인스턴스 생성");
                 trainEventManagerInstance = FindFirstObjectByType<TrainEventManager>();
-                if (trainEventManagerInstance == null)
-                {
-                    // EventSystem 오브젝트에 TrainEventManager 컴포넌트 추가
-                    GameObject eventSystem = GameObject.Find("EventSystem");
-                    if (eventSystem == null)
-                    {
-                        Debug.LogWarning("EventSystem GameObject를 찾을 수 없어서 새로 생성합니다.");
-                        eventSystem = new GameObject("EventSystem");
-                    }
-                    // 런타임에 생성된 GameObject에 HideFlags 설정
-                    eventSystem.hideFlags = HideFlags.DontSave;
-                    trainEventManagerInstance = eventSystem.AddComponent<TrainEventManager>();
-                    
-                    // CSV 파일을 Resources에서 자동으로 로드
-                    TextAsset csvFile = Resources.Load<TextAsset>("Assets_leedonggyu/Data/TrainEventList");
-                    if (csvFile != null)
-                    {
-                        trainEventManagerInstance.trainEventCSV = csvFile;
-                        Debug.Log("CSV 파일이 자동으로 로드되어 할당되었습니다.");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("CSV 파일을 자동으로 로드할 수 없습니다. Inspector에서 할당해주세요.");
-                    }
-                    
-                    Debug.Log("TrainEventManager 인스턴스가 생성되었습니다.");
-                }
             }
             return trainEventManagerInstance;
         }
