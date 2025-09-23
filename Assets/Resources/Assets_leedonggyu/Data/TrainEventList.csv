@@ -1,0 +1,35 @@
+﻿이벤트_ID,이벤트_이름,이벤트_설명,이벤트_선택지1,이벤트_선택지1_설명,이벤트_선택지2,이벤트_선택지2_설명,이벤트_선택지3,이벤트_선택지3_설명
+START,기차여행 시작,오늘도 기차를 타고 여행을 떠납니다. 창밖으로 펼쳐지는 풍경을 보며 무엇을 하실까요?,READ_BOOK,책을 읽으며 시간을 보낸다,TALK_PASSENGER,옆 승객과 대화를 나눈다,LOOK_OUTSIDE,창밖 풍경을 감상한다
+READ_BOOK,독서 시간,좋아하는 소설을 읽기 시작했습니다. 흥미진진한 내용에 빠져들어 시간가는 줄 모릅니다.,BOOK_FINISH,책을 다 읽고 만족감을 느낀다,BOOK_SLEEP,책을 읽다가 잠에 빠진다,null,null
+TALK_PASSENGER,승객과의 대화,옆자리 할머니와 대화를 나누기 시작했습니다. 할머니는 고향으로 가신다고 하네요.,LISTEN_STORY,할머니의 이야기를 들어드린다,SHARE_FOOD,간식을 나눠드린다,HELP_LUGGAGE,짐을 도와드린다
+LOOK_OUTSIDE,창밖 풍경,창밖으로 아름다운 산과 강이 보입니다. 잠시 기차가 터널을 지나가네요.,PHOTO_LANDSCAPE,풍경 사진을 찍는다,WRITE_DIARY,여행 일기를 쓴다,ENJOY_MOMENT,그저 순간을 즐긴다
+BOOK_FINISH,독서 완료,책을 다 읽고 나니 뿌듯한 기분입니다. 다음에 읽을 책을 생각해봅니다.,PLAN_NEXT,다음 독서 계획을 세운다,REST_EYES,눈을 감고 휴식을 취한다,TRIP_END,여행을 마무리한다
+BOOK_SLEEP,독서 중 잠,책을 읽다가 선잠에 빠졌습니다. 꿈에서 책 속 주인공이 되어 모험을 떠납니다.,DREAM_ADVENTURE,모험 꿈을 꾼다,WAKE_UP,깨어나서 주변을 둘러본다,TRIP_END,여행을 마무리한다
+LISTEN_STORY,할머니의 이야기,할머니께서 젊은 시절 이야기를 들려주십니다. 전쟁 중에도 희망을 잃지 않으셨다고 하네요.,MOVED_STORY,감동받아 눈물을 흘린다,ASK_MORE,더 많은 이야기를 부탁드린다,TRIP_END,여행을 마무리한다
+SHARE_FOOD,간식 나눔,할머니와 함께 간식을 나눠 먹으며 즐거운 시간을 보냅니다.,RECIPE_SHARE,레시피를 공유한다,TRAVEL_STORY,여행 이야기를 나눈다,TRIP_END,여행을 마무리한다
+HELP_LUGGAGE,짐 도움,할머니의 무거운 짐을 도와드렸습니다. 할머니께서 고맙다며 미소를 지으십니다.,BLESSING_RECEIVE,할머니의 축복을 받는다,CONTACT_EXCHANGE,연락처를 교환한다,TRIP_END,여행을 마무리한다
+PHOTO_LANDSCAPE,사진 촬영,아름다운 풍경 사진을 찍었습니다. SNS에 올릴 생각에 설렙니다.,EDIT_PHOTO,사진을 편집한다,SHARE_SNS,SNS에 바로 공유한다,TRIP_END,여행을 마무리한다
+WRITE_DIARY,일기 작성,여행 일기를 쓰며 오늘의 감정을 정리합니다. 소중한 추억이 될 것 같습니다.,REFLECT_DAY,하루를 되돌아본다,PLAN_TOMORROW,내일 계획을 세운다,TRIP_END,여행을 마무리한다
+ENJOY_MOMENT,순간 즐기기,아무 생각 없이 그저 이 순간을 즐깁니다. 평온한 마음이 듭니다.,MEDITATION,명상을 한다,MUSIC_LISTEN,음악을 들으며 휴식한다,TRIP_END,여행을 마무리한다
+PLAN_NEXT,독서 계획,다음에 읽을 책들을 리스트로 만들어봅니다. 언제나 읽고 싶은 책이 너무 많네요.,BOOK_RECOMMEND,다른 승객에게 책을 추천한다,BOOKSTORE_PLAN,서점 방문 계획을 세운다,TRIP_END,여행을 마무리한다
+REST_EYES,눈 휴식,책을 많이 읽어서 눈이 피곤합니다. 잠시 눈을 감고 휴식을 취합니다.,SLEEP_LIGHT,가벼운 잠에 빠진다,STRETCH,몸을 스트레칭한다,TRIP_END,여행을 마무리한다
+DREAM_ADVENTURE,모험 꿈,꿈에서 책 속 주인공이 되어 용과 싸우고 공주를 구합니다. 정말 생생한 꿈이었네요.,DREAM_CONTINUE,꿈을 계속 꾸고 싶다,WAKE_REALITY,현실로 돌아온다,TRIP_END,여행을 마무리한다
+WAKE_UP,잠에서 깨어남,선잠에서 깨어나니 창밖 풍경이 바뀌어 있습니다. 어느새 목적지에 거의 도착했네요.,CHECK_TIME,시간을 확인한다,PREPARE_ARRIVAL,도착 준비를 한다,TRIP_END,여행을 마무리한다
+MOVED_STORY,감동의 순간,할머니의 이야기에 감동받아 눈물이 납니다. 삶의 지혜를 배우게 됩니다.,THANK_GRANDMA,할머니께 감사를 표한다,LEARN_LESSON,인생의 교훈을 얻는다,TRIP_END,여행을 마무리한다
+ASK_MORE,더 많은 이야기,할머니께 더 많은 이야기를 부탁드립니다. 할머니는 웃으며 또 다른 이야기를 들려주십니다.,FAMILY_STORY,가족 이야기를 들려주신다,LOVE_STORY,사랑 이야기를 들려주신다,TRIP_END,여행을 마무리한다
+RECIPE_SHARE,레시피 공유,할머니께서 특별한 요리 레시피를 알려주십니다. 집에 가서 꼭 만들어보겠다고 약속드립니다.,WRITE_RECIPE,레시피를 메모한다,COOKING_PLAN,요리 계획을 세운다,TRIP_END,여행을 마무리한다
+TRAVEL_STORY,여행 이야기,서로의 여행 경험을 나누며 즐거운 시간을 보냅니다. 새로운 여행지를 추천받습니다.,PLAN_NEXT_TRIP,다음 여행을 계획한다,EXCHANGE_CONTACTS,연락처를 교환한다,TRIP_END,여행을 마무리한다
+BLESSING_RECEIVE,축복 받기,할머니께서 따뜻한 축복을 해주십니다. 마음이 따뜻해지고 행복한 기분이 듭니다.,GRATEFUL_HEART,감사한 마음을 갖는다,SHARE_KINDNESS,다른 사람에게도 친절을 베풀겠다고 다짐한다,TRIP_END,여행을 마무리한다
+CONTACT_EXCHANGE,연락처 교환,할머니와 연락처를 교환합니다. 가끔 안부를 묻겠다고 약속드립니다.,PROMISE_CONTACT,연락하겠다고 약속한다,PLAN_VISIT,할머니 댁을 방문하겠다고 약속한다,TRIP_END,여행을 마무리한다
+EDIT_PHOTO,사진 편집,찍은 사진들을 예쁘게 편집합니다. 필터를 적용하니 더욱 아름다워 보입니다.,SAVE_MEMORY,추억으로 저장한다,MAKE_ALBUM,포토앨범을 만든다,TRIP_END,여행을 마무리한다
+SHARE_SNS,SNS 공유,아름다운 풍경 사진을 SNS에 올립니다. 친구들이 좋아요를 많이 눌러주네요.,READ_COMMENTS,댓글을 읽는다,INSPIRE_OTHERS,다른 사람들에게 영감을 준다,TRIP_END,여행을 마무리한다
+REFLECT_DAY,하루 되돌아보기,오늘 하루를 되돌아보며 감사한 마음을 갖습니다. 좋은 하루였습니다.,GRATITUDE,감사함을 느낀다,LIFE_LESSON,인생의 교훈을 얻는다,TRIP_END,여행을 마무리한다
+PLAN_TOMORROW,내일 계획,내일 할 일들을 정리하며 계획을 세웁니다. 새로운 하루에 대한 기대가 생깁니다.,SET_GOALS,목표를 세운다,POSITIVE_MINDSET,긍정적인 마음가짐을 갖는다,TRIP_END,여행을 마무리한다
+MEDITATION,명상,조용히 명상을 하며 마음을 평온하게 합니다. 스트레스가 해소되는 느낌입니다.,INNER_PEACE,내면의 평화를 찾는다,MINDFULNESS,마음챙김을 실천한다,TRIP_END,여행을 마무리한다
+MUSIC_LISTEN,음악 감상,이어폰을 끼고 좋아하는 음악을 듣습니다. 멜로디가 마음을 위로해줍니다.,ENJOY_MELODY,멜로디를 즐긴다,EMOTIONAL_HEALING,감정적 치유를 받는다,TRIP_END,여행을 마무리한다
+TRIP_END,여행 마무리,즐거웠던 기차 여행이 끝났습니다. 많은 추억과 경험을 얻은 소중한 시간이었습니다.,null,null,null,null,null,null
+CAVE_ENTRANCE,동굴 입구,신비로운 동굴 입구에 도착했습니다. 어둠 속에서 시원한 바람이 불어나오고 깊숙한 곳에서 물소리가 들립니다.,CAVE_ENTER,용기를 내어 동굴 안으로 들어간다,CAVE_PREPARE_TORCH,횃불을 준비하고 신중히 계획한다,CAVE_MEDITATION,입구에서 명상하며 자연을 느낀다
+CAVE_ANCIENT_PAINTING,고대 벽화 발견,동굴 벽면에 고대인들이 그린 신비로운 벽화를 발견했습니다. 사냥하는 모습과 알 수 없는 기호들이 그려져 있습니다.,CAVE_STUDY_PAINTING,벽화를 자세히 관찰하고 기록한다,CAVE_TOUCH_WALL,조심스럽게 벽화를 만져본다,CAVE_PHOTO_ARTIFACT,벽화 사진을 찍어 보존한다
+CAVE_UNDERGROUND_SPRING,지하샘 발견,동굴 깊숙한 곳에서 맑고 차가운 지하샘을 발견했습니다. 물방울이 떨어지는 소리가 동굴 전체에 울려 퍼집니다.,CAVE_DRINK_WATER,샘물을 마셔본다,CAVE_FILL_BOTTLE,물병에 샘물을 채운다,CAVE_LISTEN_ECHO,물소리의 메아리를 감상한다
+CAVE_BAT_COLONY,박쥐 서식지,동굴 천장에 수백 마리의 박쥐들이 매달려 있는 것을 발견했습니다. 갑자기 몇 마리가 날아다니기 시작합니다.,CAVE_WATCH_QUIETLY,조용히 박쥐들을 관찰한다,CAVE_BACK_AWAY,천천히 뒤로 물러난다,CAVE_FLASH_LIGHT,손전등으로 주변을 비춰본다
+CAVE_MAZE,동굴 미로,여러 갈래로 나뉜 동굴 통로 앞에 서게 되었습니다. 각각 다른 방향에서 서로 다른 소리가 들려옵니다.,CAVE_LEFT_PATH,왼쪽 길로 향한다 (바람소리),CAVE_RIGHT_PATH,오른쪽 길로 향한다 (물소리),CAVE_CENTER_PATH,가운데 길로 향한다 (고요함)

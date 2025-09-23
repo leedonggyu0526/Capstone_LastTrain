@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4a8c8604f345081429d2bdcaeb19aa98
+guid: 2db7dc963440042db9ea3d037bef8c1d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -909499429113436276
-    second: "\uACE8\uCE74_0"
+      213: 4650170788475814302
+    second: goldCard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uACE8\uCE74_0"
+      name: goldCard_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c87e544861fc063f0800000000000000
-      internalID: -909499429113436276
+      spriteID: e91cff7c1b9b88040800000000000000
+      internalID: 4650170788475814302
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uACE8\uCE74_0": -909499429113436276
+      goldCard_0: 4650170788475814302
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

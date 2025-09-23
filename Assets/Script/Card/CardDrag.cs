@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Coffee.UIExtensions;
+//using Coffee.UIExtensions; //파티클용
 
 /// <summary>
 /// 카드 드래그 전용 스크립트(안정 버전)
@@ -35,7 +35,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public Animator animator;
     public string triggerName = "Split";
-    public UIParticle splitEffect;
+    //public UIParticle splitEffect; //파티클용
 
     void Awake()
     {
