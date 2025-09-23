@@ -4,10 +4,10 @@ using System.Collections;
 // ResourceConsumer.cs
 public class ResourceConsumer : MonoBehaviour
 {
-    [Header("¼Òºñ ¼³Á¤")]
-    public ResourceType resourceType;      // ¾î¶² ÀÚ¿ø ¼ÒºñÇÒÁö
-    public int amountPerCycle = 50;        // ÇÑ »çÀÌÅ¬´ç ¼Òºñ·®
-    public float consumptionInterval = 5f; // ¼Òºñ °£°İ(ÃÊ)
+    [Header("ì†Œë¹„ ì„¤ì •")]
+    public ResourceType resourceType;      // ì–´ë–¤ ìì› ì†Œë¹„í• ì§€
+    public int amountPerCycle = 50;        // í•œ ì‚¬ì´í´ë‹¹ ì†Œë¹„ëŸ‰
+    public float consumptionInterval = 5f; // ì†Œë¹„ ê°„ê²©(ì´ˆ)
 
     void Start()
     {
@@ -25,8 +25,8 @@ public class ResourceConsumer : MonoBehaviour
             }
             else
             {
-                //¿¬·á°¡ 0ÀÌ¸é °ÔÀÓ ¿À¹ö ³ªÁß¿¡ Ãß°¡
-                Debug.LogWarning($"{resourceType} ºÎÁ·! ³²Àº·®: {ResourceManager.Instance.GetResource(resourceType)}");
+                //ì—°ë£Œê°€ 0ì´ë©´ ê²Œì„ ì˜¤ë²„ ë‚˜ì¤‘ì— ì¶”ê°€
+                Debug.LogWarning($"{resourceType} ë¶€ì¡±! ë‚¨ì€ëŸ‰: {ResourceManager.Instance.GetResource(resourceType)}");
             }
         }
     }

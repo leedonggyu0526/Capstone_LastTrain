@@ -28,3 +28,8 @@ PLAN_TOMORROW,내일 계획,내일 할 일들을 정리하며 계획을 세웁�
 MEDITATION,명상,조용히 명상을 하며 마음을 평온하게 합니다. 스트레스가 해소되는 느낌입니다.,INNER_PEACE,내면의 평화를 찾는다,MINDFULNESS,마음챙김을 실천한다,TRIP_END,여행을 마무리한다
 MUSIC_LISTEN,음악 감상,이어폰을 끼고 좋아하는 음악을 듣습니다. 멜로디가 마음을 위로해줍니다.,ENJOY_MELODY,멜로디를 즐긴다,EMOTIONAL_HEALING,감정적 치유를 받는다,TRIP_END,여행을 마무리한다
 TRIP_END,여행 마무리,즐거웠던 기차 여행이 끝났습니다. 많은 추억과 경험을 얻은 소중한 시간이었습니다.,null,null,null,null,null,null
+CAVE_ENTRANCE,동굴 입구,신비로운 동굴 입구에 도착했습니다. 어둠 속에서 시원한 바람이 불어나오고 깊숙한 곳에서 물소리가 들립니다.,CAVE_ENTER,용기를 내어 동굴 안으로 들어간다,CAVE_PREPARE_TORCH,횃불을 준비하고 신중히 계획한다,CAVE_MEDITATION,입구에서 명상하며 자연을 느낀다
+CAVE_ANCIENT_PAINTING,고대 벽화 발견,동굴 벽면에 고대인들이 그린 신비로운 벽화를 발견했습니다. 사냥하는 모습과 알 수 없는 기호들이 그려져 있습니다.,CAVE_STUDY_PAINTING,벽화를 자세히 관찰하고 기록한다,CAVE_TOUCH_WALL,조심스럽게 벽화를 만져본다,CAVE_PHOTO_ARTIFACT,벽화 사진을 찍어 보존한다
+CAVE_UNDERGROUND_SPRING,지하샘 발견,동굴 깊숙한 곳에서 맑고 차가운 지하샘을 발견했습니다. 물방울이 떨어지는 소리가 동굴 전체에 울려 퍼집니다.,CAVE_DRINK_WATER,샘물을 마셔본다,CAVE_FILL_BOTTLE,물병에 샘물을 채운다,CAVE_LISTEN_ECHO,물소리의 메아리를 감상한다
+CAVE_BAT_COLONY,박쥐 서식지,동굴 천장에 수백 마리의 박쥐들이 매달려 있는 것을 발견했습니다. 갑자기 몇 마리가 날아다니기 시작합니다.,CAVE_WATCH_QUIETLY,조용히 박쥐들을 관찰한다,CAVE_BACK_AWAY,천천히 뒤로 물러난다,CAVE_FLASH_LIGHT,손전등으로 주변을 비춰본다
+CAVE_MAZE,동굴 미로,여러 갈래로 나뉜 동굴 통로 앞에 서게 되었습니다. 각각 다른 방향에서 서로 다른 소리가 들려옵니다.,CAVE_LEFT_PATH,왼쪽 길로 향한다 (바람소리),CAVE_RIGHT_PATH,오른쪽 길로 향한다 (물소리),CAVE_CENTER_PATH,가운데 길로 향한다 (고요함)

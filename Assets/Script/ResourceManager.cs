@@ -1,7 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ResourceManager.cs
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
@@ -27,8 +27,15 @@ public class ResourceManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    //ÀÚ¿ø·® È®ÀÎ
-    void Update()
+    void Start()
+    {
+#if UNITY_EDITOR
+        // ì—ë””í„°ì—ì„œë§Œ 5ì´ˆë§ˆë‹¤ ë¦¬ì†ŒìŠ¤ ë¡œê·¸ ì¶œë ¥
+        InvokeRepeating(nameof(LogResources), 1f, 5f);
+#endif
+    }
+
+    void LogResources()
     {
         Debug.Log("=== Current Resources ===");
         foreach (ResourceType type in System.Enum.GetValues(typeof(ResourceType)))
@@ -37,7 +44,6 @@ public class ResourceManager : MonoBehaviour
             int max = maxCapacities.ContainsKey(type) ? maxCapacities[type] : -1;
             Debug.Log($"{type}: {current} / {max}");
         }
-
     }
 
     public void AddResource(ResourceType type, int amount)
@@ -47,7 +53,7 @@ public class ResourceManager : MonoBehaviour
             newAmount = Mathf.Clamp(newAmount, 0, maxCapacities[type]);
 
         resources[type] = newAmount;
-        Debug.Log($"{type} {(amount >= 0 ? "+" : "")}{amount} ¡æ ÃÑ {resources[type]} (Max {maxCapacities[type]})");
+        Debug.Log($"{type} {(amount >= 0 ? "+" : "")}{amount} â†’ ì´ {resources[type]} (Max {maxCapacities[type]})");
     }
 
     public int GetResource(ResourceType type)
@@ -55,11 +61,30 @@ public class ResourceManager : MonoBehaviour
         return resources[type];
     }
 
-    // ¡ç Ãß°¡µÈ ¸Ş¼­µå: °¢ ÀÚ¿øÀÇ ÃÖ´ëÄ¡¸¦ ¹İÈ¯
     public int GetMaxCapacity(ResourceType type)
     {
         return maxCapacities.ContainsKey(type)
             ? maxCapacities[type]
             : int.MaxValue;
+    }
+
+    // ìì› ì†Œë¹„ìš© í•¨ìˆ˜
+    public bool ConsumeResources(ResourceType type, int amount)
+    {
+        if (!resources.ContainsKey(type))
+        {
+            Debug.LogWarning($"{type} ë¦¬ì†ŒìŠ¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!");
+            return false;
+        }
+
+        if (resources[type] < amount)
+        {
+            Debug.LogWarning($"{type} ë¶€ì¡±! ë‚¨ì€ëŸ‰: {resources[type]}");
+            return false;
+        }
+
+        resources[type] -= amount;
+        Debug.Log($"{type} -{amount} â†’ ì´ {resources[type]} (Max {maxCapacities[type]})");
+        return true;
     }
 }
