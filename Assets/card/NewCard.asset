@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5b7d1bfcd2ff2d49afd078357b92a3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3257915fe6a284c06a85d2940e4ae574, type: 3}
   m_Name: NewCard
   m_EditorClassIdentifier: 
-  cardName: coper
-  description: copercard
-  artwork: {fileID: 5230911077920879800, guid: a8069d3bdad095c4484507c5fc629175, type: 3}
-  background: {fileID: -2384459870373602998, guid: 83823ade8a7c6f843b152a427e45283e, type: 3}
-  rarity: 0
   cardID: 0
+  cardName: cooper
+  description: 
+  artwork: {fileID: 5230911077920879800, guid: a8069d3bdad095c4484507c5fc629175, type: 3}
+  background: {fileID: 3698297041941899089, guid: cf0c19e8de359466b93ee9e47e231e44, type: 3}
+  rarity: 0

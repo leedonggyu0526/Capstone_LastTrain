@@ -1,0 +1,207 @@
+========================================
+ TrainEvent 스크립트, 이미지 위치
+========================================
+- Assets/Script : TrainEvent, trainEventCSVReader, TrainEventManager, TrainEventUIManager
+- Assets/Resources/Assets_leedonggyu/Data : TrainEventList
+- Assets/Resources/Assets_leedonggyu/Sprites/EventImages : 이미지 위치
+
+========================================
+ TrainEvent 스크립트 적용 객체
+========================================
+- Canvas <== TrainEventUIManager <== UI 요소들 
+- EventSystem <== TrainEventManager <== trainEventCSV
+
+========================================
+ TrainEvent 시스템 상세 요약
+========================================
+
+1. TrainEvent.cs - 이벤트 데이터 구조체
+========================================
+
+[주요 기능]
+- 기차 여행 중 발생하는 이벤트의 핵심 데이터 구조를 정의
+- 이벤트 이름, 설명, 이미지, 3개의 선택지와 각 선택지 설명을 포함
+- 데이터 유효성 검증 기능 제공
+
+[필드 구조]
+- eventName: 이벤트 이름
+- eventDescription: 이벤트 상황 설명
+- eventImage: 이벤트를 나타내는 Sprite 이미지
+- eventChoice1/2/3: 플레이어가 선택할 수 있는 선택지 (다음 이벤트 ID)
+- eventChoice1/2/3Description: 각 선택지에 대한 설명 텍스트
+
+[핵심 메서드]
+- GetEventXXX(): 모든 필드의 Getter 메서드
+- SetEventImage(): 이벤트 이미지 동적 업데이트
+- HasChoice1/2/3(): 선택지 유효성 확인 (null, 빈 문자열 체크)
+- IsValidEvent(): 전체 이벤트 데이터 유효성 검사
+- GetValidChoiceCount(): 유효한 선택지 개수 반환
+- GetAllEventInfo(): 디버깅용 전체 정보 문자열 반환
+
+[유효성 검증 로직]
+- 필수 데이터(이름, 설명) 존재 여부 확인
+- 선택지와 선택지 설명의 일치성 검증
+- "null" 문자열과 실제 null 값 구분 처리
+
+========================================
+2. TrainEventCSVReader.cs.meta - Unity 메타파일
+========================================
+
+[파일 정보]
+- fileFormatVersion: 2 (Unity 파일 포맷 버전)
+- guid: f7fb9a38b172b6542a8ccfed2bd96077 (고유 식별자)
+- Unity가 자동 생성하는 설정 파일
+- TrainEventCSVReader.cs 파일과 연결된 메타데이터
+
+========================================
+3. TrainEventManager.cs - 이벤트 시스템 관리자
+========================================
+
+[주요 기능]
+- 싱글톤 패턴으로 구현된 이벤트 시스템의 핵심 관리자
+- CSV 파일에서 이벤트 데이터 로딩 및 관리
+- 이벤트 체인 검증 시스템
+- 이미지 사전 로딩 및 캐시 관리
+
+[싱글톤 구현]
+- Instance 프로퍼티로 접근
+- EventSystem GameObject에 자동 추가
+- DontDestroyOnLoad로 씬 전환 시에도 유지
+- 런타임 생성 시 자동으로 CSV 파일 로드
+
+[핵심 데이터 구조]
+- trainEventDic: <이벤트ID, TrainEvent> 딕셔너리
+- trainEventCSVReader: CSV 파일 읽기 담당
+- trainEventCSV: Resources에서 로드된 CSV 텍스트 에셋
+
+[이벤트 관리 메서드]
+- LoadCSVFile(): CSV 파일에서 이벤트 데이터 로딩
+- GetTrainEvent(eventID): 특정 이벤트 조회 (유효성 검사 포함)
+- GetAllTrainEvents(): 전체 이벤트 딕셔너리 반환
+- HasEvent(eventID): 이벤트 존재 여부 확인
+- GetEventCount(): 로드된 이벤트 수 반환
+
+[이벤트 체인 검증 시스템]
+- ValidateEventChains(): 전체 이벤트 체인 유효성 검사
+- ValidateChoiceReference(): 개별 선택지 참조 검증
+- TraverseEventChain(): START에서 도달 가능한 이벤트 탐색
+- ReportValidationResults(): 검증 결과 리포트 생성
+- GetInvalidReferences(): 유효하지 않은 참조 목록
+- GetUnreachableEvents(): 도달 불가능한 이벤트 목록
+
+[이미지 관리 시스템]
+- PreloadAllEventImages(): 모든 이벤트 이미지 사전 로딩
+- LoadSingleEventImage(): 개별 이미지 로딩 (여러 경로 시도)
+- ReloadEventImage(): 런타임 이미지 재로딩
+- UpdateEventImage(): TrainEvent 객체 이미지 업데이트
+- 이미지 캐시 관리 (ClearImageCache, GetImageCacheSize)
+
+[초기화 프로세스]
+1. Awake에서 싱글톤 인스턴스 설정
+2. CSV 파일 자동 로드 시도
+3. 이벤트 데이터 로딩 및 검증
+4. 이벤트 체인 유효성 검사
+5. DontDestroyOnLoad 적용
+6. 이미지 사전 로딩 시작
+
+========================================
+4. TrainEventUIManager.cs - 이벤트 UI 관리자
+========================================
+
+[주요 기능]
+- 이벤트 화면 표시 및 상호작용 관리
+- 애니메이션 효과 제공 (페이드, 타이핑)
+- 선택 히스토리 추적
+- 동적 이미지 로딩 지원
+
+[UI 컴포넌트]
+- eventPanel: 이벤트 전체 패널
+- eventImage: 이벤트 이미지 표시
+- eventDescription: 이벤트 설명 텍스트
+- choice1/2/3Button: 3개의 선택지 버튼
+- choice1/2/3Text: 각 선택지의 텍스트
+
+[설정 옵션]
+- defaultEventImage: 기본 이미지
+- loadingImage: 로딩 중 표시 이미지
+- typingSpeed: 타이핑 애니메이션 속도
+- fadeSpeed: 페이드 애니메이션 속도
+- enableDynamicImageLoading: 동적 이미지 로딩 활성화
+- enableTypingAnimation: 타이핑 애니메이션 활성화
+
+[핵심 메서드]
+- ShowEvent(eventID): 특정 이벤트 화면 표시
+- CloseEvent(): 이벤트 화면 닫기
+- OnChoiceClick(): 선택지 클릭 처리 (히스토리 추가 포함)
+- SetupEventUI(): UI 요소들 설정
+- CheckAndAutoCloseEvent(): 선택지 없는 이벤트 자동 닫기
+
+[애니메이션 시스템]
+- ShowEventWithAnimation(): 페이드인과 함께 이벤트 표시
+- CloseEventWithAnimation(): 페이드아웃과 함께 이벤트 닫기
+- TypeText(): 타이핑 애니메이션으로 텍스트 표시
+- FadeIn/FadeOut(): 페이드 애니메이션
+- StopAllAnimations(): 모든 애니메이션 중지
+
+[이미지 관리]
+- SetupEventImage(): 이벤트 이미지 설정
+- LoadEventImageDynamically(): 동적 이미지 로딩
+- ApplyFallbackImage(): 대체 이미지 적용
+- FadeInImage(): 이미지 페이드인 효과
+
+[선택 히스토리 시스템]
+- EventChoice 구조체: 선택 정보 저장
+  * eventID, eventName, choiceNumber
+  * choiceDescription, nextEventID, timestamp
+- choiceHistory: 선택 기록 리스트
+- ShowChoiceHistory(): 히스토리 출력
+- GetChoiceHistory(): 히스토리 조회
+- ClearChoiceHistory(): 히스토리 초기화
+
+[사용자 입력 처리]
+- Update(): 스페이스 키로 이벤트 시작 (START 이벤트 또는 첫 번째 이벤트)
+- 선택지 클릭 이벤트 처리
+- 타이핑 애니메이션 중 클릭 무시
+
+[디버깅 및 유틸리티]
+- DebugImageCache(): 이미지 캐시 상태 확인
+- ReloadCurrentEventImage(): 현재 이벤트 이미지 재로딩
+- 각종 설정 토글 메서드들
+- 애니메이션 및 이미지 로딩 설정 변경
+
+========================================
+시스템 전체 흐름
+========================================
+
+1. 초기화:
+   - TrainEventManager가 싱글톤으로 생성됨
+   - CSV 파일에서 이벤트 데이터 로딩
+   - 이벤트 체인 유효성 검사
+   - 이미지 사전 로딩 시작
+
+2. 이벤트 표시:
+   - TrainEventUIManager에서 ShowEvent() 호출
+   - 페이드인 애니메이션과 함께 UI 표시
+   - 타이핑 애니메이션으로 설명 텍스트 출력
+   - 동적 이미지 로딩 (필요시)
+
+3. 사용자 상호작용:
+   - 선택지 버튼 클릭
+   - 선택 히스토리에 기록
+   - 다음 이벤트로 이동 또는 종료
+
+4. 종료:
+   - 선택지가 없거나 null인 경우 자동 종료
+   - 선택 히스토리 출력
+   - 페이드아웃 애니메이션과 함께 UI 닫기
+
+========================================
+주요 특징
+========================================
+
+1. 확장성: CSV 파일로 이벤트 데이터 관리
+2. 안정성: 다단계 유효성 검사 시스템
+3. 사용성: 다양한 애니메이션 효과
+4. 디버깅: 상세한 로그 및 검증 시스템
+5. 성능: 이미지 캐싱 및 사전 로딩
+6. 유지보수: 모듈화된 구조와 명확한 책임 분리

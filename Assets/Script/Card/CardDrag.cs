@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+//using Coffee.UIExtensions; //파티클용
 
 /// <summary>
 /// 카드 드래그 전용 스크립트(안정 버전)
@@ -31,6 +32,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // (호환용) 필수는 아니지만 인스펙터에서 연결 가능
     public GameObject cardPrefab;
     public Transform parentTransform;
+
+    public Animator animator;
+    public string triggerName = "Split";
+    //public UIParticle splitEffect; //파티클용
 
     void Awake()
     {
@@ -135,5 +140,26 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         rectTransform.anchoredPosition = endPos;
+    }
+    /// <summary>
+    /// 카드 사용 애니메이션 실행 --> 매커니즘 변경되어 사용 안함
+    /// </summary>
+    // public void PlaySplitAnimation()
+    // {
+    //     if (animator != null)
+    //     {
+    //         splitEffect.Play();
+
+    //         animator.SetTrigger("Split");
+    //     }
+    //     else
+    //     {
+    //         DestroyMe();
+    //     }
+    // }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 }
