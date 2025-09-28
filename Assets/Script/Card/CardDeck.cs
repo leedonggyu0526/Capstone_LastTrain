@@ -10,6 +10,9 @@ public class CardDeck : MonoBehaviour
     // 보유 카드 저장소 (key = cardID, value = 수량)
     private Dictionary<string, int> deck = new Dictionary<string, int>();
 
+    // 카드 ID가 덱에 "처음" 추가된 순서를 저장하는 리스트 (순서 보장)
+    private List<string> insertionOrder = new List<string>();
+
     // ── 테스트용 시드(임시). 추후 상점/보상 연결 시 끄면 됨 ──
     [Header("Test Seed (임시) — 추후 상점 붙으면 끄세요")]
     public bool seedOnStart = true;
@@ -41,10 +44,18 @@ public class CardDeck : MonoBehaviour
         if (string.IsNullOrWhiteSpace(cardID)) return;
         cardID = cardID.Trim();
 
+        // Dictionary에 카드가 있는지 확인
         if (deck.ContainsKey(cardID))
+        {
             deck[cardID] += amount;
+        }
         else
+        {
+            // 신규 카드: 수량 설정
             deck[cardID] = amount;
+            // 신규 카드의 경우에만 순서 리스트에 추가 (삽입 순서 보장)
+            insertionOrder.Add(cardID);
+        }
     }
 
     /// <summary>카드 제거(성공 시 true)</summary>
@@ -56,10 +67,27 @@ public class CardDeck : MonoBehaviour
         if (!deck.ContainsKey(cardID)) return false;
 
         deck[cardID] -= amount;
-        if (deck[cardID] <= 0)
+        if (deck[cardID] <= 0) 
+        {
             deck.Remove(cardID);
+            //수량이 0 이하가 되면 순서 기록 리스트에서도 제거
+            insertionOrder.Remove(cardID);
+        }
 
         return true;
+    }
+
+    // CardDeckUI에서 사용할, 삽입 순서대로 (cardID, count)를 반환하는 메서드
+    public IEnumerable<KeyValuePair<string, int>> GetOwnedInInsertionOrder()
+    {
+        foreach (string cardID in insertionOrder)
+        {
+            // 수량이 0보다 큰 카드만 반환
+            if (deck.TryGetValue(cardID, out int count) && count > 0)
+            {
+                yield return new KeyValuePair<string, int>(cardID, count);
+            }
+        }
     }
 
     /// <summary>해당 카드ID의 보유 수량</summary>

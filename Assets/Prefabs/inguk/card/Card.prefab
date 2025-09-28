@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47227a1d1398a4af9a5ae52c20ae1a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardData: {fileID: 0}
+  cardData: {fileID: 11400000, guid: 3741aa1260d59544ea149aa6066c3bb3, type: 2}
   backgroundImage: {fileID: 1062607573200038487}
   artworkImage: {fileID: 5590735115496074171}
   titleText: {fileID: 1772378305206865042}
@@ -512,4 +512,3 @@ MonoBehaviour:
   parentTransform: {fileID: 0}
   animator: {fileID: 0}
   triggerName: Split
-  splitEffect: {fileID: 0}
