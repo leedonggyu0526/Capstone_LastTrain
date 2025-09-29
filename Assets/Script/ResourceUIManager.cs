@@ -7,25 +7,25 @@ using TMPro;
 public struct ResourceUI
 {
     public ResourceType type;   // Fuel, Food, MachinePart, Passenger
-    public Image icon;          // Inspector¿¡ µå·Ó´Ù¿îÀ¸·Î ÇÒ´ç
-    public TMP_Text countText;      // ¡°500/1000¡± À» Ç¥½ÃÇÒ Text
+    public Image icon;          // Inspectorì— ë“œë¡­ë‹¤ìš´ìœ¼ë¡œ í• ë‹¹
+    public TMP_Text countText;      // â€œ500/1000â€ ì„ í‘œì‹œí•  Text
 }
 
 public class ResourceUIManager : MonoBehaviour
 {
-    [Header("ÀÚ¿øº° UI ¾ÆÀÌÄÜ°ú ÅØ½ºÆ®")]
+    [Header("ìì›ë³„ UI ì•„ì´ì½˜ê³¼ í…ìŠ¤íŠ¸")]
     public List<ResourceUI> resourceUIs = new List<ResourceUI>();
 
     void Start()
     {
-        // ÃÊ±â ÇÑ¹ø ·»´õ
+        // ì´ˆê¸° í•œë²ˆ ë Œë”
         UpdateAllUI();
     }
 
     void Update()
     {
-        // ½Ç½Ã°£ º¯µ¿ÀÌ ÀæÀ¸¸é ¸Å ÇÁ·¹ÀÓ¸¶´Ù °»½ÅÇØµµ µÇ°í,
-        // º¯µ¿ÀÌ Àû´Ù¸é ÀÌº¥Æ® ±â¹İ(UpdateAllUI() È£Ãâ)À¸·Îµµ ÃæºĞÇÕ´Ï´Ù.
+        // ì‹¤ì‹œê°„ ë³€ë™ì´ ì¦ìœ¼ë©´ ë§¤ í”„ë ˆì„ë§ˆë‹¤ ê°±ì‹ í•´ë„ ë˜ê³ ,
+        // ë³€ë™ì´ ì ë‹¤ë©´ ì´ë²¤íŠ¸ ê¸°ë°˜(UpdateAllUI() í˜¸ì¶œ)ìœ¼ë¡œë„ ì¶©ë¶„í•©ë‹ˆë‹¤.
         UpdateAllUI();
     }
 
@@ -36,7 +36,7 @@ public class ResourceUIManager : MonoBehaviour
             int current = ResourceManager.Instance.GetResource(rui.type);
             int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
             rui.countText.text = $"{current}/{max}";
-            // ¾ÆÀÌÄÜ´Â ¹Ì¸® Inspector¿¡¼­ ÇÒ´çÇØ µÎ¾ú´Ù¸é º°µµ ¾÷µ¥ÀÌÆ® ºÒÇÊ¿ä
+            // ì•„ì´ì½˜ëŠ” ë¯¸ë¦¬ Inspectorì—ì„œ í• ë‹¹í•´ ë‘ì—ˆë‹¤ë©´ ë³„ë„ ì—…ë°ì´íŠ¸ ë¶ˆí•„ìš”
         }
     }
 }

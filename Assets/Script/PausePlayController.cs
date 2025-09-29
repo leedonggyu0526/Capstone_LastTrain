@@ -4,25 +4,25 @@ using TMPro;
 
 public class PausePlayController : MonoBehaviour
 {
-    [Header("UI Button ¹× ¶óº§")]
-    public Button toggleButton;      // Inspector¿¡ µå·¡±×ÇÒ UI Button
-    public TMP_Text buttonText;        // ¹öÆ° À§¿¡ ¿Ã¸± Text (TextMeshPro »ç¿ë ½Ã TMP_Text)
+    [Header("UI Button ë° ë¼ë²¨")]
+    public Button toggleButton;      // Inspectorì— ë“œë˜ê·¸í•  UI Button
+    public TMP_Text buttonText;        // ë²„íŠ¼ ìœ„ì— ì˜¬ë¦´ Text (TextMeshPro ì‚¬ìš© ì‹œ TMP_Text)
 
     private bool isPaused = false;
 
     void Start()
     {
-        // ¹öÆ° Å¬¸¯ ½Ã TogglePause() È£Ãâ
+        // ë²„íŠ¼ í´ë¦­ ì‹œ TogglePause() í˜¸ì¶œ
         if (toggleButton != null)
             toggleButton.onClick.AddListener(TogglePause);
 
-        // ÃÊ±â ¹öÆ° ¶óº§ ¼³Á¤
+        // ì´ˆê¸° ë²„íŠ¼ ë¼ë²¨ ì„¤ì •
         UpdateButtonLabel();
     }
 
     void Update()
     {
-        // ½ºÆäÀÌ½º¹Ù Åä±Û
+        // ìŠ¤í˜ì´ìŠ¤ë°” í† ê¸€
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TogglePause();
@@ -30,16 +30,16 @@ public class PausePlayController : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ ÀÏ½ÃÁ¤Áö/Àç»ı Åä±Û
+    /// ê²Œì„ ì¼ì‹œì •ì§€/ì¬ìƒ í† ê¸€
     /// </summary>
     public void TogglePause()
     {
         isPaused = !isPaused;
 
-        // ½Ã°£ Èå¸§ Á¦¾î
+        // ì‹œê°„ íë¦„ ì œì–´
         Time.timeScale = isPaused ? 0f : 1f;
 
-        // ¹öÆ° ¶óº§ °»½Å
+        // ë²„íŠ¼ ë¼ë²¨ ê°±ì‹ 
         UpdateButtonLabel();
     }
 

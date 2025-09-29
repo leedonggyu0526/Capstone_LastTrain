@@ -320,8 +320,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.9146, y: -38.556}
-  m_SizeDelta: {x: 57.9723, y: 24.4582}
+  m_AnchoredPosition: {x: -5, y: -32}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5833378779893406232
 CanvasRenderer:
@@ -512,4 +512,3 @@ MonoBehaviour:
   parentTransform: {fileID: 0}
   animator: {fileID: 0}
   triggerName: Split
-  splitEffect: {fileID: 0}

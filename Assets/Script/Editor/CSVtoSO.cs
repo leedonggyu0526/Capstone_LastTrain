@@ -7,8 +7,8 @@ using System.Collections.Generic;
 public class CSVtoSO : EditorWindow
 {
     TextAsset csvFile;
-    string outputFolder = "Assets/data/Item";
-    string spriteFolder = "Assets/data/Item/ItemImages";
+    string outputFolder = "Assets/Resources/item";
+    string spriteFolder = "Assets/Resources/item/ItemImages";
 
     [MenuItem("Tools(Custom)/CSV → Item ScriptableObject 변환기")]
     public static void ShowWindow()
