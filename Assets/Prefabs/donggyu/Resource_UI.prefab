@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5230911077920879800, guid: a8069d3bdad095c4484507c5fc629175, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -431,6 +431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2298882357047908868}
+  - component: {fileID: 6714362111001668599}
   m_Layer: 5
   m_Name: ResourceSlotMachinePart
   m_TagString: Untagged
@@ -459,6 +460,22 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6714362111001668599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324686924481765284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260052fa6e3634490bc1d2a165213737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui:
+    type: 2
+    icon: {fileID: 4596885124140447444}
+    countText: {fileID: 2310275162569620404}
 --- !u!1 &3537075520103461619
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7248855109244004403}
+  - component: {fileID: 5410150529339427054}
   m_Layer: 5
   m_Name: ResourceSlotFuel
   m_TagString: Untagged
@@ -671,6 +689,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5410150529339427054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124306374279704501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260052fa6e3634490bc1d2a165213737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui:
+    type: 0
+    icon: {fileID: 16190050558460875}
+    countText: {fileID: 198535532044757866}
 --- !u!1 &4837371039733899700
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 4919500086455055436, guid: 4132ad5fd5952b24680db0a7004c6ac3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -755,6 +789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 572062942558589656}
+  - component: {fileID: 5238770554687576256}
   m_Layer: 5
   m_Name: ResourceSlotFood
   m_TagString: Untagged
@@ -783,6 +818,22 @@ RectTransform:
   m_AnchoredPosition: {x: 150, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5238770554687576256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059295631883720587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260052fa6e3634490bc1d2a165213737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui:
+    type: 1
+    icon: {fileID: 8509530538126686935}
+    countText: {fileID: 8603442939042706542}
 --- !u!1 &7168792047420846998
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -3549493382825583616, guid: 6d2eb0025547c3d44b11e6833fa02fd8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1003,6 +1054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8149042532924240271}
+  - component: {fileID: 5885521151963917155}
   m_Layer: 5
   m_Name: ResourceSlotPassenger
   m_TagString: Untagged
@@ -1031,3 +1083,19 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5885521151963917155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114527505363845639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260052fa6e3634490bc1d2a165213737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui:
+    type: 3
+    icon: {fileID: 3779775301106265788}
+    countText: {fileID: 5160288401488100767}

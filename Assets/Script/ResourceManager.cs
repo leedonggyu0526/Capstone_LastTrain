@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+
+    public event Action<ResourceType> OnResourceChanged;
 
     private Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
     private Dictionary<ResourceType, int> maxCapacities = new Dictionary<ResourceType, int>()
@@ -54,6 +57,7 @@ public class ResourceManager : MonoBehaviour
 
         resources[type] = newAmount;
         Debug.Log($"{type} {(amount >= 0 ? "+" : "")}{amount} → 총 {resources[type]} (Max {maxCapacities[type]})");
+        OnResourceChanged?.Invoke(type);
     }
 
     public int GetResource(ResourceType type)
@@ -85,6 +89,7 @@ public class ResourceManager : MonoBehaviour
 
         resources[type] -= amount;
         Debug.Log($"{type} -{amount} → 총 {resources[type]} (Max {maxCapacities[type]})");
+        OnResourceChanged?.Invoke(type);
         return true;
     }
 }
