@@ -1347,6 +1347,7 @@ GameObject:
   - component: {fileID: 464150451}
   - component: {fileID: 464150450}
   - component: {fileID: 464150454}
+  - component: {fileID: 464150455}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1465,6 +1466,24 @@ MonoBehaviour:
   optionPrefab: {fileID: 3694347877008513339, guid: 5da2e6c792cd5b84eaac7918c9a3a64f, type: 3}
   minCount: 2
   maxCount: 3
+--- !u!114 &464150455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464150449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2434a29b12e0e440ab5846d96cfb1e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 826152850}
+  gridParent: {fileID: 470277707}
+  detailImage: {fileID: 1724408129}
+  detailName: {fileID: 786464408}
+  detailEffect: {fileID: 1242215293}
+  detailDescription: {fileID: 1571243865}
 --- !u!1 &469209706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,6 +2184,7 @@ GameObject:
   - component: {fileID: 599082197}
   - component: {fileID: 599082196}
   - component: {fileID: 599082198}
+  - component: {fileID: 599082199}
   m_Layer: 5
   m_Name: Item_bag
   m_TagString: Untagged
@@ -2273,9 +2293,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1940293929}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
-        m_MethodName: OpenInventoryPanel
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2285,6 +2305,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &599082199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599082194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d0f71b1f153499587baf5ca5ac6870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAction: 0
 --- !u!1 &603261674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,6 +3808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 883556176}
   - component: {fileID: 883556177}
+  - component: {fileID: 883556178}
   m_Layer: 5
   m_Name: NoticerPanelArea
   m_TagString: Untagged
@@ -3828,6 +3862,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &883556178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883556175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9722cb05a9934f8aa26bec80d478238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationParent: {fileID: 883556176}
+  notificationPanel: {fileID: 596595674}
+  notificationImage: {fileID: 492137564}
+  notificationText: {fileID: 0}
+  displayDuration: 3
+  fadeDuration: 0.5
 --- !u!1 &884730217
 GameObject:
   m_ObjectHideFlags: 0
@@ -7266,6 +7318,7 @@ GameObject:
   - component: {fileID: 1773943602}
   - component: {fileID: 1773943601}
   - component: {fileID: 1773943600}
+  - component: {fileID: 1773943603}
   m_Layer: 5
   m_Name: closeButton
   m_TagString: Untagged
@@ -7336,19 +7389,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1773943601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1940293929}
-        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
-        m_MethodName: CloseInventoryPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1773943601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7387,6 +7428,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773943598}
   m_CullTransparentMesh: 1
+--- !u!114 &1773943603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773943598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d0f71b1f153499587baf5ca5ac6870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAction: 1
 --- !u!224 &1787409406 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
@@ -8037,7 +8091,6 @@ GameObject:
   - component: {fileID: 1940293929}
   - component: {fileID: 1940293931}
   - component: {fileID: 1940293930}
-  - component: {fileID: 1940293932}
   - component: {fileID: 1940293933}
   m_Layer: 0
   m_Name: GameManager
@@ -8085,13 +8138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948c84b1f42585d4f8573448af2fc838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridParent: {fileID: 470277707}
   itemSlotPrefab: {fileID: 3199930519180446228, guid: b9f8d36884cf1bb4d8e8a51a8080d832, type: 3}
-  inventoryPanel: {fileID: 826152850}
-  detailImage: {fileID: 1724408129}
-  detailName: {fileID: 786464408}
-  detailEffect: {fileID: 1242215293}
-  detailDescription: {fileID: 1571243865}
   ownedItems:
   - {fileID: 11400000, guid: 02577f29be7b05343a1ebb7449365037, type: 2}
   - {fileID: 11400000, guid: 6ea78b15ab3fb12438e1a65ff388bb08, type: 2}
@@ -8126,24 +8173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9c1df1558d6f54690a253c2a39a4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1940293932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940293926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9722cb05a9934f8aa26bec80d478238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notificationParent: {fileID: 883556176}
-  notificationPanel: {fileID: 596595674}
-  notificationImage: {fileID: 492137564}
-  notificationText: {fileID: 0}
-  displayDuration: 3
-  fadeDuration: 0.5
 --- !u!114 &1940293933
 MonoBehaviour:
   m_ObjectHideFlags: 0
