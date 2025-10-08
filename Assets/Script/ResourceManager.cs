@@ -21,8 +21,8 @@ public class ResourceManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            foreach (ResourceType t in System.Enum.GetValues(typeof(ResourceType)))
-                resources[t] = 0;
+            foreach (ResourceType type in System.Enum.GetValues(typeof(ResourceType)))
+                resources[type] = maxCapacities[type] / 2;
         }
         else Destroy(gameObject);
     }

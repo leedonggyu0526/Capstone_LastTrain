@@ -1,17 +1,38 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 // ResourceConsumer.cs
+[System.Serializable]
+public struct ResourceConsumption
+{
+    public ResourceType type;      // ìì› ì¢…ë¥˜
+    public int amountPerCycle;     // ì‚¬ì´í´ë‹¹ ì†Œë¹„ëŸ‰(ìŒìˆ˜ ë¶ˆê°€)
+}
+
 public class ResourceConsumer : MonoBehaviour
 {
-    [Header("¼Òºñ ¼³Á¤")]
-    public ResourceType resourceType;      // ¾î¶² ÀÚ¿ø ¼ÒºñÇÒÁö
-    public int amountPerCycle = 50;        // ÇÑ »çÀÌÅ¬´ç ¼Òºñ·®
-    public float consumptionInterval = 5f; // ¼Òºñ °£°İ(ÃÊ)
+    [Header("ìì› ì†Œë¹„")]
+    public List<ResourceConsumption> consumptions = new List<ResourceConsumption>();
+    public float consumptionInterval = 5f; // ì†Œë¹„ ê°„ê²©(ì´ˆ)
 
-    void Start()
+    private Coroutine _consumeRoutine;
+
+    void OnEnable()
     {
-        StartCoroutine(ConsumeRoutine());
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        var current = SceneManager.GetActiveScene().name;
+        if (current == "Settlement")
+            StopConsume();
+        else
+            StartConsume();
+    }
+
+    void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        StopConsume();
     }
 
     private IEnumerator ConsumeRoutine()
@@ -19,15 +40,49 @@ public class ResourceConsumer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(consumptionInterval);
-            if (ResourceManager.Instance.GetResource(resourceType) >= amountPerCycle)
+
+            if (ResourceManager.Instance == null)
             {
-                ResourceManager.Instance.AddResource(resourceType, -amountPerCycle);
+                Debug.LogWarning("[ResourceConsumer] ResourceManager.Instanceê°€ ì—†ìŠµë‹ˆë‹¤.");
+                continue;
             }
-            else
+
+            foreach (var consumption in consumptions)
             {
-                //¿¬·á°¡ 0ÀÌ¸é °ÔÀÓ ¿À¹ö ³ªÁß¿¡ Ãß°¡
-                Debug.LogWarning($"{resourceType} ºÎÁ·! ³²Àº·®: {ResourceManager.Instance.GetResource(resourceType)}");
+                int amount = Mathf.Max(0, consumption.amountPerCycle);
+                if (amount == 0) continue;
+
+                // ì¶©ë¶„í•œ ìì›ì´ ìˆìœ¼ë©´ ì†Œë¹„, ì•„ë‹ˆë©´ ê²½ê³ 
+                bool isSuccess = ResourceManager.Instance.ConsumeResources(consumption.type, amount);
+                if (!isSuccess)
+                {
+                    int current = ResourceManager.Instance.GetResource(consumption.type);
+                    Debug.LogWarning($"{consumption.type} ë¶€ì¡±! í˜„ì¬ëŸ‰: {current}");
+                }
             }
         }
+    }
+
+    private void StartConsume()
+    {
+        if (_consumeRoutine == null)
+            _consumeRoutine = StartCoroutine(ConsumeRoutine());
+    }
+
+    private void StopConsume()
+    {
+        if (_consumeRoutine != null)
+        {
+            StopCoroutine(_consumeRoutine);
+            _consumeRoutine = null;
+        }
+    }
+
+    private void OnActiveSceneChanged(Scene prev, Scene next)
+    {
+        if (next.name == "Settlement")
+            StopConsume();
+        else
+            StartConsume();
     }
 }

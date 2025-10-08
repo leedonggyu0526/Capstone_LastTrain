@@ -7,25 +7,24 @@ using TMPro;
 public struct ResourceUI
 {
     public ResourceType type;   // Fuel, Food, MachinePart, Passenger
-    public Image icon;          // Inspector�� ��Ӵٿ����� �Ҵ�
-    public TMP_Text countText;      // ��500/1000�� �� ǥ���� Text
+    public Image icon;          // Inspector에서 아이콘 이미지 할당
+    public TMP_Text countText;  // 예: 500/1000 형태로 표시
 }
 
 public class ResourceUIManager : MonoBehaviour
 {
-    [Header("�ڿ��� UI �����ܰ� �ؽ�Ʈ")]
+    [Header("자원 UI 아이콘 및 텍스트")]
     public List<ResourceUI> resourceUIs = new List<ResourceUI>();
 
     void Start()
     {
-        // �ʱ� �ѹ� ����
+        // 초기 한 번 갱신
         UpdateAllUI();
     }
 
     void Update()
     {
-        // �ǽð� ������ ������ �� �����Ӹ��� �����ص� �ǰ�,
-        // ������ ���ٸ� �̺�Ʈ ���(UpdateAllUI() ȣ��)���ε� ����մϴ�.
+        // 실제 게임에서는 이벤트 기반(값 변경 시에만 UpdateAllUI 호출)으로 바꾸는 것을 권장합니다.
         UpdateAllUI();
     }
 

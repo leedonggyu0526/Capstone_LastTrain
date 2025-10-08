@@ -1,25 +1,81 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 // ResourceProducer.cs
+[System.Serializable]
+public struct ResourceProduction
+{
+    public ResourceType type;          // ì–´ë–¤ ìì›ì„ ìƒì‚°í•˜ëŠ”ì§€
+    public int amountPerCycle;         // í•œ ì‚¬ì´í´ ìƒì‚°ëŸ‰
+}
+
 public class ResourceProducer : MonoBehaviour
 {
-    [Header("»ı»ê ¼³Á¤")]
-    public ResourceType resourceType;      // ¾î¶² ÀÚ¿ø »ı»êÇÒÁö
-    public int amountPerCycle = 100;       // ÇÑ »çÀÌÅ¬´ç »ı»ê·®
-    public float productionInterval = 10f; // »ı»ê °£°İ(ÃÊ)
+    [Header("ìì› ìƒì‚°")]
+    public List<ResourceProduction> productions = new List<ResourceProduction>();
+    public float productionInterval = 10f; // ìƒì‚° ê°„ê²©(ì´ˆ)
 
-    void Start()
+    private Coroutine _produceRoutine;
+
+    void OnEnable()
     {
-        StartCoroutine(ProduceRoutine());
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        var current = SceneManager.GetActiveScene().name;
+        if (current == "Settlement")
+            StopProduce();
+        else
+            StartProduce();
     }
 
+    void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        StopProduce();
+    }
+        
     private IEnumerator ProduceRoutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(productionInterval);
-            ResourceManager.Instance.AddResource(resourceType, amountPerCycle);
+
+            if (ResourceManager.Instance == null)
+            {
+                Debug.LogWarning("[ResourceProducer] ResourceManager.Instanceê°€ ì—†ìŠµë‹ˆë‹¤.");
+                continue;
+            }
+
+            foreach (var production in productions)
+            {
+                int amount = Mathf.Max(0, production.amountPerCycle);
+                if (amount == 0) continue;
+                ResourceManager.Instance.AddResource(production.type, amount);
+            }
         }
+    }
+
+    private void StartProduce()
+    {
+        if (_produceRoutine == null)
+            _produceRoutine = StartCoroutine(ProduceRoutine());
+    }
+
+    private void StopProduce()
+    {
+        if (_produceRoutine != null)
+        {
+            StopCoroutine(_produceRoutine);
+            _produceRoutine = null;
+        }
+    }
+
+    private void OnActiveSceneChanged(Scene prev, Scene next)
+    {
+        if (next.name == "Settlement")
+            StopProduce();
+        else
+            StartProduce();
     }
 }
