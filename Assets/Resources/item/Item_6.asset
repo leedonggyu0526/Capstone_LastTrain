@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc2fa6bb4dfcd4b4aa4a241898b25fbf, type: 3}
-  m_Name: Item_2
+  m_Name: Item_6
   m_EditorClassIdentifier: 
-  ID: 2
-  itemName: "\uB300\uD615 \uC5F0\uB8CC\uD1B5"
-  itemEffect: "\uC5F0\uB8CC \uD68D\uB4DD\uB7C9 \uC99D\uAC00"
-  description: "\uD2BC\uD2BC\uD55C \uC7AC\uC9C8\uC758 \uB300\uD615 \uC5F0\uB8CC\uD1B5\uC785\uB2C8\uB2E4."
-  artwork: {fileID: 6937817954938267909, guid: 260fa0ededac089418f78b804893b0e7, type: 3}
+  ID: 6
+  itemName: "\uC7AC\uD65C\uC6A9\uCCB4"
+  itemEffect: "\uAE30\uACC4\uBD80\uD488 \uC0DD\uC0B0\uB7C9 \uC99D\uAC00"
+  description: "\uB178\uD6C4\uD654\uB41C \uBD80\uD488\uB4E4\uC744 \uC0C8 \uAE30\uACC4\uBD80\uD488\uC73C\uB85C
+    \uC7AC\uD65C\uC6A9\uD569\uB2C8\uB2E4."
+  artwork: {fileID: 0}

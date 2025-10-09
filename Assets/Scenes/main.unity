@@ -8142,6 +8142,10 @@ MonoBehaviour:
   ownedItems:
   - {fileID: 11400000, guid: 02577f29be7b05343a1ebb7449365037, type: 2}
   - {fileID: 11400000, guid: 6ea78b15ab3fb12438e1a65ff388bb08, type: 2}
+  - {fileID: 11400000, guid: d1b760c6ef9d8b6428c816b66790221b, type: 2}
+  - {fileID: 11400000, guid: e7dca653b9f082e47b597bfbfafa4a3c, type: 2}
+  - {fileID: 11400000, guid: 234925986c4586947973d20decec8399, type: 2}
+  - {fileID: 11400000, guid: 2f24ee3457db2f04c8887847d4f07b11, type: 2}
 --- !u!114 &1940293930
 MonoBehaviour:
   m_ObjectHideFlags: 0
