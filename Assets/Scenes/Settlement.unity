@@ -4684,7 +4684,7 @@ MonoBehaviour:
   m_text: "\uC218\uB9AC\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?\n\uC5F0\uB8CC : 150\n\uBD80\uD488
     : 100\n\uB0B4\uAD6C\uB3C4 30% \uD68C\uBCF5"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b15774005fea88042aa7f8d357cb80c8, type: 2}
   m_sharedMaterial: {fileID: 2529200343192039643, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
