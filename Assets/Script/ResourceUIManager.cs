@@ -14,20 +14,23 @@ public struct ResourceUI
 public class ResourceUIManager : MonoBehaviour
 {
     [Header("자원 UI 아이콘 및 텍스트")]
-    public List<ResourceUI> resourceUIs = new List<ResourceUI>();
+    public List<ResourceUI> resourceUIList = new List<ResourceUI>();
 
+    // 시작 시 초기 한 번 갱신
     void Start()
     {
         // 초기 한 번 갱신
         UpdateAllUI();
     }
 
+    // 매 프레임 갱신
     void Update()
     {
         // 실제 게임에서는 이벤트 기반(값 변경 시에만 UpdateAllUI 호출)으로 바꾸는 것을 권장합니다.
         UpdateAllUI();
     }
 
+    // 모든 UI 갱신
     private void UpdateAllUI()
     {
 		// ResourceManager가 아직 초기화되지 않았다면 대기
@@ -37,18 +40,18 @@ public class ResourceUIManager : MonoBehaviour
 			return;
 		}
 
-		foreach (var rui in resourceUIs)
+		foreach (var resourceUI in resourceUIList)
 		{
 			// UI 참조가 비어 있으면 건너뛰고 경고
-			if (rui.countText == null)
+			if (resourceUI.countText == null)
 			{
-				Debug.LogWarning($"[ResourceUIManager] {rui.type} 의 countText가 비어 있습니다. Inspector에서 할당하세요.");
+				Debug.LogWarning($"[ResourceUIManager] {resourceUI.type} 의 countText가 비어 있습니다. Inspector에서 할당하세요.");
 				continue;
 			}
 
-			int current = ResourceManager.Instance.GetResource(rui.type);
-			int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
-			rui.countText.text = $"{current}/{max}";
+			int current = ResourceManager.Instance.GetResource(resourceUI.type);
+			int max = ResourceManager.Instance.GetMaxCapacity(resourceUI.type);
+			resourceUI.countText.text = $"{current}/{max}";
 			// 참조가 비어 있으면 건너뛰고 경고
 		}
     }

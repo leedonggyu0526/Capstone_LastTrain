@@ -19,6 +19,7 @@ public class ResourceConsumer : MonoBehaviour
 
     private Coroutine _consumeRoutine;
 
+    // 씬 전환 시 소비 시작/중지
     void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
@@ -29,12 +30,14 @@ public class ResourceConsumer : MonoBehaviour
             StartConsume();
     }
 
+    // 씬 전환 시 소비 중지
     void OnDisable()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         StopConsume();
     }
 
+    // 소비 루틴
     private IEnumerator ConsumeRoutine()
     {
         while (true)
@@ -63,12 +66,14 @@ public class ResourceConsumer : MonoBehaviour
         }
     }
 
+    // 소비 시작
     private void StartConsume()
     {
         if (_consumeRoutine == null)
             _consumeRoutine = StartCoroutine(ConsumeRoutine());
     }
 
+    // 소비 중지
     private void StopConsume()
     {
         if (_consumeRoutine != null)
@@ -78,6 +83,7 @@ public class ResourceConsumer : MonoBehaviour
         }
     }
 
+    // 씬 전환 시 소비 시작/중지
     private void OnActiveSceneChanged(Scene prev, Scene next)
     {
         if (next.name == "Settlement")

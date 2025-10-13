@@ -1,3 +1,4 @@
+// Assets/Scripts/UpgradeButtonManager.cs
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -24,11 +25,20 @@ public class UpgradeButtonManager : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         // 자기 자신을 클릭했을 때 → 버튼 켜기
-        if (upgradeButtonUI != null)
+        if (upgradeButtonUI != null && _trainKhan != null)
         {
-            bool isActive = upgradeButtonUI.activeSelf;
-            HideAllButtons(); // 다른 오브젝트 버튼은 다 끔
-            upgradeButtonUI.SetActive(!isActive); // 자기 버튼만 토글
+            // [수정된 부분] 업그레이드가 가능한 경우에만 버튼 표시/토글 로직 실행
+            if (_trainKhan.CanUpgrade())
+            {
+                bool isActive = upgradeButtonUI.activeSelf;
+                HideAllButtons(); // 다른 오브젝트 버튼은 다 끔
+                upgradeButtonUI.SetActive(!isActive); // 자기 버튼만 토글
+            }
+            else
+            {
+                // 최대 레벨에 도달했다면, 혹시 켜져있을 버튼을 숨깁니다.
+                HideAllButtons();
+            }
         }
     }
 
@@ -43,6 +53,7 @@ public class UpgradeButtonManager : MonoBehaviour, IPointerClickHandler
             Debug.Log($"[UBM] {name} level {before} -> {_trainKhan.level}");
         }
 
+        // 업그레이드 후에는 버튼을 숨깁니다.
         if (upgradeButtonUI != null) upgradeButtonUI.SetActive(false);
     }
 

@@ -1,4 +1,4 @@
-// Assets/Scripts/Building.cs
+// Assets/Scripts/TrainKhan.cs
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -17,6 +17,15 @@ public class TrainKhan : MonoBehaviour
     {
         _sr = GetComponent<SpriteRenderer>();
         ApplySprite(); // 시작 시 현재 레벨 스프라이트 적용
+    }
+
+    // [새로 추가된 함수] 업그레이드 가능 여부를 반환합니다.
+    public bool CanUpgrade()
+    {
+        int maxLevel = TrainImageDB.GetMaxLevel(typeKey);
+        // 등록된 레벨이 없거나, 현재 레벨이 최대 레벨과 같거나 크면 업그레이드 불가
+        if (maxLevel < 0) return false;
+        return level < maxLevel;
     }
 
     public void Upgrade()

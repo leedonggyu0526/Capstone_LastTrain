@@ -19,6 +19,7 @@ public class ResourceProducer : MonoBehaviour
 
     private Coroutine _produceRoutine;
 
+    // 씬 전환 시 생산 시작/중지
     void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
@@ -29,12 +30,14 @@ public class ResourceProducer : MonoBehaviour
             StartProduce();
     }
 
+    // 씬 전환 시 생산 중지
     void OnDisable()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         StopProduce();
     }
         
+    // 생산 루틴
     private IEnumerator ProduceRoutine()
     {
         while (true)
@@ -56,12 +59,14 @@ public class ResourceProducer : MonoBehaviour
         }
     }
 
+    // 생산 시작
     private void StartProduce()
     {
         if (_produceRoutine == null)
             _produceRoutine = StartCoroutine(ProduceRoutine());
     }
 
+    // 생산 중지
     private void StopProduce()
     {
         if (_produceRoutine != null)
@@ -71,6 +76,7 @@ public class ResourceProducer : MonoBehaviour
         }
     }
 
+    // 씬 전환 시 생산 시작/중지
     private void OnActiveSceneChanged(Scene prev, Scene next)
     {
         if (next.name == "Settlement")
