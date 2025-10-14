@@ -4670,54 +4670,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &884730217
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 884730219}
-  - component: {fileID: 884730218}
-  m_Layer: 0
-  m_Name: CardDeckUIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &884730218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884730217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27e5d69f88f87bc48998551d20900b34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDeck: {fileID: 1682214346}
-  cardSlotPrefab: {fileID: 2109799430}
-  cardGrid: {fileID: 1869599189}
-  deckPanel: {fileID: 1032299242}
---- !u!4 &884730219
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884730217}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1904.4567, y: 143.13863, z: -3.4494154}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &888219806 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2310275162569620404, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
@@ -5298,7 +5250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032299242}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -5341,7 +5293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e5d69f88f87bc48998551d20900b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDeck: {fileID: 1682214346}
   cardSlotPrefab: {fileID: 1598452242922627376, guid: f56cd31b343e07446bad739e4b90b63e, type: 3}
   cardGrid: {fileID: 1869599189}
   deckPanel: {fileID: 1032299242}
@@ -7630,7 +7581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3724608790366170358, guid: ba683f9c21273f74b959004aa31f16b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8523,11 +8474,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6fc6bc245e9e740851daa641f4115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedOnStart: 1
+  seedOnStart: 0
   seedIds:
   - 1
   - 2
   - 3
+  - 4
+  - 6
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
   seedAmountEach: 4
 --- !u!1 &1722397472
 GameObject:
@@ -9636,10 +9596,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1032299243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -300}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -580, y: 125}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869599190
 MonoBehaviour:
@@ -9659,12 +9619,12 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_StartCorner: 1
+  m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 450}
-  m_Spacing: {x: 100, y: 100}
+  m_CellSize: {x: 0, y: 0}
+  m_Spacing: {x: 250, y: 400}
   m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ConstraintCount: 6
 --- !u!1 &1875550615
 GameObject:
   m_ObjectHideFlags: 0
@@ -11142,17 +11102,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060265547}
   m_CullTransparentMesh: 1
---- !u!1 &2109799430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
-  m_PrefabInstance: {fileID: 226575808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2109799432 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8027437769008232, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
   m_PrefabInstance: {fileID: 226575808}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109799430}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47227a1d1398a4af9a5ae52c20ae1a6d, type: 3}
@@ -11429,6 +11384,14 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -11458,7 +11421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -800
+      value: -790
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11480,6 +11443,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5769289487030456147, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769289487030456147, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11500,6 +11471,5 @@ SceneRoots:
   - {fileID: 1766774554}
   - {fileID: 318708316}
   - {fileID: 1581681628}
-  - {fileID: 884730219}
   - {fileID: 1362113258}
   - {fileID: 868297869}

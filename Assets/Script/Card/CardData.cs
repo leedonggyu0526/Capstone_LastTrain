@@ -10,4 +10,5 @@ public class CardData : ScriptableObject
     public Sprite artwork;       // 카드 일러스트
     public Sprite background;    // 카드 뒷배경 이미지
     public string rarity;        // CSV에서 읽은 문자열 그대로 (Common, Rare, Epic 등)
+    public int price;            // 카드의 가격
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 public static class CardCsvLoader
@@ -27,6 +28,19 @@ public static class CardCsvLoader
         // 희귀도 (문자열 그대로 저장)
         data.rarity = cols[5].Trim();
 
+        // 가격 추가: CSV 컬럼 길이와 파싱 성공 여부 확인
+        if (cols.Length > 6 && int.TryParse(
+            cols[6].Trim(),
+            NumberStyles.Any,
+            CultureInfo.InvariantCulture,
+            out int price))
+        {
+            data.price = price;
+        }
+        else
+        {
+            data.price = 0; // 가격 정보가 없거나 파싱 오류 시 0으로 설정
+        }
         return data;
     }
 }
