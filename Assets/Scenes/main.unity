@@ -273,17 +273,6 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!114 &47805216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3779775301106265788, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &55552255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,6 +1899,7 @@ GameObject:
   - component: {fileID: 464150451}
   - component: {fileID: 464150450}
   - component: {fileID: 464150454}
+  - component: {fileID: 464150455}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1999,11 +1989,11 @@ RectTransform:
   - {fileID: 1751192958}
   - {fileID: 1382899557}
   - {fileID: 1032299243}
-  - {fileID: 523109981}
   - {fileID: 1995934839}
   - {fileID: 826152851}
   - {fileID: 883556176}
   - {fileID: 1822265827}
+  - {fileID: 523109981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2028,6 +2018,24 @@ MonoBehaviour:
   optionPrefab: {fileID: 3694347877008513339, guid: 5da2e6c792cd5b84eaac7918c9a3a64f, type: 3}
   minCount: 2
   maxCount: 3
+--- !u!114 &464150455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464150449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1124277b436e8c7448008910e8f47872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 826152850}
+  gridParent: {fileID: 470277707}
+  detailImage: {fileID: 1724408129}
+  detailName: {fileID: 786464408}
+  detailEffect: {fileID: 1242215293}
+  detailDescription: {fileID: 1571243865}
 --- !u!1 &469209706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,9 +2229,9 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 10, y: 10}
+  m_Spacing: {x: 15, y: 15}
   m_Constraint: 1
-  m_ConstraintCount: 3
+  m_ConstraintCount: 4
 --- !u!114 &492137564 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3088991695914610289, guid: 772d1b41c5a0e4e8196d92c66dd03ab6, type: 3}
@@ -2728,6 +2736,7 @@ GameObject:
   - component: {fileID: 599082197}
   - component: {fileID: 599082196}
   - component: {fileID: 599082198}
+  - component: {fileID: 599082199}
   m_Layer: 5
   m_Name: Item_bag
   m_TagString: Untagged
@@ -2835,19 +2844,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 599082196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1940293929}
-        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
-        m_MethodName: OpenInventoryPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &599082199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599082194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f75e601e6e95f4d8ae1d9bd5b87e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAction: 0
 --- !u!1 &603261674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,17 +3967,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &767881892 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 16190050558460875, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &771644165
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,17 +4669,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &888219806 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2310275162569620404, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &924179600
 GameObject:
   m_ObjectHideFlags: 0
@@ -6264,17 +6252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edac0cc391b44a24580f5ddd5ff98814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1353751188 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5160288401488100767, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1355136035 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
@@ -7513,17 +7490,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2721382302229203600, guid: 0708b053fc495a344baa36d05cd87a23, type: 3}
   m_PrefabInstance: {fileID: 1536975885}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1560543168 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8603442939042706542, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1565646017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8158,28 +8124,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1614893212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4596885124140447444, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1619761484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8509530538126686935, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1635088428
 GameObject:
   m_ObjectHideFlags: 0
@@ -8958,6 +8902,7 @@ GameObject:
   - component: {fileID: 1773943602}
   - component: {fileID: 1773943601}
   - component: {fileID: 1773943600}
+  - component: {fileID: 1773943603}
   m_Layer: 5
   m_Name: closeButton
   m_TagString: Untagged
@@ -9028,19 +8973,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1773943601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1940293929}
-        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
-        m_MethodName: CloseInventoryPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1773943601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9079,6 +9012,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773943598}
   m_CullTransparentMesh: 1
+--- !u!114 &1773943603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773943598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f75e601e6e95f4d8ae1d9bd5b87e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAction: 1
 --- !u!224 &1787409406 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
@@ -9735,17 +9681,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1878527726 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 198535532044757866, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
-  m_PrefabInstance: {fileID: 4083311679189106356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1920130697
 GameObject:
   m_ObjectHideFlags: 0
@@ -9908,6 +9843,7 @@ GameObject:
   - component: {fileID: 1940293931}
   - component: {fileID: 1940293930}
   - component: {fileID: 1940293932}
+  - component: {fileID: 1940293933}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9942,19 +9878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a3702cf1ddc0244958ad60b516194e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceUIs:
-  - type: 0
-    icon: {fileID: 767881892}
-    countText: {fileID: 1878527726}
-  - type: 1
-    icon: {fileID: 1619761484}
-    countText: {fileID: 1560543168}
-  - type: 2
-    icon: {fileID: 1614893212}
-    countText: {fileID: 888219806}
-  - type: 3
-    icon: {fileID: 47805216}
-    countText: {fileID: 1353751188}
 --- !u!114 &1940293929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9967,16 +9890,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948c84b1f42585d4f8573448af2fc838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridParent: {fileID: 470277707}
   itemSlotPrefab: {fileID: 3199930519180446228, guid: b9f8d36884cf1bb4d8e8a51a8080d832, type: 3}
-  inventoryPanel: {fileID: 826152850}
-  detailImage: {fileID: 1724408129}
-  detailName: {fileID: 786464408}
-  detailEffect: {fileID: 1242215293}
-  detailDescription: {fileID: 1571243865}
   ownedItems:
   - {fileID: 11400000, guid: 02577f29be7b05343a1ebb7449365037, type: 2}
   - {fileID: 11400000, guid: 6ea78b15ab3fb12438e1a65ff388bb08, type: 2}
+  - {fileID: 11400000, guid: b4eec0e3afd097641b50c40364910555, type: 2}
+  - {fileID: 11400000, guid: 3e6ff362f0ce5e345b3c4b2c4eee5664, type: 2}
+  - {fileID: 11400000, guid: 3be22f17cf4ca8a408ba4c79ee63b204, type: 2}
 --- !u!114 &1940293930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9994,7 +9914,7 @@ MonoBehaviour:
   rp_factory:
   - {fileID: 0}
   rp_plant: {fileID: 0}
-  factory: {fileID: 0}
+  factory: {fileID: 1054487322}
   plant: {fileID: 1225962384}
 --- !u!114 &1940293931
 MonoBehaviour:
@@ -10026,6 +9946,19 @@ MonoBehaviour:
   notificationText: {fileID: 0}
   displayDuration: 3
   fadeDuration: 0.5
+--- !u!114 &1940293933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940293926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e5c9d4877d54282bec9fcb42c67666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimmerPrefab: {fileID: 7500389091790078854, guid: 84c9c49baf99f7c4b86dc7095e5424a4, type: 3}
 --- !u!1 &1948553642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10448,7 +10381,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d1b760c6ef9d8b6428c816b66790221b, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

@@ -1,42 +1,112 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 [System.Serializable]
 public struct ResourceUI
 {
     public ResourceType type;   // Fuel, Food, MachinePart, Passenger
-    public Image icon;          // Inspector¿¡ µå·Ó´Ù¿îÀ¸·Î ÇÒ´ç
-    public TMP_Text countText;      // ¡°500/1000¡± À» Ç¥½ÃÇÒ Text
+    public Image icon;          // Inspectorì— ë“œë¡­ë‹¤ìš´ìœ¼ë¡œ í• ë‹¹
+    public TMP_Text countText;      // â€œ500/1000â€ ì„ í‘œì‹œí•  Text
 }
 
 public class ResourceUIManager : MonoBehaviour
 {
-    [Header("ÀÚ¿øº° UI ¾ÆÀÌÄÜ°ú ÅØ½ºÆ®")]
-    public List<ResourceUI> resourceUIs = new List<ResourceUI>();
+    [Header("ìì›ë³„ UI ì•„ì´ì½˜ê³¼ í…ìŠ¤íŠ¸")]
+    [Tooltip("ì”¬ì— ìˆëŠ” ResourceUI ì»´í¬ë„ŒíŠ¸ë“¤ì„ ë‹´ì„ ë¦¬ìŠ¤íŠ¸ì…ë‹ˆë‹¤. ì”¬ì´ ë¡œë“œë  ë•Œ ìë™ìœ¼ë¡œ ì±„ì›Œì§‘ë‹ˆë‹¤.")]
+    private List<ResourceUI> resourceUIs = new List<ResourceUI>();
+
+    public static ResourceUIManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.OnResourceChanged += UpdateSpecificUI;
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.OnResourceChanged -= UpdateSpecificUI;
+        }
+    }
 
     void Start()
     {
-        // ÃÊ±â ÇÑ¹ø ·»´õ
+        // ì²« ì”¬ ë¡œë“œ ì‹œ UIë¥¼ ì°¾ìŠµë‹ˆë‹¤.
+        FindAndRegisterUIElements();
         UpdateAllUI();
     }
 
-    void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // ½Ç½Ã°£ º¯µ¿ÀÌ ÀæÀ¸¸é ¸Å ÇÁ·¹ÀÓ¸¶´Ù °»½ÅÇØµµ µÇ°í,
-        // º¯µ¿ÀÌ Àû´Ù¸é ÀÌº¥Æ® ±â¹İ(UpdateAllUI() È£Ãâ)À¸·Îµµ ÃæºĞÇÕ´Ï´Ù.
+        // ìƒˆë¡œìš´ ì”¬ì´ ë¡œë“œë˜ë©´ UI ìš”ì†Œë“¤ì„ ë‹¤ì‹œ ì°¾ê³ , ì „ì²´ UIë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤.
+        FindAndRegisterUIElements();
         UpdateAllUI();
     }
 
-    private void UpdateAllUI()
+    /// <summary>
+    /// í˜„ì¬ ì”¬ì— ìˆëŠ” ëª¨ë“  ResourceUIHolderë¥¼ ì°¾ì•„ ë¦¬ìŠ¤íŠ¸ì— ë“±ë¡í•©ë‹ˆë‹¤.
+    /// </summary>
+    private void FindAndRegisterUIElements()
+    {
+        resourceUIs.Clear();
+        ResourceUIHolder[] holders = FindObjectsOfType<ResourceUIHolder>();
+        foreach (var holder in holders)
+        {
+            resourceUIs.Add(holder.ui);
+        }
+        Debug.Log($"[ResourceUIManager] {resourceUIs.Count}ê°œì˜ ìì› UIë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤. {resourceUIs}");
+    }
+
+    /// <summary>
+    /// ëª¨ë“  ìì› UIë¥¼ í˜„ì¬ ê°’ìœ¼ë¡œ ê°±ì‹ í•©ë‹ˆë‹¤.
+    /// </summary>
+    public void UpdateAllUI()
     {
         foreach (var rui in resourceUIs)
         {
+            if (rui.countText == null) continue;
             int current = ResourceManager.Instance.GetResource(rui.type);
             int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
             rui.countText.text = $"{current}/{max}";
-            // ¾ÆÀÌÄÜ´Â ¹Ì¸® Inspector¿¡¼­ ÇÒ´çÇØ µÎ¾ú´Ù¸é º°µµ ¾÷µ¥ÀÌÆ® ºÒÇÊ¿ä
+        }
+    }
+
+    /// <summary>
+    /// íŠ¹ì • ìì› íƒ€ì…ì˜ UIë§Œ ê°±ì‹ í•©ë‹ˆë‹¤.
+    /// </summary>
+    private void UpdateSpecificUI(ResourceType type)
+    {
+        foreach (var rui in resourceUIs)
+        {
+            if (rui.type == type && rui.countText != null)
+            {
+                int current = ResourceManager.Instance.GetResource(rui.type);
+                int max = ResourceManager.Instance.GetMaxCapacity(rui.type);
+                rui.countText.text = $"{current}/{max}";
+                break; // í•´ë‹¹ íƒ€ì…ì˜ UIë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë°˜ë³µ ì¤‘ë‹¨
+            }
         }
     }
 }
