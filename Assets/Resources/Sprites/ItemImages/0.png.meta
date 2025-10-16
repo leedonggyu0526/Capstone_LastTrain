@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 340fb6e34d963f444ac675683e077634
+guid: b398c3997f6e9467e9471e072dc25896
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5897144600191862986
-    second: trainengine_4_0
+      213: 4919500086455055436
+    second: '@n'
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trainengine_4_0
+      name: 
       rect:
         serializedVersion: 2
-        x: 115
-        y: 115
-        width: 1050
-        height: 708
+        x: 126
+        y: 117
+        width: 763
+        height: 788
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac88c8bf4cdd6d150800000000000000
-      internalID: 5897144600191862986
+      spriteID: c4438a59343954440800000000000000
+      internalID: 4919500086455055436
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      trainengine_4_0: 5897144600191862986
+      : 4919500086455055436
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

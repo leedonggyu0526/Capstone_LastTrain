@@ -15,13 +15,6 @@ MonoBehaviour:
   eventId: 1
   eventImage: {fileID: 0}
   description: 
-<<<<<<<< Updated upstream:Assets/card/NewCard 1.asset
-  artwork: {fileID: 0}
-  background: {fileID: 0}
-  rarity: 0
-  cardID: 7
-========
   choices:
   - "\uC608"
   - "\uC544\uB2C8\uC624"
->>>>>>>> Stashed changes:Assets/Events/EVENT_01.asset

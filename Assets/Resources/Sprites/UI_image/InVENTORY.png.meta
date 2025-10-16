@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: e258654d792a883479f08f30342e76c4
+guid: 5523ecb185fa07d4f9f11f9d5e8fe6e2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1308000751934551444
-    second: trainengine_2_0
-  - first:
-      213: 4589726872805922669
-    second: trainengine_2_1
+      213: -8915100702841392678
+    second: InVENTORY_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trainengine_2_0
+      name: InVENTORY_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 76
-        width: 998
-        height: 849
+        x: 0
+        y: 0
+        width: 320
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6a4ff60f3c09dde0800000000000000
-      internalID: -1308000751934551444
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trainengine_2_1
-      rect:
-        serializedVersion: 2
-        x: 133
-        y: 727
-        width: 536
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6759adf54cf1bf30800000000000000
-      internalID: 4589726872805922669
+      spriteID: ad1bd4e1523374480800000000000000
+      internalID: -8915100702841392678
       vertices: []
       indices: 
       edges: []
@@ -160,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      trainengine_2_0: -1308000751934551444
-      trainengine_2_1: 4589726872805922669
+      InVENTORY_0: -8915100702841392678
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

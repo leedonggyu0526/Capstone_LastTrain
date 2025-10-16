@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8ac5df6ff28514d97286521e89b0c7, type: 3}
-  m_Name: EVENT_01
+  m_Script: {fileID: 11500000, guid: cc2fa6bb4dfcd4b4aa4a241898b25fbf, type: 3}
+  m_Name: New Item
   m_EditorClassIdentifier: 
-  eventId: 1
-  eventImage: {fileID: 0}
-  description: "\uC640\uC624"
-  choices:
-  - "\uC608"
-  - "\uC5B4\uB0AD\u3145"
+  ID: 0
+  itemName: asdf
+  itemEffect: qwer
+  description: 2314536412312
+  artwork: {fileID: 21300000, guid: 22f01bf636af4ba48874f6d1e21dcae4, type: 3}
