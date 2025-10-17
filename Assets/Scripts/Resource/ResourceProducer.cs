@@ -39,7 +39,7 @@ public class ResourceProducer : MonoBehaviour
         StopProduce();
     }
         
-    // 생산 루틴
+    // 생산 루틴 
     private IEnumerator ProduceRoutine()
     {
         while (true)
@@ -54,6 +54,7 @@ public class ResourceProducer : MonoBehaviour
 
             foreach (var production in productions)
             {
+                // 최종생산량 : 기본 * 멀티플러 * 콜렉션
                 int finalAmount = (int)(Mathf.Max(0, production.amountPerCycle * production.multiplier * production.correction));
                 if (finalAmount == 0) continue;
                 ResourceManager.Instance.AddResource(production.type, finalAmount);
@@ -101,6 +102,11 @@ public class ResourceProducer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  생산 코루틴 보정값(Correction) 증가
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="value"></param>
     public void AddCorrection(ResourceType type, float value)
     {
         for (int i = 0; i < productions.Count; i++)

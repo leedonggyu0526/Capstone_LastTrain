@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+// 직접적 효과 구현
 public class ItemEffectManager : MonoBehaviour
 {
 
@@ -9,10 +9,12 @@ public class ItemEffectManager : MonoBehaviour
 
     private List<ItemEffect> activeEffects = new();
 
+
+    // TODO :조정 영역 
     public void ApplyEffect(ItemEffect effect, ResourceType type, float value)
     {
         effect.Add(type, value);
-        activeEffects.Add(effect);
+        activeEffects.Remove(effect);
     }
     public void RemoveEffect(ItemEffect effect, ResourceType type, float value)
     {

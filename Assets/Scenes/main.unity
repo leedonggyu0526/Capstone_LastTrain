@@ -10455,7 +10455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e5c9d4877d54282bec9fcb42c67666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dimmerPrefab: {fileID: 7500389091790078854, guid: 84c9c49baf99f7c4b86dc7095e5424a4, type: 3}
+  dimmerPrefab: {fileID: 5226384983273954111, guid: 63a338890cc4e4bf99f03ed80ae2e26e, type: 3}
 --- !u!1 &1948553642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10990,7 +10990,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 11400000, guid: d1b760c6ef9d8b6428c816b66790221b, type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
