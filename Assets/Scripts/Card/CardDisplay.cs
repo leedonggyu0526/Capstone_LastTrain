@@ -6,7 +6,7 @@ public class CardDisplay : MonoBehaviour
 {
     public CardData cardData;
 
-    public Image backgroundImage;    // ¡ç Ãß°¡µÈ Ç×¸ñ
+    public Image backgroundImage;    // ì¹´ë“œ ë°°ê²½ ì´ë¯¸ì§€
     public Image artworkImage;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;

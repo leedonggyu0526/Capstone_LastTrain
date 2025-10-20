@@ -2297,6 +2297,7 @@ MonoBehaviour:
   panel: {fileID: 958043350}
   optionsParent: {fileID: 1536975886}
   optionPrefab: {fileID: 3694347877008513339, guid: 5da2e6c792cd5b84eaac7918c9a3a64f, type: 3}
+  dropZonePanel: {fileID: 1751192957}
   minCount: 2
   maxCount: 3
 --- !u!114 &464150455
@@ -10412,7 +10413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxID: 31
   rp: {fileID: 1959856272}
-  effectValue: 0.2
+  cor: 0.2
 --- !u!114 &1940293931
 MonoBehaviour:
   m_ObjectHideFlags: 0

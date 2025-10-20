@@ -48,10 +48,19 @@ public class UIManager : MonoBehaviour
         float elapsedTime = 0f;
         float duration = 1f / fadeSpeed;
         
+        // 시작 시 알파 보장
+        canvasGroup.alpha = 0f;
+        
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / duration);
+            // 타임스케일 영향 없이 자연스러운 경과 시간
+            elapsedTime += Time.unscaledDeltaTime;
+            
+            // 진행도 0~1 클램프 및 부드러운 이징
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float eased = Mathf.SmoothStep(0f, 1f, t);
+            
+            canvasGroup.alpha = eased;
             yield return null;
         }
         
@@ -66,10 +75,20 @@ public class UIManager : MonoBehaviour
         float elapsedTime = 0f;
         float duration = 1f / fadeSpeed;
         
+        // 시작 시 알파 보장
+        canvasGroup.alpha = 1f;
+        
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+            // 타임스케일 영향 없이 자연스러운 경과 시간
+            elapsedTime += Time.unscaledDeltaTime;
+            
+            // 진행도 0~1 클램프 및 부드러운 이징
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float eased = Mathf.SmoothStep(0f, 1f, t);
+            
+            // 1 -> 0으로 감소
+            canvasGroup.alpha = 1f - eased;
             yield return null;
         }
         

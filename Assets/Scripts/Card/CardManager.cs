@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public CardData[] availableCards; // ¿¡µğÅÍ¿¡¼­ Ä«µå µ¥ÀÌÅÍ ¿©·¯ °³ µî·Ï
-    public CardDisplay[] cardSlots;   // Card1~Card3 ¿ÀºêÁ§Æ®¸¦ ³Ö¾îÁÜ
+    public CardData[] availableCards; // ê°€ëŠ¥í•œ ì¹´ë“œ ë°ì´í„° ë°°ì—´
+    public CardDisplay[] cardSlots;   // Card1~Card3 ì¹´ë“œ ìŠ¬ë¡¯
 
     void Start()
     {
@@ -12,18 +12,18 @@ public class CardManager : MonoBehaviour
 
     void AssignRandomCards()
     {
-        // ·£´ıÇÏ°Ô 3°³ÀÇ ¼­·Î ´Ù¸¥ Ä«µå ¼±ÅÃ
+        // ëœë¤ìœ¼ë¡œ 3ì¥ì˜ ì¹´ë“œ ì„ íƒ
         CardData[] selectedCards = GetRandomCards(3);
 
-        // Ä«µå ½½·Ô¿¡ ·£´ı Ä«µå ¹èÁ¤
+        // ì¹´ë“œ ìŠ¬ë¡¯ì— ì¹´ë“œ ë°ì´í„° í• ë‹¹
         for (int i = 0; i < cardSlots.Length; i++)
         {
             cardSlots[i].cardData = selectedCards[i];
-            cardSlots[i].RefreshUI(); // Ä«µå UI ¾÷µ¥ÀÌÆ® ÇÔ¼ö È£Ãâ
+            cardSlots[i].RefreshUI(); // ì¹´ë“œ UI ìƒˆë¡œê³ ì¹¨
         }
     }
 
-    // Áßº¹ ¾øÀÌ N°³ÀÇ Ä«µå »Ì±â
+    // ëœë¤ìœ¼ë¡œ Nì¥ì˜ ì¹´ë“œ ì„ íƒ
     CardData[] GetRandomCards(int count)
     {
         CardData[] result = new CardData[count];
@@ -33,7 +33,7 @@ public class CardManager : MonoBehaviour
         {
             int randIndex = Random.Range(0, list.Count);
             result[i] = list[randIndex];
-            list.RemoveAt(randIndex); // Áßº¹ ¹æÁö
+            list.RemoveAt(randIndex); // ì¹´ë“œ ì œê±°
         }
         return result;
     }

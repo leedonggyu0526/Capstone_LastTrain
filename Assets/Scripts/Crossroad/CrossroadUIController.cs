@@ -13,6 +13,7 @@ public class CrossroadUIController : MonoBehaviour
     public GameObject panel;        // 전체 팝업 (처음 비활성)
     public Transform optionsParent; // 그리드/리스트 부모(OptionsParent)
     public GameObject optionPrefab; // CrossRoadSelectPrefab (루트에 Button + CrossroadOptionView)
+    public GameObject dropZonePanel; // 드랍존 패널
 
     [Header("Spawn Count")]
     public int minCount = 2;
@@ -107,6 +108,8 @@ public class CrossroadUIController : MonoBehaviour
             );
         }
 
+        // 크로스로드 패널 활성화 전 드랍존 패널 비활성화
+        if (dropZonePanel != null) dropZonePanel.SetActive(false);
         panel.SetActive(true);
     }
 
@@ -116,6 +119,8 @@ public class CrossroadUIController : MonoBehaviour
         if (panel) panel.SetActive(false);
         ClearChildren();
 
+        // 크로스로드 패널 닫은 후 드랍존 패널 활성화
+        if (dropZonePanel != null) dropZonePanel.SetActive(true);
         // 게임 재개
         Time.timeScale = 1f;
     }

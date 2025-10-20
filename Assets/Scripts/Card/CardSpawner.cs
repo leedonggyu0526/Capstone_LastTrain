@@ -44,7 +44,7 @@ public class CardSpawner : MonoBehaviour
             // 덱에서 무작위 카드 ID 뽑기
             string id = playerDeck?.GetRandomCardID();
             if (string.IsNullOrEmpty(id))
-            {
+            {   
                 slot.cardData = null;
                 slot.RefreshUI();
                 continue;
