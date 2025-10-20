@@ -1,4 +1,0 @@
-﻿cardID,cardName,description,background,artwork,rarity
-1,gold,gold ticket,UI_image/goldCard,UI_image/food,Epic
-2,silver,silver ticket,UI_image/silverCard,UI_image/fuel,Rare
-3,copper,copper ticket,UI_image/copperCard,UI_image/gear,Common
