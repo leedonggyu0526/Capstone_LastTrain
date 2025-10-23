@@ -6817,6 +6817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1681056855}
   - component: {fileID: 1681056856}
+  - component: {fileID: 1681056857}
   m_Layer: 5
   m_Name: CardDataBase
   m_TagString: Untagged
@@ -6855,6 +6856,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf5232213b30cf46bc9d51573aee14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1681056857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681056854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6fc6bc245e9e740851daa641f4115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedOnStart: 0
+  seedIds:
+  - 1
+  - 2
+  - 3
+  seedAmountEach: 3
 --- !u!1 &1705327007
 GameObject:
   m_ObjectHideFlags: 0

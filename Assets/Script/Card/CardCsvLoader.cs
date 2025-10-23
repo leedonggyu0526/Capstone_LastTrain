@@ -29,18 +29,20 @@ public static class CardCsvLoader
         data.rarity = cols[5].Trim();
 
         // 가격 추가: CSV 컬럼 길이와 파싱 성공 여부 확인
-        if (cols.Length > 6 && int.TryParse(
-            cols[6].Trim(),
-            NumberStyles.Any,
-            CultureInfo.InvariantCulture,
-            out int price))
-        {
-            data.price = price;
-        }
-        else
-        {
-            data.price = 0; // 가격 정보가 없거나 파싱 오류 시 0으로 설정
-        }
+        data.fuelCost = ParseIntSafe(cols, 6);
+        data.foodCost = ParseIntSafe(cols, 7);
+        data.partsCost = ParseIntSafe(cols, 8);
+
         return data;
+    }
+
+    // [헬퍼 함수] 배열 범위 초과와 파싱 오류를 안전하게 처리
+    private static int ParseIntSafe(string[] cols, int index)
+    {
+        if (cols.Length > index && int.TryParse(cols[index].Trim(), out int value))
+        {
+            return value;
+        }
+        return 0;
     }
 }

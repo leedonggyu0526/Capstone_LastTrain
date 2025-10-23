@@ -8,7 +8,31 @@ using UnityEngine;
 /// </summary>
 public class CardDeck : MonoBehaviour
 {
-    public static CardDeck Instance { get; private set; } // ⬅️ 싱글턴 인스턴스
+    // ⬇️ 🚨 Lazy Instantiation을 위한 private 필드 🚨 
+    private static CardDeck instance;
+
+    public static CardDeck Instance // ⬅️ 싱글턴 인스턴스 (접근 시 초기화 시도)
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // 인스턴스가 없으면 씬에서 찾아 등록 (복구 로직)
+                instance = FindFirstObjectByType<CardDeck>();
+
+                if (instance == null)
+                {
+                    Debug.LogError("CardDeck 인스턴스를 씬에서 찾을 수 없습니다. (배치 오류)");
+                    return null;
+                }
+
+                // 찾은 인스턴스에 DontDestroyOnLoad를 적용 (Awake 대신 여기서 초기화 시도)
+                DontDestroyOnLoad(instance.gameObject);
+            }
+            return instance;
+        }
+    }
+    // ⬆️ Instance 속성 변경 완료 ⬆️
 
     // 보유 카드 저장소 (key = cardID, value = 수량)
     private Dictionary<string, int> deck = new Dictionary<string, int>();
@@ -21,14 +45,14 @@ public class CardDeck : MonoBehaviour
 
     void Awake()
     {
-        // 씬 이동 시 파괴되지 않는 싱글턴 구현
-        if (Instance != null && Instance != this)
+        // 씬 이동 시 파괴되지 않는 싱글턴 구현 (Awake가 실행되면 바로 private 필드에 등록)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // ⬅️ 씬 이동 시 파괴 방지
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -39,15 +63,6 @@ public class CardDeck : MonoBehaviour
             foreach (var id in seedIds)
                 Add(id, seedAmountEach);
         }
-    }
-
-    /// <summary>보유 요약 문자열(디버그·UI 표시용)</summary>
-    public string GetSummary()
-    {
-        if (deck.Count == 0) return "(empty)";
-        StringBuilder sb = new StringBuilder();
-        foreach (var kv in deck) sb.Append($"{kv.Key}:{kv.Value} ");
-        return sb.ToString();
     }
 
     /// <summary>카드 추가</summary>
@@ -82,12 +97,24 @@ public class CardDeck : MonoBehaviour
         List<string> expanded = new List<string>();
         foreach (var kv in deck)
         {
+            // 보유 수량만큼 리스트에 카드 ID를 반복해서 추가 (확장)
             for (int i = 0; i < kv.Value; i++)
                 expanded.Add(kv.Key);
         }
-        if (expanded.Count == 0) return null;
+        if (expanded.Count == 0) return null; // 보유 카드가 없으면 null 반환
+
+        // 확장된 리스트에서 무작위 인덱스를 뽑아 카드 ID 반환
         return expanded[Random.Range(0, expanded.Count)];
     }
 
-    // ... (TryDrawRandomData 등 다른 편의 함수는 생략)
+    /// <summary>외부에서 CardDeck 인스턴스를 싱글턴으로 설정합니다. (주로 복구용)</summary>
+    public static void RegisterInstance(CardDeck targetInstance)
+    {
+        if (instance == null)
+        {
+            instance = targetInstance;
+        }
+    }
+
+    // ... (GetSummary 등 다른 함수는 필요에 따라 추가/유지)
 }
