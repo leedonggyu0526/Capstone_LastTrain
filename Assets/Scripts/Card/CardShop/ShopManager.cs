@@ -9,8 +9,6 @@ using UnityEngine.UI; // Button 사용을 위해 추가
 public class ShopManager : MonoBehaviour
 {
     public CardDatabase database;
-    // public CardDeck playerDeck;         // ⬅️ 제거 (싱글턴으로 대체)
-    // public CardDeckUI cardDeckUI;       // ⬅️ 제거 (싱글턴으로 대체)
     // public ResourceManager resourceManager; // [PLACEHOLDER] 자원 관리 시스템
 
     public GameObject cardSlotPrefab;     // 연결할 CardSlotPrefab (Root에 Button이 있어야 함)
@@ -96,8 +94,35 @@ public class ShopManager : MonoBehaviour
             if (priceText != null)
             {
                 priceText.gameObject.SetActive(true);
-                // ⬅️ 수정된 가격 표시: "GF"
-                priceText.text = $"{data.price} GF";
+
+                // 🚨 핵심 수정: 3가지 자원 가격을 조합하여 표시합니다.
+                string priceDisplay = "";
+
+                // 1. 연료 가격 추가
+                if (data.Fuel_price > 0)
+                {
+                    priceDisplay += $"{data.Fuel_price} Fuel";
+                }
+
+                // 2. 식량 가격 추가
+                if (data.Food_price > 0)
+                {
+                    if (!string.IsNullOrEmpty(priceDisplay)) priceDisplay += "\n"; // 줄바꿈
+                    priceDisplay += $"{data.Food_price} Food";
+                }
+
+                // 3. 부품 가격 추가
+                if (data.MachinePart_price > 0)
+                {
+                    if (!string.IsNullOrEmpty(priceDisplay)) priceDisplay += "\n"; // 줄바꿈
+                    priceDisplay += $"{data.MachinePart_price} Parts";
+                }
+
+                // 텍스트 필드에 적용
+                priceText.text = priceDisplay;
+
+                // 텍스트 필드 크기가 충분하지 않을 경우, 줄바꿈 대신 콤마를 사용할 수 있습니다.
+                // (예시: priceDisplay = priceDisplay.Replace("\n", ", ");)
             }
 
             // 5. 버튼 컴포넌트 연결 (Root인 slotInstance에서 Button을 찾습니다)
@@ -117,43 +142,57 @@ public class ShopManager : MonoBehaviour
     /// <param name="cardData">구매할 카드의 데이터</param>
     public void BuyCard(CardData cardData)
     {
-        if (cardData == null) return;
+        // 필수 인스턴스 확인
+        if (cardData == null || CardDeck.Instance == null || ResourceManager.Instance == null)
+            return;
 
-        // 1. [Placeholder] 비용 지불 로직
-        int cost = cardData.price;
-        // bool canAfford = resourceManager != null ? resourceManager.CanAfford(cost) : true;
-        bool canAfford = true; // 자원 시스템 구현 전까지는 항상 구매 가능 (임시)
+        // 1. 초기 자원 확인 (Check Phase)
+        // GetResource를 사용하여 비용 지불 없이 충분한지 미리 확인합니다.
 
-        if (!canAfford)
+        // 필요한 비용
+        int fuelCost = cardData.Fuel_price;
+        int foodCost = cardData.Food_price;
+        int machinePartCost = cardData.MachinePart_price;
+
+        // 현재 보유 자원
+        int currentFuel = ResourceManager.Instance.GetResource(ResourceType.Fuel);
+        int currentFood = ResourceManager.Instance.GetResource(ResourceType.Food);
+        int currentMachinePart = ResourceManager.Instance.GetResource(ResourceType.MachinePart);
+
+        // 세 가지 비용 모두 지불 가능한지 확인
+        bool canAffordFuel = currentFuel >= fuelCost;
+        bool canAffordFood = currentFood >= foodCost;
+        bool canAffordMachinePart = currentMachinePart >= machinePartCost;
+
+        // 2. 구매 조건 검사: 세 자원 모두 지불 가능해야 구매 가능
+        if (!canAffordFuel || !canAffordFood || !canAffordMachinePart)
         {
-            Debug.LogWarning($"[ShopManager] 자원 부족: {cardData.cardName} 구매 실패 (필요: {cost} GF)");
+            // 🚨 자원 부족: 구매 실패
+            Debug.LogWarning($"[ShopManager] 자원 부족으로 {cardData.cardName} 구매 실패. " +
+                             $"(Fuel: {canAffordFuel}, Food: {canAffordFood}, MachinePart: {canAffordMachinePart})");
             return;
         }
 
-        // 2. 카드 덱에 추가 (싱글턴 인스턴스 사용)
-        CardDeck playerDeckInstance = CardDeck.Instance;
-        if (playerDeckInstance != null)
+        // --- 3. 비용 지불 (Spend Phase) ---
+        // Check Phase를 통과했으므로 ConsumeResources를 호출하여 자원을 소비합니다.
+
+        bool spentFuel = ResourceManager.Instance.ConsumeResources(ResourceType.Fuel, fuelCost);
+        bool spentFood = ResourceManager.Instance.ConsumeResources(ResourceType.Food, foodCost);
+        bool spentMachinePart = ResourceManager.Instance.ConsumeResources(ResourceType.MachinePart, machinePartCost);
+
+        // 안전 확인: ConsumeResources가 false를 반환하면 (내부 로직 실패 시)
+        if (!spentFuel || !spentFood || !spentMachinePart)
         {
-            playerDeckInstance.Add(cardData.cardID, 1); // ⬅️ Instance를 통해 접근
-            Debug.Log($"[ShopManager] {cardData.cardName} 구매 성공. 덱에 추가됨. (비용: {cost} GF)");
-        }
-        else
-        {
-            Debug.LogError("[ShopManager] CardDeck.Instance를 찾을 수 없습니다. (CardDeck 오브젝트에 DontDestroyOnLoad 확인 필요)");
+            Debug.LogError($"[ShopManager] 구매 비용 지불 중 심각한 오류 발생! (롤백 로직 필요)");
+            // 🚨 [주의] 이 시점에서 이미 소비된 자원(예: Fuel)을 되돌리는 롤백 로직이 필요할 수 있습니다.
             return;
         }
 
-        // 3. UI 갱신: 상점 UI 갱신, 덱 패널 UI 갱신
-        RefreshShopUI();
+        // 4. 카드 덱에 추가 (성공)
+        CardDeck.Instance.Add(cardData.cardID, 1);
 
-        CardDeckUI deckUIInstance = CardDeckUI.Instance;
-        if (deckUIInstance != null)
-        {
-            deckUIInstance.RefreshDeckUI(); // ⬅️ Instance를 통해 접근
-        }
-        else
-        {
-            Debug.LogWarning("[ShopManager] CardDeckUI.Instance를 찾을 수 없습니다. (덱 패널 씬이 로드되지 않았을 수 있음)");
-        }
+        // 5. UI 갱신 (선택 사항: 덱 패널이 CardDeck.OnCardUsed 이벤트를 구독하고 있다면 필요 없음)
+        // RefreshShopUI(); 
+        // CardDeckUI.Instance.RefreshDeckUI();
     }
 }

@@ -81,4 +81,23 @@ public class CardDeckUI : MonoBehaviour
             }
         }
     }
+    void OnEnable()
+    {
+        // 🚨 1. 이벤트 구독 시작
+        CardDeck.OnCardUsed += HandleCardUsed;
+    }
+    private void OnDisable()
+    {
+        // 🚨 2. 이벤트 구독 해제 (필수)
+        CardDeck.OnCardUsed -= HandleCardUsed;
+    }
+
+    /// <summary>
+    /// 카드가 사용될 때마다 덱 패널 UI를 갱신합니다.
+    /// </summary>
+    private void HandleCardUsed(string usedCardID)
+    {
+        // 🚨 3. 카드가 사용되면 덱 패널 전체를 다시 그립니다.
+        RefreshDeckUI();
+    }
 }

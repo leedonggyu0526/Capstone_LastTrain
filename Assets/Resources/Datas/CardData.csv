@@ -1,13 +1,13 @@
-﻿cardID,cardName,description,background,artwork,rarity,price
-1,gold,gold ticket,goldCard,food,Epic,1000
-2,silver,silver ticket,silverCard,fuel,Rare,500
-3,copper,copper ticket,copperCard,gear,Common,100
-4,gold1,gold ticket2,goldCard,food,Epic,1000
-5,silver1,silver ticket1,silverCard,fuel,Rare,500
-6,silver2,silver ticket2,silverCard,fuel,Rare,500
-7,silver3,silver ticket3,silverCard,fuel,Rare,500
-8,copper1,copper ticket1,copperCard,gear,Common,100
-9,copper2,copper ticket2,copperCard,gear,Common,100
-10,copper3,copper ticket3,copperCard,gear,Common,100
-11,copper4,copper ticket4,copperCard,gear,Common,100
-12,copper5,copper ticket5,copperCard,gear,Common,100
+﻿cardID,cardName,description,background,artwork,rarity,Fuel_price,Food_price,MachinePart_price
+1,gold,gold ticket,goldCard,food,Epic,100,100,100
+2,silver,silver ticket,silverCard,fuel,Rare,50,50,50
+3,copper,copper ticket,copperCard,gear,Common,10,10,10
+4,gold1,gold ticket2,goldCard,food,Epic,100,100,100
+5,silver1,silver ticket1,silverCard,fuel,Rare,50,50,50
+6,silver2,silver ticket2,silverCard,fuel,Rare,50,50,50
+7,silver3,silver ticket3,silverCard,fuel,Rare,50,50,50
+8,copper1,copper ticket1,copperCard,gear,Common,10,10,10
+9,copper2,copper ticket2,copperCard,gear,Common,10,10,10
+10,copper3,copper ticket3,copperCard,gear,Common,10,10,10
+11,copper4,copper ticket4,copperCard,gear,Common,10,10,10
+12,copper5,copper ticket5,copperCard,gear,Common,10,10,10
