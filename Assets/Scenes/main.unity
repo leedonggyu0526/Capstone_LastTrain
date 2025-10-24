@@ -3134,6 +3134,7 @@ GameObject:
   - component: {fileID: 599082196}
   - component: {fileID: 599082198}
   - component: {fileID: 599082199}
+  - component: {fileID: 599082200}
   m_Layer: 5
   m_Name: Item_bag
   m_TagString: Untagged
@@ -3221,7 +3222,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.5471698, g: 0.53942686, b: 0.53942686, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3255,6 +3256,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonAction: 0
+--- !u!114 &599082200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599082194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.5943396, g: 0.13737096, b: 0.13737096, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &603261674
 GameObject:
   m_ObjectHideFlags: 0
@@ -10786,7 +10802,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d1b760c6ef9d8b6428c816b66790221b, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: ea0778ba30d284e07b3f56f485c811a9, type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
