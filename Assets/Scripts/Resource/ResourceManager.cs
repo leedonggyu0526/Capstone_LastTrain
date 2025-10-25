@@ -102,4 +102,10 @@ public class ResourceManager : MonoBehaviour
         Debug.Log($"{type} -{amount} 소비 후 {resources[type]} (Max {maxCapacities[type]})");
         return true;
     }
+
+    public void SetResource(ResourceType type, int amount)
+    {
+        resources[type] = amount;
+        Debug.Log($"{type} {amount} 설정 후 {resources[type]} (Max {maxCapacities[type]})");
+    }
 }

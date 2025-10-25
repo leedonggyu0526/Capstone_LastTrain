@@ -19,12 +19,25 @@ public class SettlementObjectClickHandler : MonoBehaviour
     // DepartureUIManager 참조
     public DepartureUIManager departureUIManager;
     
-    // 동굴 이벤트 ID 목록
+    // Entrance 이벤트 ID 목록
     private List<string> caveEventIDList;
+
+    private string currentEventID = "";
+    private bool isEventEnded = false;
 
     // 초기화
     void Start()
     {
+        // UI Manager 검증
+        if (trainEventUIManager == null)
+        {
+            Debug.LogError("[SettlementObjectClickHandler] trainEventUIManager가 할당되지 않았습니다! Inspector에서 할당해주세요.");
+        }
+        else
+        {
+            Debug.Log("[SettlementObjectClickHandler] trainEventUIManager 연결 확인됨");
+        }
+        
         if (storePanel != null)
             storePanel.SetActive(false);
         if (eventPanel != null)
@@ -33,24 +46,32 @@ public class SettlementObjectClickHandler : MonoBehaviour
         // 동굴 이벤트 ID 목록 초기화
         caveEventIDList = new List<string>();
         
-        // TrainEventManager에서 모든 이벤트를 가져와서 CAVE로 시작하는 이벤트 ID 수집
+        // TrainEventManager에서 Entrance 이벤트를 가져와서 이벤트 ID 수집
+        Debug.Log("[SettlementObjectClickHandler] Entrance 이벤트 수집 시작");
         var trainEventManager = TrainEventManager.Instance;
         if (trainEventManager != null)
         {
-            var allEvents = trainEventManager.GetAllTrainEvents();
-            if (allEvents != null)
+            Debug.Log("[SettlementObjectClickHandler] TrainEventManager 찾음");
+            var entranceEventIDList = trainEventManager.GetEntranceTrainEventID();
+            if (entranceEventIDList != null)
             {
-                foreach (var eventPair in allEvents)
+                Debug.Log($"[SettlementObjectClickHandler] {entranceEventIDList.Count}개의 Entrance 이벤트 발견");
+                foreach (var entranceEventID in entranceEventIDList)
                 {
-                    string eventId = eventPair.Key;
-                    if (!string.IsNullOrEmpty(eventId) && eventId.StartsWith("CAVE"))
-                    {
-                        caveEventIDList.Add(eventId);
-                    }
+                    caveEventIDList.Add(entranceEventID);
+                    Debug.Log($"[SettlementObjectClickHandler] 이벤트 추가: {entranceEventID}");
                 }
             }
+            else
+            {
+                Debug.LogWarning("[SettlementObjectClickHandler] entranceEventIDList가 null입니다");
+            }
         }
-        
+        else
+        {
+            Debug.LogError("[SettlementObjectClickHandler] TrainEventManager를 찾을 수 없습니다");
+        }
+
         // trainEventUIManager가 할당되었는지 확인
         if (trainEventUIManager == null)
         {
@@ -68,6 +89,17 @@ public class SettlementObjectClickHandler : MonoBehaviour
         {
             Debug.LogWarning("departureUIManager가 할당되지 않았습니다. Unity Inspector에서 DepartureUIManager를 연결해주세요.");
         }
+
+        // 탐험 이벤트 무작위 선택
+        if (trainEventUIManager != null)
+            {
+                if (caveEventIDList != null && caveEventIDList.Count > 0)
+                {
+                    int randomIndex = UnityEngine.Random.Range(0, caveEventIDList.Count);
+                    string selectedEventID = caveEventIDList[randomIndex];
+                    currentEventID = selectedEventID;
+                }
+            }
     }
 
     // 매 프레임마다 마우스 클릭 확인
@@ -163,23 +195,22 @@ public class SettlementObjectClickHandler : MonoBehaviour
                 break;
             case "Cave":
                 Debug.Log("[SettlementObjectClickHandler] Cave 객체 처리 중...");
-                if (trainEventUIManager != null)
+                
+                // trainEventUIManager null 체크
+                if (trainEventUIManager == null)
                 {
-                    if (caveEventIDList != null && caveEventIDList.Count > 0)
-                    {
-                        int randomIndex = UnityEngine.Random.Range(0, caveEventIDList.Count);
-                        string selectedCaveEvent = caveEventIDList[randomIndex];
-
-                        trainEventUIManager.ShowEvent(selectedCaveEvent);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("CAVE로 시작하는 이벤트가 없습니다.");
-                    }
+                    Debug.LogError("[SettlementObjectClickHandler] trainEventUIManager가 null입니다! Inspector에서 할당해주세요.");
+                    break;
+                }
+                
+                if (currentEventID != "")
+                {
+                    Debug.Log($"[SettlementObjectClickHandler] ShowEvent 호출: {currentEventID}");
+                    trainEventUIManager.ShowEvent(currentEventID);
                 }
                 else
                 {
-                    Debug.LogWarning("trainEventUIManager가 할당되지 않았습니다. Unity Inspector에서 TrainEventUIManager를 연결해주세요.");
+                    Debug.LogError("[SettlementObjectClickHandler] currentEventID가 비어있습니다!");
                 }
                 break;
             default:

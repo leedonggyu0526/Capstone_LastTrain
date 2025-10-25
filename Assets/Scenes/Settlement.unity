@@ -2282,18 +2282,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
-      propertyPath: m_Name
-      value: Card (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2381,6 +2369,18 @@ PrefabInstance:
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
+      propertyPath: m_Name
+      value: Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3751,19 +3751,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3803,11 +3803,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -790
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1263632622011121463, guid: 768321996d7a148499bdfb6a3de38842, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4632,6 +4632,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009253891}
   m_CullTransparentMesh: 1
+--- !u!1 &1021760710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3305100077139806465, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+  m_PrefabInstance: {fileID: 1080267740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1027357509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5392,9 +5397,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2022445812}
     m_Modifications:
+    - target: {fileID: 566553222214613636, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 629783107357672081, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementQuantity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083679371834339316, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementQuantity
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007564303368863155, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementImage
+      objectReference: {fileID: 0}
     - target: {fileID: 5918178973152443448, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
       propertyPath: m_Name
       value: EventPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114693686674622887, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementQuantity
       objectReference: {fileID: 0}
     - target: {fileID: 7072341905086130913, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
       propertyPath: m_Pivot.x
@@ -5475,6 +5500,10 @@ PrefabInstance:
     - target: {fileID: 7072341905086130913, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230245202234676954, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+      propertyPath: m_Name
+      value: RequirementImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6237,6 +6266,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!1 &1523542257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7468984027822569532, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+  m_PrefabInstance: {fileID: 1080267740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1530937850
 GameObject:
   m_ObjectHideFlags: 0
@@ -6855,6 +6889,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638256478}
   m_CullTransparentMesh: 1
+--- !u!1 &1668380563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4759763142859971620, guid: 314b2e3edc0e4de49b4ca3897ce4b556, type: 3}
+  m_PrefabInstance: {fileID: 1080267740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1681056854
 GameObject:
   m_ObjectHideFlags: 0
@@ -7353,18 +7392,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
-      propertyPath: m_Name
-      value: Card (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7452,6 +7479,18 @@ PrefabInstance:
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
+      propertyPath: m_Name
+      value: Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7733,18 +7772,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
-      propertyPath: m_Name
-      value: Card
-      objectReference: {fileID: 0}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7832,6 +7859,18 @@ PrefabInstance:
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
+      propertyPath: m_Name
+      value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8492,6 +8531,14 @@ MonoBehaviour:
   - {fileID: 56694078}
   - {fileID: 668297859}
   - {fileID: 1121710268}
+  eventChoiceRequirements:
+  - {fileID: 1523542257}
+  - {fileID: 1668380563}
+  - {fileID: 1021760710}
+  fuelItemImage: {fileID: 5230911077920879800, guid: af018b9db73c55843abf3b66e4d140cb, type: 3}
+  foodItemImage: {fileID: 4919500086455055436, guid: d5054284cbfdbaa48862fa9d270d11df, type: 3}
+  machinePartItemImage: {fileID: -3769713001771636395, guid: b0507c99f3b419e4c9a04a22c9f566f9, type: 3}
+  passengerItemImage: {fileID: -7505603783588786108, guid: 3587da62586b1824fafeda142f82de29, type: 3}
   defaultEventImage: {fileID: 4091005629594397538, guid: 3f5ea633f4e56cf4bbf941cbdd13dd98, type: 3}
 --- !u!114 &2022445821
 MonoBehaviour:
