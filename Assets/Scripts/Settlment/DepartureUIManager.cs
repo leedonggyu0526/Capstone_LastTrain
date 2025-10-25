@@ -98,8 +98,8 @@ public class DepartureUIManager : UIManager
             if (departureCanvasGroup != null)
             {
                 StopAllAnimations();
-                fadeCoroutine = StartCoroutine(FadeOut(departureCanvasGroup));
                 StartCoroutine(DeactivateAfterFade());
+                Debug.Log("[DepartureUIManager] 출발 패널 숨기기");
             }
             else
             {
@@ -113,8 +113,7 @@ public class DepartureUIManager : UIManager
     /// </summary>
     private IEnumerator DeactivateAfterFade()
     {
-        yield return new WaitForSeconds(1f / fadeSpeed);
-        
+        yield return FadeOut(departureCanvasGroup);
         if (departurePanel != null)
         {
             departurePanel.SetActive(false);
