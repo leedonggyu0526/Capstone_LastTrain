@@ -85,4 +85,30 @@ public class CardDeck : MonoBehaviour
             OnCardUsed?.Invoke(cardID); // 이벤트 호출
         }
     }
+
+    /// <summary>
+    /// 지정된 카드의 수량을 감소시킵니다. (카드 판매 시 사용)
+    /// </summary>
+    /// <param name="cardID">제거할 카드의 ID</param>
+    /// <param name="count">제거할 수량 (기본값 1)</param>
+    public bool Remove(string cardID, int count = 1)
+    {
+        if (!deck.ContainsKey(cardID) || deck[cardID] < count)
+        {
+            Debug.LogWarning($"[CardDeck] 카드가 부족하여 {cardID}를 제거할 수 없습니다.");
+            return false;
+        }
+
+        deck[cardID] -= count;
+
+        if (deck[cardID] <= 0)
+        {
+            deck.Remove(cardID);
+        }
+
+        // 🚨 이벤트 발생: 덱의 수량이 변경되었음을 알립니다.
+        OnCardUsed?.Invoke(cardID);
+
+        return true;
+    }
 }
