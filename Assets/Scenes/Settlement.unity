@@ -2297,14 +2297,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2396,6 +2388,14 @@ PrefabInstance:
     - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Name
       value: Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2860,7 +2860,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fd63183c56cc8db4c9d6034eb1d700ab, type: 3}
+  m_Sprite: {fileID: 7732918821141617347, guid: 6fecaa9673e038b46b1a6b85b1aa1e55, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2924,7 +2924,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
+    oldSize: {x: 20.960001, y: 16}
     newSize: {x: 20.48, y: 20.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7404,7 +7404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
-  outlineSize: 15
+  outlineSize: 16
 --- !u!1001 &1730219314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7413,14 +7413,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7512,6 +7504,14 @@ PrefabInstance:
     - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Name
       value: Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7793,14 +7793,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136712121}
     m_Modifications:
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
-    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7141207368788500460, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7892,6 +7884,14 @@ PrefabInstance:
     - target: {fileID: 8630801158994301179, guid: fa081b47cbf6d734dbaaa04e3bedaab0, type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a1c61962bee8747abeb1f2d78b4c66, type: 2}
+    - target: {fileID: 2292264581280952264, guid: 52c29db1ffc78174685ac95bb434d7f8, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
