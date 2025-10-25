@@ -27,6 +27,7 @@ public class UpgradeButtonManager : MonoBehaviour, IPointerClickHandler
         // 자기 자신을 클릭했을 때 → 버튼 켜기
         if (upgradeButtonUI != null && _trainKhan != null)
         {
+            Debug.Log($"[UBM] CanUpgrade: {_trainKhan.CanUpgrade()} {_trainKhan.level} {TrainImageDB.GetMaxLevel(_trainKhan.typeKey)}");
             // [수정된 부분] 업그레이드가 가능한 경우에만 버튼 표시/토글 로직 실행
             if (_trainKhan.CanUpgrade())
             {

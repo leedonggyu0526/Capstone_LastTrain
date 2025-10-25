@@ -13,6 +13,8 @@ public static class TrainImageDB
 
     public static void Set(string typeKey, int level, string imageName)
     {
+        Debug.Log($"[TrainImageDB] Set() 호출됨 - typeKey: '{typeKey}', level: {level}, imageName: '{imageName}'");
+        
         if (string.IsNullOrWhiteSpace(typeKey) || string.IsNullOrWhiteSpace(imageName)) {
             Debug.LogError("[TrainImageDB] typeKey 또는 imageName이 비어있습니다.");
             Debug.LogError("[TrainImageDB] typeKey: " + typeKey);
@@ -21,6 +23,7 @@ public static class TrainImageDB
         }
 
         string fullPath = BASE_PATH + imageName.Trim();
+        Debug.Log($"[TrainImageDB] Resources 경로: {fullPath}");
 
         var sprite = Resources.Load<Sprite>(fullPath);
         if (sprite == null)
@@ -35,34 +38,62 @@ public static class TrainImageDB
         {
             set = new HashSet<int>();
             _trainImageLevelsByType[typeKey] = set;
+            Debug.Log($"[TrainImageDB] 새로운 타입 '{typeKey}' 등록됨");
         }
         set.Add(level);
 
-        // 등록 확인 로그 — 잠깐 켜두고 확인 후 주석 처리해도 됨
-        // Debug.Log($"[TrainImageDB] OK: ({typeKey}, L{level}) -> {fullPath}");
+        Debug.Log($"[TrainImageDB] 등록 완료: ({typeKey}, L{level}) -> {fullPath}");
+        Debug.Log($"[TrainImageDB] 현재 '{typeKey}' 레벨들: {string.Join(", ", set.OrderBy(x => x))}");
     }
 
     public static bool GetSprite(string typeKey, int level, out Sprite sprite)
     {
-        return _trainImageMap.TryGetValue((typeKey, level), out sprite);
+        string lowerTypeKey = typeKey.ToLower();
+        return _trainImageMap.TryGetValue((lowerTypeKey, level), out sprite);
     }
 
     // 해당 타입에 이 레벨이 존재하는가?
     public static bool HasSprite(string typeKey, int level)
     {
-        return _trainImageMap.ContainsKey((typeKey, level));
+        string lowerTypeKey = typeKey.ToLower();
+        return _trainImageMap.ContainsKey((lowerTypeKey, level));
     }
 
     // 이 타입의 가능한 최댓 레벨 (없으면 -1)
     public static int GetMaxLevel(string typeKey)
     {
-        return _trainImageLevelsByType.TryGetValue(typeKey, out var set) && set.Count > 0 ? set.Max() : -1;
+        if (string.IsNullOrEmpty(typeKey))
+        {
+            Debug.LogWarning("[TrainImageDB] GetMaxLevel: typeKey가 null이거나 비어있습니다.");
+            return -1;
+        }
+
+        // 대소문자 구분 없이 검색
+        string lowerTypeKey = typeKey.ToLower();
+        
+        if (!_trainImageLevelsByType.TryGetValue(lowerTypeKey, out var set))
+        {
+            Debug.LogWarning($"[TrainImageDB] GetMaxLevel: '{typeKey}' 타입이 등록되지 않았습니다. (검색 키: '{lowerTypeKey}')");
+            Debug.LogWarning($"[TrainImageDB] 등록된 타입들: {string.Join(", ", _trainImageLevelsByType.Keys)}");
+            return -1;
+        }
+
+        if (set == null || set.Count == 0)
+        {
+            Debug.LogWarning($"[TrainImageDB] GetMaxLevel: '{typeKey}' 타입에 등록된 레벨이 없습니다.");
+            return -1;
+        }
+
+        int maxLevel = set.Max();
+        Debug.Log($"[TrainImageDB] GetMaxLevel: '{typeKey}' 타입의 최대 레벨은 {maxLevel}입니다. (등록된 레벨들: {string.Join(", ", set.OrderBy(x => x))})");
+        return maxLevel;
     }
 
     // 이 타입에서 level 이하 중 가장 가까운(최대) 존재 레벨 찾기 (없으면 -1)
     public static int GetNearestLeqLevel(string typeKey, int level)
     {
-        if (!_trainImageLevelsByType.TryGetValue(typeKey, out var set) || set.Count == 0) return -1;
+        string lowerTypeKey = typeKey.ToLower();
+        if (!_trainImageLevelsByType.TryGetValue(lowerTypeKey, out var set) || set.Count == 0) return -1;
         int best = -1;
         foreach (var lv in set)
             if (lv <= level && lv > best) best = lv;
@@ -79,8 +110,44 @@ public static class TrainImageDB
     // 디버그: 이 타입에 어떤 레벨들이 등록됐는지 문자열로 덤프
     public static string debugLevels(string typeKey)
     {
-        if (!_trainImageLevelsByType.TryGetValue(typeKey, out var set) || set.Count == 0) return "(none)";
+        if (string.IsNullOrEmpty(typeKey))
+        {
+            return "(typeKey is null or empty)";
+        }
+
+        string lowerTypeKey = typeKey.ToLower();
+        if (!_trainImageLevelsByType.TryGetValue(lowerTypeKey, out var set))
+        {
+            return $"(type '{typeKey}' not found, searched as '{lowerTypeKey}')";
+        }
+
+        if (set == null || set.Count == 0)
+        {
+            return $"(type '{typeKey}' has no levels)";
+        }
+
         var ordered = set.OrderBy(x => x).ToArray();
         return string.Join(", ", ordered.Select(l => $"L{l}"));
+    }
+
+    // 디버그: 모든 등록된 타입과 레벨들을 출력
+    public static void debugAllLevels()
+    {
+        Debug.Log("[TrainImageDB] === 등록된 모든 타입과 레벨들 ===");
+        if (_trainImageLevelsByType.Count == 0)
+        {
+            Debug.Log("[TrainImageDB] 등록된 타입이 없습니다.");
+            return;
+        }
+
+        foreach (var kvp in _trainImageLevelsByType)
+        {
+            string typeKey = kvp.Key;
+            var set = kvp.Value;
+            string levels = set != null && set.Count > 0 
+                ? string.Join(", ", set.OrderBy(x => x).Select(l => $"L{l}"))
+                : "(no levels)";
+            Debug.Log($"[TrainImageDB] '{typeKey}': {levels}");
+        }
     }
 }
