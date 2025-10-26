@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 // TrainEvent를 관리
 // EventSystem 오브젝트에 추가해 사용
@@ -32,6 +33,8 @@ public class TrainEventManager : MonoBehaviour
     private Dictionary<string, bool> eventChainValidation;
     private List<string> unreachableEvents;
     private List<string> invalidReferences;
+    private List<string> invalidRequirements;
+    private List<string> invalidResults;
     
     void Awake()
     {
@@ -213,6 +216,22 @@ public class TrainEventManager : MonoBehaviour
         return trainEventDic?.Count ?? 0;
     }
 
+    public List<string> GetEntranceTrainEventID()
+    {
+        List<string> entranceEventIDList = new List<string>();
+        foreach (var eventEntry in trainEventDic)
+        {
+            // "_ENTRANCE"로 끝나는 모든 이벤트 ID를 찾음
+            if (eventEntry.Key.EndsWith("ENTRANCE"))
+            {
+                entranceEventIDList.Add(eventEntry.Key);
+                Debug.Log($"Entrance 이벤트 찾음: {eventEntry.Key}");
+            }
+        }
+        Debug.Log($"총 {entranceEventIDList.Count}개의 Entrance 이벤트 발견");
+        return entranceEventIDList;
+    }
+
     // 이벤트 존재 여부 확인
     public bool HasEvent(string eventID)
     {
@@ -232,6 +251,8 @@ public class TrainEventManager : MonoBehaviour
         eventChainValidation = new Dictionary<string, bool>();
         unreachableEvents = new List<string>();
         invalidReferences = new List<string>();
+        invalidRequirements = new List<string>();
+        invalidResults = new List<string>();
         
         // 모든 이벤트에 대해 검증
         foreach (var eventEntry in trainEventDic)
@@ -243,21 +264,34 @@ public class TrainEventManager : MonoBehaviour
             ValidateChoiceReference(eventID, trainEvent.GetEventChoice1(), 1);
             ValidateChoiceReference(eventID, trainEvent.GetEventChoice2(), 2);
             ValidateChoiceReference(eventID, trainEvent.GetEventChoice3(), 3);
+            
+            // 각 선택지의 요구사항 유효성 검사
+            ValidateRequirement(eventID, trainEvent.GetEventChoice1Requirement(), 1);
+            ValidateRequirement(eventID, trainEvent.GetEventChoice2Requirement(), 2);
+            ValidateRequirement(eventID, trainEvent.GetEventChoice3Requirement(), 3);
+            
+            // 이벤트 결과 유효성 검사
+            ValidateResult(eventID, trainEvent.GetEventResult());
         }
         
-        // START 이벤트에서 도달 가능한 이벤트 검사
-        if (trainEventDic.ContainsKey("START"))
+        // ENTRANCE 이벤트 그룹에서 도달 가능한 이벤트 검사
+        HashSet<string> reachableEvents = new HashSet<string>();
+        
+        // ENTRANCE로 끝나는 모든 이벤트를 시작점으로 사용
+        foreach (var eventID in trainEventDic.Keys)
         {
-            HashSet<string> reachableEvents = new HashSet<string>();
-            TraverseEventChain("START", reachableEvents);
-            
-            // 도달 불가능한 이벤트 찾기
-            foreach (var eventID in trainEventDic.Keys)
+            if (eventID.EndsWith("ENTRANCE"))
             {
-                if (!reachableEvents.Contains(eventID))
-                {
-                    unreachableEvents.Add(eventID);
-                }
+                TraverseEventChain(eventID, reachableEvents);
+            }
+        }
+        
+        // 도달 불가능한 이벤트 찾기
+        foreach (var eventID in trainEventDic.Keys)
+        {
+            if (!reachableEvents.Contains(eventID) && !eventID.EndsWith("ENTRANCE"))
+            {
+                unreachableEvents.Add(eventID);
             }
         }
         
@@ -308,12 +342,80 @@ public class TrainEventManager : MonoBehaviour
         }
     }
     
+    // 요구사항 유효성 검사
+    private void ValidateRequirement(string eventID, Dictionary<ResourceType, int> requirement, int choiceNumber)
+    {
+        if (requirement == null)
+        {
+            return;
+        }
+        
+        foreach (var resource in requirement.Keys)
+        {
+            // 리소스 타입 검증
+            if (!Enum.IsDefined(typeof(ResourceType), resource))
+            {
+                invalidRequirements.Add($"{eventID} -> 선택지 {choiceNumber} -> 유효하지 않은 리소스 타입: '{resource}'");
+                Debug.LogWarning($"유효하지 않은 리소스 타입: {eventID}의 선택지 {choiceNumber}에서 '{resource}'");
+            }
+            else if (requirement[resource] == 0)
+            {
+                invalidRequirements.Add($"{eventID} -> 선택지 {choiceNumber} -> 유효하지 않은 수량: '{requirement[resource]}'");
+                Debug.LogWarning($"유효하지 않은 수량: {eventID}의 선택지 {choiceNumber}에서 '{requirement[resource]}'");
+            }
+        }
+    }
+    
+    // 결과 유효성 검사
+    private void ValidateResult(string eventID, Dictionary<ResourceType, int> result)
+    {
+        if (result == null)
+        {
+            return;
+        }
+        
+        foreach (var resource in result.Keys)
+        {
+            if (!Enum.IsDefined(typeof(ResourceType), resource))
+            {
+                invalidResults.Add($"{eventID} -> 유효하지 않은 리소스 타입: '{resource}'");
+                Debug.LogWarning($"유효하지 않은 리소스 타입: {eventID}의 결과에서 '{resource}'");
+            }
+            
+            // 수량 검증
+            else if (result[resource] == 0)
+            {
+                invalidResults.Add($"{eventID} -> 유효하지 않은 수량: '{result[resource]}'");
+                Debug.LogWarning($"유효하지 않은 수량: {eventID}의 결과에서 '{result[resource]}'");
+            }
+        }
+    }
+    
+    // 유효한 리소스 타입인지 확인
+    private bool IsValidResourceType(string resourceType)
+    {
+        // 게임에서 사용 가능한 리소스 타입 목록 (enum 값과 일치)
+        string[] validResourceTypes = { "Food", "Fuel", "Passenger", "MachinePart", "Durability"};
+        
+        foreach (string validType in validResourceTypes)
+        {
+            if (resourceType.Equals(validType, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     // 검증 결과 보고
     private void ReportValidationResults()
     {
         Debug.Log($"=== 이벤트 체인 검증 결과 ===");
         Debug.Log($"총 이벤트 수: {trainEventDic.Count}");
         Debug.Log($"유효하지 않은 참조 수: {invalidReferences.Count}");
+        Debug.Log($"유효하지 않은 요구사항 수: {invalidRequirements.Count}");
+        Debug.Log($"유효하지 않은 결과 수: {invalidResults.Count}");
         Debug.Log($"도달 불가능한 이벤트 수: {unreachableEvents.Count}");
         
         if (invalidReferences.Count > 0)
@@ -322,6 +424,24 @@ public class TrainEventManager : MonoBehaviour
             foreach (var invalidRef in invalidReferences)
             {
                 Debug.LogWarning($"- {invalidRef}");
+            }
+        }
+        
+        if (invalidRequirements.Count > 0)
+        {
+            Debug.LogWarning("유효하지 않은 요구사항들:");
+            foreach (var invalidReq in invalidRequirements)
+            {
+                Debug.LogWarning($"- {invalidReq}");
+            }
+        }
+        
+        if (invalidResults.Count > 0)
+        {
+            Debug.LogWarning("유효하지 않은 결과들:");
+            foreach (var invalidRes in invalidResults)
+            {
+                Debug.LogWarning($"- {invalidRes}");
             }
         }
         
@@ -334,22 +454,44 @@ public class TrainEventManager : MonoBehaviour
             }
         }
         
-        if (invalidReferences.Count == 0 && unreachableEvents.Count == 0)
+        if (invalidReferences.Count == 0 && invalidRequirements.Count == 0 && 
+            invalidResults.Count == 0 && unreachableEvents.Count == 0)
         {
             Debug.Log("✅ 모든 이벤트 체인이 올바르게 구성되었습니다!");
+        }
+        else
+        {
+            int totalIssues = invalidReferences.Count + invalidRequirements.Count + 
+                            invalidResults.Count + unreachableEvents.Count;
+            Debug.LogWarning($"⚠️ 총 {totalIssues}개의 문제가 발견되었습니다.");
         }
     }
     
     // 이벤트 체인 검증 결과 조회 메서드
     public bool IsEventChainValid()
     {
-        return invalidReferences.Count == 0 && unreachableEvents.Count == 0;
+        return invalidReferences.Count == 0 && invalidRequirements.Count == 0 && 
+               invalidResults.Count == 0 && unreachableEvents.Count == 0;
     }
+    
     // 유효하지 않은 참조 목록 반환
     public List<string> GetInvalidReferences()
     {
         return new List<string>(invalidReferences);
     }
+    
+    // 유효하지 않은 요구사항 목록 반환
+    public List<string> GetInvalidRequirements()
+    {
+        return new List<string>(invalidRequirements);
+    }
+    
+    // 유효하지 않은 결과 목록 반환
+    public List<string> GetInvalidResults()
+    {
+        return new List<string>(invalidResults);
+    }
+    
     // 도달 불가능한 이벤트 목록 반환
     public List<string> GetUnreachableEvents()
     {

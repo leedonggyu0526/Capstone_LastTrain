@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     
     [Header("애니메이션 설정")]
     [Range(0.1f, 2f)]
-    public float typingSpeed = 0.05f; // 타이핑 애니메이션 속도
+    public float typingSpeed = 0.01f; // 타이핑 애니메이션 속도
     [Range(0.1f, 1f)]
     public float fadeSpeed = 0.5f; // 페이드 애니메이션 속도
     public bool enableTypingAnimation = true; // 타이핑 애니메이션 활성화
@@ -100,16 +100,27 @@ public class UIManager : MonoBehaviour
     /// </summary>
     protected IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText)
     {
+        Debug.Log($"[UIManager] TypeText 시작 - 텍스트 길이: {fullText.Length}, 속도: {typingSpeed}, 예상 시간: {fullText.Length * typingSpeed}초");
+        Debug.Log($"[UIManager] Time.timeScale: {Time.timeScale}, textComponent null: {textComponent == null}");
+        
         isTypingAnimation = true;
         textComponent.text = "";
         
         for (int i = 0; i <= fullText.Length; i++)
         {
             textComponent.text = fullText.Substring(0, i);
-            yield return new WaitForSeconds(typingSpeed);
+            // Time.timeScale의 영향을 받지 않도록 WaitForSecondsRealtime 사용
+            yield return new WaitForSecondsRealtime(typingSpeed);
+            
+            // 10글자마다 진행 상황 로그
+            if (i % 10 == 0)
+            {
+                Debug.Log($"[UIManager] TypeText 진행 중: {i}/{fullText.Length}");
+            }
         }
         
         isTypingAnimation = false;
+        Debug.Log("[UIManager] TypeText 완료");
     }
     
     /// <summary>
