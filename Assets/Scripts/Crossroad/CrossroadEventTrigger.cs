@@ -6,7 +6,7 @@ public class CrossroadEventTrigger : MonoBehaviour
     public CrossroadUIController ui;         // 도달 시 열 UI 컨트롤러
 
     [Header("Next target offsets (pick one randomly)")]
-    public float[] possibleOffsets = { 200f, 300f, 400f, 600f };
+    public float[] possibleOffsets = { 50f, 100f, 150f, 200f };
 
     [Header("State (read-only)")]
     [SerializeField] private float nextTargetDistance = 0f;
@@ -39,7 +39,7 @@ public class CrossroadEventTrigger : MonoBehaviour
     {
         if (possibleOffsets == null || possibleOffsets.Length == 0)
         {
-            possibleOffsets = new float[] { 200f, 300f, 400f, 600f };
+            possibleOffsets = new float[] { 50f, 100f, 150f, 200f };
         }
 
         float offset = possibleOffsets[Random.Range(0, possibleOffsets.Length)];

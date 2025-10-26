@@ -1488,6 +1488,7 @@ GameObject:
   - component: {fileID: 464150455}
   - component: {fileID: 464150456}
   - component: {fileID: 464150457}
+  - component: {fileID: 464150458}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1670,9 +1671,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379fe2298b29f2849a5973c6256ae573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManager: {fileID: 1959856274}
   gameEndUI: {fileID: 112949728}
   playTimeText: {fileID: 1032730454}
+--- !u!114 &464150458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464150449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8fc52d8609e44740a99163a6857ec99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nuclear: {fileID: 1098456723}
+  gameEnd: {fileID: 464150457}
 --- !u!1 &470277706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,7 +3958,7 @@ Transform:
   m_GameObject: {fileID: 1021497257}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.2, y: -1, z: -0.5}
+  m_LocalPosition: {x: 5.2, y: -1, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4530,7 +4544,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1940293934}
+      - m_Target: {fileID: 464150458}
         m_TargetAssemblyTypeName: Nuclear, Assembly-CSharp
         m_MethodName: Bomb
         m_Mode: 1
@@ -4636,7 +4650,7 @@ Transform:
   m_GameObject: {fileID: 1149468302}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -1, z: -0.5}
+  m_LocalPosition: {x: 1, y: -1, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5166,7 +5180,7 @@ Transform:
   m_GameObject: {fileID: 1347345296}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -1, z: -0.5}
+  m_LocalPosition: {x: -5.5, y: -1, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5275,12 +5289,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiController: {fileID: 464150454}
   possibleDistances:
-  - 200
   - 50
-  - 150
   - 100
+  - 150
+  - 200
   nextTriggerDistance: 0
-  initialized: 0
+  initialized: 1
 --- !u!4 &1362113258
 Transform:
   m_ObjectHideFlags: 0
@@ -6342,7 +6356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601934915034814822, guid: a53a6aec6cad9ee438d60c4f14062f81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8870166177178896904, guid: a53a6aec6cad9ee438d60c4f14062f81, type: 3}
@@ -6744,7 +6758,7 @@ Transform:
   m_GameObject: {fileID: 1571496340}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.7, y: -1, z: -0.5}
+  m_LocalPosition: {x: -3.7, y: -1, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8111,7 +8125,6 @@ GameObject:
   - component: {fileID: 1940293930}
   - component: {fileID: 1940293932}
   - component: {fileID: 1940293933}
-  - component: {fileID: 1940293934}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8224,20 +8237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dimmerPrefab: {fileID: 5226384983273954111, guid: 63a338890cc4e4bf99f03ed80ae2e26e, type: 3}
---- !u!114 &1940293934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940293926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8fc52d8609e44740a99163a6857ec99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceManager: {fileID: 1959856274}
-  nuclear: {fileID: 1098456723}
 --- !u!1 &1959856270
 GameObject:
   m_ObjectHideFlags: 0

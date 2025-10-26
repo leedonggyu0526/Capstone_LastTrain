@@ -42,7 +42,7 @@ public class SceneFader : MonoBehaviour
     }
 
     /// <summary>
-    /// DontDestroyOnLoad 초기화
+    /// DontDestroyOnLoad 초기화 (ResourceManager는 제외)
     /// </summary>
     private void DestroyAllDontDestroyOnLoad()
     {

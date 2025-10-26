@@ -62,7 +62,22 @@ public class BackgroundScrolling : MonoBehaviour
         // 화면을 가득 채우도록 스케일 조정 및 간격 재설정
         if (setBackground != null)
         {
-            interval = setBackground.FitSpritesToScreen(spriteRenderers, transform, (count, _) => SortImage());
+            //interval = setBackground.FitSpritesToScreen(spriteRenderers, transform, (count, _) => SortImage());
+            float oldInterval = interval; // ⬅️ 기존 값 저장
+
+            // FitSpritesToScreen이 interval 값을 갱신합니다.
+            float newInterval = setBackground.FitSpritesToScreen(spriteRenderers, transform, (count, _) => SortImage());
+
+            // ⬅️ 반환 값이 0이거나 유효하지 않으면 기존 값을 사용합니다.
+            if (newInterval > 0.001f)
+            {
+                interval = newInterval;
+            }
+            else
+            {
+                Debug.LogWarning("[BackgroundScrolling] FitSpritesToScreen에서 유효하지 않은 간격(0)을 반환했습니다. 기존 값인 " + oldInterval + "을 사용합니다.");
+                interval = oldInterval;
+            }
         }
         else
         {

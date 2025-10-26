@@ -3,8 +3,8 @@ using UnityEngine;
 public class Nuclear : MonoBehaviour
 {
     [Header("Refs")]
-    public ResourceManager resourceManager;
     public GameObject nuclear;
+    public GameEnd gameEnd;
     void Start()
     {
         nuclear.SetActive(false);
@@ -13,7 +13,7 @@ public class Nuclear : MonoBehaviour
     public void Bomb()
     {
         Debug.LogError($"[Nuclear] Nuclear launch Detected");
-        resourceManager.SetResource(ResourceType.Durability, 0);
-        nuclear.SetActive(false);
+        nuclear.SetActive(true);
+        gameEnd.CheckGameEnd();
     }
 }
