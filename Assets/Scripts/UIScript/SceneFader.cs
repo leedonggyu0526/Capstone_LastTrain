@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
+
 public class SceneFader : MonoBehaviour
 {
     public Image fadeImage; // 화면 덮을 이미지 할당
@@ -21,6 +22,8 @@ public class SceneFader : MonoBehaviour
     /// <returns></returns>
     IEnumerator FadeOutAndLoad(string sceneName)
     {
+        //DontDestroyOnLoad 초기화
+        DestroyAllDontDestroyOnLoad();  // DontDestroyOnLoad 초기화
         // 암전(fadeout)
         float t = 0;
         Color color = fadeImage.color;
@@ -33,7 +36,27 @@ public class SceneFader : MonoBehaviour
         }
         color.a = 1;
         fadeImage.color = color;
+        
         // 씬 전환 (비동기로 하면 더 부드러움)
         yield return SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    /// <summary>
+    /// DontDestroyOnLoad 초기화
+    /// </summary>
+    private void DestroyAllDontDestroyOnLoad()
+    {
+        // DontDestroyOnLoad 씬에 있는 모든 루트 GameObject 찾기
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        
+        foreach (GameObject obj in allObjects)
+        {
+            // 루트 객체만 체크 (부모가 없고, scene.buildIndex가 -1인 DontDestroyOnLoad 씬에 있는 것)
+            if (obj.transform.parent == null && obj.scene.buildIndex == -1)
+            {
+                Debug.Log($"[SceneFader] DontDestroyOnLoad 객체 파괴: {obj.name}");
+                Destroy(obj);
+            }
+        }
     }
 }

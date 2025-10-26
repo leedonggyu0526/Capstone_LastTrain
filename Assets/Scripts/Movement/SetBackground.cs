@@ -7,22 +7,32 @@ public class SetBackground : MonoBehaviour
     
     [Header("배경 설정")]
     public SpriteRenderer targetSpriteRenderer;
-    public Sprite backgroundSprite;
+    public Sprite[] sceneBackgroundSprites;
     public bool fitToScreenOnStart = true;
     
     #endregion
+    
+    public Sprite currentSceneBackgroundSprite { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         if (targetSpriteRenderer == null)
         {
             targetSpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        if (fitToScreenOnStart && backgroundSprite != null)
+        if (fitToScreenOnStart && sceneBackgroundSprites != null)
         {
-            ApplyBackground(backgroundSprite);
+            RandomBackground();
         }
+    }
+
+    public void RandomBackground()
+    {
+        if (sceneBackgroundSprites == null || sceneBackgroundSprites.Length == 0) return;
+        currentSceneBackgroundSprite = sceneBackgroundSprites[Random.Range(0, sceneBackgroundSprites.Length)];
+        ApplyBackground(currentSceneBackgroundSprite);
+        Debug.Log($"[SetBackground] 랜덤 배경 적용: {currentSceneBackgroundSprite.name}");
     }
 
     /// <summary>

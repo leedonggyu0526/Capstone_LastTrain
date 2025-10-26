@@ -23,8 +23,23 @@ public class BackgroundScrolling : MonoBehaviour
         {
             setBackground = GetComponent<SetBackground>();
         }
-
+    }
+    
+    private void Start()
+    {
         var newSpriteRenderer = Instantiate<SpriteRenderer>(spriteRenderer);
+        
+        // 원본 spriteRenderer의 sprite를 복사 (SetBackground가 Awake에서 이미 설정했음)
+        if (spriteRenderer.sprite != null)
+        {
+            newSpriteRenderer.sprite = spriteRenderer.sprite;
+        }
+        // SetBackground가 있고 현재 배경 스프라이트가 있으면 적용
+        else if (setBackground != null && setBackground.currentSceneBackgroundSprite != null)
+        {
+            newSpriteRenderer.sprite = setBackground.currentSceneBackgroundSprite;
+        }
+        
         newSpriteRenderer.transform.SetParent(this.transform);
         spriteRenderers.Add(spriteRenderer);
         spriteRenderers.Add(newSpriteRenderer);

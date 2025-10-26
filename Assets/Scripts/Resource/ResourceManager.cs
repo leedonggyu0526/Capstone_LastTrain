@@ -119,4 +119,9 @@ public class ResourceManager : MonoBehaviour
         Debug.Log($"[ResourceManager] {type} MaxCapacity 증가: +{amount} => {maxCapacities[type]}");
         return true;
     }
+
+    public void SetResource(ResourceType type, int amount)
+    {
+        resources[type] = amount;
+    }
 }
