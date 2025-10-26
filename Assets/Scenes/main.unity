@@ -9353,7 +9353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6fc6bc245e9e740851daa641f4115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedOnStart: 0
+  seedOnStart: 1
   seedIds:
   - 1
   - 2
