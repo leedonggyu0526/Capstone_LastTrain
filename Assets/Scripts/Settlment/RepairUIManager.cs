@@ -64,6 +64,7 @@ public class RepairUIManager : UIManager
     
     protected override void OnCloseButtonClick()
     {
+        Debug.Log("[RepairUIManager] OnCloseButtonClick 호출됨");
         // 수리 패널 닫기
         HideRepairPanel();
     }
@@ -115,20 +116,28 @@ public class RepairUIManager : UIManager
     /// </summary>
     public void HideRepairPanel()
     {
+        Debug.Log("[RepairUIManager] HideRepairPanel 호출됨");
+        
         if (repairPanel != null)
         {
             // 페이드아웃 애니메이션
             if (repairCanvasGroup != null)
             {
+                Debug.Log("[RepairUIManager] 페이드아웃 시작");
                 StopAllAnimations();
                 fadeCoroutine = StartCoroutine(FadeOut(repairCanvasGroup));
                 StartCoroutine(DeactivateAfterFade());
             }
             else
             {
+                Debug.LogWarning("[RepairUIManager] repairCanvasGroup이 null입니다. 즉시 비활성화합니다.");
                 repairPanel.SetActive(false);
                 isRepairCompleted = false;
             }
+        }
+        else
+        {
+            Debug.LogWarning("[RepairUIManager] repairPanel이 null입니다.");
         }
     }
     
@@ -137,12 +146,23 @@ public class RepairUIManager : UIManager
     /// </summary>
     private System.Collections.IEnumerator DeactivateAfterFade()
     {
-        yield return new WaitForSeconds(1f / fadeSpeed);
+        float waitTime = 1f / fadeSpeed;
+        Debug.Log($"[RepairUIManager] DeactivateAfterFade 코루틴 시작 - fadeSpeed: {fadeSpeed}, 대기시간: {waitTime}초, Time.timeScale: {Time.timeScale}");
+        
+        // Time.timeScale의 영향을 받지 않도록 WaitForSecondsRealtime 사용
+        yield return new WaitForSecondsRealtime(waitTime);
+        
+        Debug.Log("[RepairUIManager] 대기 완료, 패널 비활성화 시작");
         
         if (repairPanel != null)
-        {
+        {   
+            Debug.Log("[RepairUIManager] repairPanel 비활성화");
             repairPanel.SetActive(false);
             isRepairCompleted = false;
+        }
+        else
+        {
+            Debug.LogWarning("[RepairUIManager] repairPanel이 null입니다 (DeactivateAfterFade)");
         }
     }
     
@@ -151,10 +171,18 @@ public class RepairUIManager : UIManager
     /// </summary>
     private void OnRepairButtonClick()
     {
+        Debug.Log($"[RepairUIManager] OnRepairButtonClick 호출 - isRepairCompleted: {isRepairCompleted}");
+        
         if (!isRepairCompleted)
         {
             // 수리 실행
             ExecuteRepair();
+        }
+        else
+        {
+            // 수리 완료 후 확인 버튼을 눌렀을 때
+            Debug.Log("[RepairUIManager] 수리 완료 후 확인 버튼 클릭");
+            HideRepairPanel();
         }
     }
     

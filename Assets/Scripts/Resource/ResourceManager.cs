@@ -102,4 +102,17 @@ public class ResourceManager : MonoBehaviour
         Debug.Log($"{type} -{amount} 소비 후 {resources[type]} (Max {maxCapacities[type]})");
         return true;
     }
+
+    public bool SetResource(ResourceType type, int amount)
+    {
+        if (!resources.ContainsKey(type))
+        {
+            Debug.LogWarning($"{type} 리소스가 존재하지 않습니다!");
+            return false;
+        }
+
+        resources[type] = Mathf.Clamp(amount, 0, maxCapacities[type]);
+        Debug.Log($"{type} {amount} 설정 후 {resources[type]} (Max {maxCapacities[type]})");
+        return true;
+    }
 }

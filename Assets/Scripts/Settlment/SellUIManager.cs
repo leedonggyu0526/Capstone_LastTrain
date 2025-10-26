@@ -50,17 +50,15 @@ public class SellUIManager : UIManager
             StopAllAnimations();
             StartCoroutine(FadeOutAndDeactivate());
         }
-        else
-        {
-            sellPanel.SetActive(false);
-        }
+
+        sellPanel.SetActive(false);
     }
 
     private IEnumerator FadeOutAndDeactivate()
     {
         yield return FadeOut(sellCanvasGroup);
         if (sellPanel != null)
-        {
+        {   
             sellPanel.SetActive(false);
         }
     }
