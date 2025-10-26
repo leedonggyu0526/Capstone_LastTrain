@@ -1,40 +1,33 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System;
 
-/// <summary>
-/// 플레이어 보유 카드 관리: cardID(string) ↔ 수량(int)
-/// 씬 간 이동 시 파괴되지 않는 싱글턴으로 구현.
-/// </summary>
 public class CardDeck : MonoBehaviour
 {
-    public static CardDeck Instance { get; private set; } // ⬅️ 싱글턴 인스턴스
-
-    // 보유 카드 저장소 (key = cardID, value = 수량)
+    public static CardDeck Instance { get; private set; }
     private Dictionary<string, int> deck = new Dictionary<string, int>();
 
-    // ── 테스트용 시드(임시). 추후 상점/보상 연결 시 끄면 됨 ──
     [Header("Test Seed (임시) — 추후 상점 붙으면 끄세요")]
     public bool seedOnStart = true;
-    public string[] seedIds = new[] { "1", "2", "3" }; // CSV의 cardID와 동일해야 함
+    public string[] seedIds = new[] { "1", "2", "3" };
     public int seedAmountEach = 3;
+
+    public static event Action<string> OnCardUsed; // 외부 UI 갱신 이벤트
 
     void Awake()
     {
-        // 씬 이동 시 파괴되지 않는 싱글턴 구현
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); // ⬅️ 씬 이동 시 파괴 방지
-        //  수정 사항 : CardDeck 위치 변경(EventSystem 상단)
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        // 시작 시 테스트용으로 카드 자동 지급
         if (seedOnStart)
         {
             foreach (var id in seedIds)
@@ -42,42 +35,21 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    /// <summary>보유 요약 문자열(디버그·UI 표시용)</summary>
-    public string GetSummary()
-    {
-        if (deck.Count == 0) return "(empty)";
-        StringBuilder sb = new StringBuilder();
-        foreach (var kv in deck) sb.Append($"{kv.Key}:{kv.Value} ");
-        return sb.ToString();
-    }
-
-    /// <summary>카드 추가</summary>
     public void Add(string cardID, int amount = 1)
     {
-        if (string.IsNullOrWhiteSpace(cardID)) return;
-        if (amount <= 0) return;
-
+        if (string.IsNullOrWhiteSpace(cardID) || amount <= 0) return;
         if (deck.ContainsKey(cardID))
-        {
             deck[cardID] += amount;
-        }
         else
-        {
             deck.Add(cardID, amount);
-        }
-        Debug.Log($"[CardDeck] Added {amount}x card {cardID}. Total: {deck[cardID]}");
     }
 
-    /// <summary>보유 카드 목록 전체 반환</summary>
     public IEnumerable<KeyValuePair<string, int>> GetAllOwned()
     {
         foreach (var kv in deck)
             yield return kv;
     }
 
-    /// <summary>
-    /// 보유 수량 비율에 따른 무작위 cardID 반환(없으면 null)
-    /// </summary>
     public string GetRandomCardID()
     {
         List<string> expanded = new List<string>();
@@ -87,8 +59,56 @@ public class CardDeck : MonoBehaviour
                 expanded.Add(kv.Key);
         }
         if (expanded.Count == 0) return null;
-        return expanded[Random.Range(0, expanded.Count)];
+        return expanded[UnityEngine.Random.Range(0, expanded.Count)];
     }
 
-    // ... (TryDrawRandomData 등 다른 편의 함수는 생략)
+    public int GetUniqueCardCount() => deck.Count;
+
+    public int GetTotalCardCount()
+    {
+        int total = 0;
+        foreach (int count in deck.Values)
+            total += count;
+        return total;
+    }
+
+    public void UseCard(string cardID)
+    {
+        if (string.IsNullOrEmpty(cardID)) return;
+        if (deck.ContainsKey(cardID))
+        {
+            deck[cardID]--;
+            if (deck[cardID] <= 0)
+            {
+                deck.Remove(cardID);
+            }
+            OnCardUsed?.Invoke(cardID); // 이벤트 호출
+        }
+    }
+
+    /// <summary>
+    /// 지정된 카드의 수량을 감소시킵니다. (카드 판매 시 사용)
+    /// </summary>
+    /// <param name="cardID">제거할 카드의 ID</param>
+    /// <param name="count">제거할 수량 (기본값 1)</param>
+    public bool Remove(string cardID, int count = 1)
+    {
+        if (!deck.ContainsKey(cardID) || deck[cardID] < count)
+        {
+            Debug.LogWarning($"[CardDeck] 카드가 부족하여 {cardID}를 제거할 수 없습니다.");
+            return false;
+        }
+
+        deck[cardID] -= count;
+
+        if (deck[cardID] <= 0)
+        {
+            deck.Remove(cardID);
+        }
+
+        // 🚨 이벤트 발생: 덱의 수량이 변경되었음을 알립니다.
+        OnCardUsed?.Invoke(cardID);
+
+        return true;
+    }
 }

@@ -2,21 +2,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System;
 
-/// <summary>
-/// 드롭 처리:
-/// - 카드ID == 현재 이벤트ID면: 이벤트 종료 후 같은 카드 오브젝트에 새 카드 데이터로 교체
-/// - 불일치/이벤트 없음/셋업 미완: 카드 원위치 복귀
-/// - 교체 연출: 페이드 아웃 → 데이터 교체 → 원위치 스냅 → 페이드 인
-/// </summary>
 public class DropZone : MonoBehaviour, IDropHandler
 {
     [Header("References")]
-    public EventSpawner eventSpawner;   // 현재 이벤트 관리자
-    public CardDeck playerDeck;         // 플레이어 보유 덱
+    public EventSpawner eventSpawner;
+    public CardDeck playerDeck; // CardDeck.Instance를 사용하도록 권장
 
     [Header("Effect")]
-    public float fadeDuration = 0.15f;  // 페이드 연출 시간
+    public float fadeDuration = 0.15f;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -26,39 +21,39 @@ public class DropZone : MonoBehaviour, IDropHandler
         var card = droppedCard.GetComponent<CardDrag>();
         if (card == null) return;
 
-        // 필수 레퍼런스 확인 실패 → 복귀
-        if (eventSpawner == null)
+        // 1. 필수 레퍼런스 및 이벤트 상태 확인
+        if (eventSpawner == null || eventSpawner.currentEventID == -1)
         {
-            card.ReturnToOriginalPositionSmooth();
+            card.ReturnToOriginalPositionSmooth(); // 이벤트 없음 → 복귀
             return;
         }
 
-        // 이벤트 없음 → 복귀
-        if (eventSpawner.currentEventID == -1)
-        {
-            card.ReturnToOriginalPositionSmooth();
-            return;
-        }
+        // 2. 카드 ID와 이벤트 ID 일치 확인
+        string requiredEventID = eventSpawner.currentEventID.ToString();
 
-        // 카드ID와 이벤트ID 일치 시: 교체 진행
-        if (card.cardID == eventSpawner.currentEventID.ToString())
+        // 카드ID와 이벤트ID 일치 시: 카드 사용 성공
+        if (card.cardID == requiredEventID)
         {
+            string usedID = card.cardID;
+
+            // 🚨 핵심 로직: CardDeck의 수량을 줄이고 갱신 이벤트를 발생시킵니다.
+            CardDeck.Instance.UseCard(usedID);
+
+            // 3. 이벤트 종료
             eventSpawner.DestroyCurrentEvent();
+
+            // 4. 연출 코루틴 호출 (CardSpawner가 이미 데이터를 갱신했으므로 연출만 진행)
             StartCoroutine(ReplaceCardInPlace(card));
         }
         else
         {
-            // 불일치 → 복귀
+            // 5. 불일치 → 복귀
             card.ReturnToOriginalPositionSmooth();
         }
     }
 
-    /// <summary>
-    /// 같은 카드 오브젝트 재사용: 페이드 아웃 → 덱/DB에서 새 데이터 적용 → 원위치 스냅 → 페이드 인
-    /// </summary>
     private IEnumerator ReplaceCardInPlace(CardDrag card)
     {
-        // 페이드 아웃 준비
         var cg = card.GetComponent<CanvasGroup>();
         if (cg == null) cg = card.gameObject.AddComponent<CanvasGroup>();
 
@@ -73,48 +68,16 @@ public class DropZone : MonoBehaviour, IDropHandler
         }
         cg.alpha = 0f;
 
-        // 2) 새 카드ID 선택 (가능하면 현재와 다른 ID)
-        string currentID = card.cardID;
-        string newID = null;
+        // 🚨 2) 데이터 갱신 로직은 CardSpawner가 담당했으므로 제거
 
-        if (playerDeck != null)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                newID = playerDeck.GetRandomCardID();
-                if (!string.IsNullOrEmpty(newID) && newID != currentID) break;
-            }
-        }
-
-        // 3) DB에서 새 데이터 조회(실패 시 폴백)
-        CardData newData = null;
-        if (CardDatabase.Instance != null)
-        {
-            if (!string.IsNullOrEmpty(newID))
-                newData = CardDatabase.Instance.Get(newID);
-
-            // 덱이 비었거나 조회 실패 시 DB 랜덤 폴백
-            if (newData == null)
-                newData = CardDatabase.Instance.GetRandom();
-        }
-
-        // 4) UI/ID 교체(데이터가 있을 때만)
-        var display = card.GetComponent<CardDisplay>();
-        if (display != null && newData != null)
-        {
-            display.cardData = newData;
-            display.RefreshUI();
-            card.cardID = newData.cardID;   // 이후 드랍 판정에 사용
-        }
-
-        // 5) 원위치 스냅 (비표시 상태에서)
+        // 3) 원위치 스냅 (비표시 상태에서)
+        // CardSpawner가 이미 위치를 스냅했지만, 최종 연출을 위해 한 번 더 호출합니다.
         card.ResetToOriginalPositionInstant();
 
-        // 6) 페이드 인
+        // 4) 페이드 인
         yield return FadeIn(cg);
     }
 
-    /// <summary>카드를 천천히 다시 보이게 함</summary>
     private IEnumerator FadeIn(CanvasGroup cg)
     {
         float t = 0f;

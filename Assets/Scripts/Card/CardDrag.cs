@@ -123,6 +123,19 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         rectTransform.anchoredPosition = originalPosition;
     }
 
+    /// <summary>
+    /// 현재 Transform 위치를 새로운 원위치로 저장합니다.
+    /// (손패 압축/정렬 시 CardSpawner에서 호출됨)
+    /// </summary>
+    public void UpdateOriginalPosition()
+    {
+        if (rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+        originalPosition = rectTransform.anchoredPosition;
+    }
+
     /// <summary>Lerp 보간으로 자연스러운 복귀 연출</summary>
     private IEnumerator SmoothMove()
     {
@@ -141,9 +154,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         rectTransform.anchoredPosition = endPos;
     }
-    /// <summary>
-    /// 카드 사용 애니메이션 실행 --> 매커니즘 변경되어 사용 안함
-    /// </summary>
+
     // public void PlaySplitAnimation()
     // {
     //     if (animator != null)

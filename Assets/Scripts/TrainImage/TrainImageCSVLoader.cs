@@ -12,19 +12,11 @@ public class TrainImageCSVLoader : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("[TrainImageCSVLoader] Awake() 실행됨");
-        Debug.Log($"[TrainImageCSVLoader] GameObject 이름: {gameObject.name}");
-        Debug.Log($"[TrainImageCSVLoader] trainImageCSV 할당 상태: {trainImageCSV != null}");
-        
         if (trainImageCSV == null)
         {
             Debug.LogError("[TrainImageCSVLoader] trainImageCSV가 할당되지 않았습니다.");
-            Debug.LogError("[TrainImageCSVLoader] 인스펙터에서 TextAsset을 할당해주세요.");
             return;
         }
-        
-        Debug.Log($"[TrainImageCSVLoader] CSV 파일명: {trainImageCSV.name}");
-        Debug.Log($"[TrainImageCSVLoader] CSV 텍스트 길이: {trainImageCSV.text.Length}");
 
         // 라인 분해 및 정리
         var rawLines = trainImageCSV.text.Split('\n');
@@ -34,14 +26,9 @@ public class TrainImageCSVLoader : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[TrainImageCSVLoader] CSV 라인 수: {rawLines.Length}");
-
         // 헤더 처리
         string headerLine = rawLines[0].TrimEnd('\r').Trim();
         var headers = headerLine.Split(',');
-        Debug.Log($"[TrainImageCSVLoader] 헤더: {string.Join(", ", headers)}");
-
-        int totalEntries = 0;
 
         // 데이터
         for (int i = 1; i < rawLines.Length; i++)
@@ -54,8 +41,6 @@ public class TrainImageCSVLoader : MonoBehaviour
 
             string typeKey = cols[0].Trim();
             if (string.IsNullOrEmpty(typeKey)) continue;
-
-            Debug.Log($"[TrainImageCSVLoader] 처리 중인 타입: '{typeKey}'");
 
             // 각 열: 헤더에서 레벨 추출 → 값은 이미지 파일명(확장자 제거)
             for (int j = 1; j < cols.Length && j < headers.Length; j++)
@@ -74,18 +59,8 @@ public class TrainImageCSVLoader : MonoBehaviour
                     level = j - 1;
                 }
 
-                Debug.Log($"[TrainImageCSVLoader] 등록: {typeKey} L{level} -> {imageName}");
                 TrainImageDB.Set(typeKey, level, imageName);
-                totalEntries++;
             }
         }
-        
-        Debug.Log($"[TrainImageCSVLoader] 총 {totalEntries}개 항목 로드 완료");
-        
-        // 로딩 완료 후 모든 데이터 확인
-        TrainImageDB.debugAllLevels();
-        
-        Debug.Log($"[TrainImageCSVLoader] Engine 최대 레벨: {TrainImageDB.GetMaxLevel("Engine")}");
     }
-    
 }

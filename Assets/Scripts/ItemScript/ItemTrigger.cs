@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ItemTrigger : MonoBehaviour
 {
     [Header("최대 ID값 유동적 조정")]
-    public int MaxID = 3;
+    public int MaxID = 5;
     public ResourceProducer rp;
     // 아이템 변수 영역
     public float cor = 0.2f;

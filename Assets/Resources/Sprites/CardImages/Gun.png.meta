@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CardImages/Gun.png.meta
 guid: 22b38fc777fbf1d43b075a2bb1641d69
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 6879118450950661895
     second: Gun_0
+========
+guid: 1b54f514761fa264c9a63dfd3b5107da
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5601323976189978565
+    second: Weapons_0
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/Weapons.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +109,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CardImages/Gun.png.meta
       name: Gun_0
+========
+      name: Weapons_0
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/Weapons.png.meta
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/CardImages/Gun.png.meta
       spriteID: 707efb4b8c9877f50800000000000000
       internalID: 6879118450950661895
+========
+      spriteID: 5c7aea0ba76ebbd40800000000000000
+      internalID: 5601323976189978565
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/Weapons.png.meta
       vertices: []
       indices: 
       edges: []
@@ -135,7 +153,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Resources/Sprites/CardImages/Gun.png.meta
       Gun_0: 6879118450950661895
+========
+      Weapons_0: 5601323976189978565
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/Weapons.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -16,21 +16,7 @@ public class TrainKhan : MonoBehaviour
     void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
-    }
-
-    void Start()
-    {
-        Debug.Log($"[TrainKhan] Start() 실행됨 - GameObject: {gameObject.name}, typeKey: '{typeKey}'");
-        
-        // CSV 로더가 먼저 실행된 후에 스프라이트 적용
-        ApplySprite();
-        
-        int maxLevel = TrainImageDB.GetMaxLevel(typeKey);
-        Debug.Log($"[TrainKhan] {typeKey} 초기화 완료 - 레벨: {level}, 최대 레벨: {maxLevel}");
-        
-        // 등록된 레벨들도 확인
-        string registeredLevels = TrainImageDB.debugLevels(typeKey);
-        Debug.Log($"[TrainKhan] 등록된 레벨들: {registeredLevels}");
+        ApplySprite(); // 시작 시 현재 레벨 스프라이트 적용
     }
 
     // [새로 추가된 함수] 업그레이드 가능 여부를 반환합니다.

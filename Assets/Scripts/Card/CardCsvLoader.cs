@@ -32,19 +32,24 @@ public static class CardCsvLoader
         // 희귀도 (문자열 그대로 저장)
         data.rarity = cols[5].Trim();
 
-        // 가격 추가: CSV 컬럼 길이와 파싱 성공 여부 확인
-        if (cols.Length > 6 && int.TryParse(
-            cols[6].Trim(),
-            NumberStyles.Any,
-            CultureInfo.InvariantCulture,
-            out int price))
+        // --- Fuel_price (인덱스 6) ---
+        if (cols.Length > 6 && int.TryParse(cols[6].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out int fuelPrice))
         {
-            data.price = price;
+            data.Fuel_price = fuelPrice;
         }
-        else
+
+        // --- Food_price (인덱스 7) ---
+        if (cols.Length > 7 && int.TryParse(cols[7].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out int foodPrice))
         {
-            data.price = 0; // 가격 정보가 없거나 파싱 오류 시 0으로 설정
+            data.Food_price = foodPrice;
         }
+
+        // --- MachinePart_price (인덱스 8) ---
+        if (cols.Length > 8 && int.TryParse(cols[8].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out int machinePartPrice))
+        {
+            data.MachinePart_price = machinePartPrice;
+        }
+
         return data;
     }
 }

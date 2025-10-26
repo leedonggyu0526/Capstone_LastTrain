@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DistanceManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class DistanceManager : MonoBehaviour
     public GearSpeedController gearSpeedController;
     public PausePlayController pausePlayController;
     public TMP_Text progressUI;
+    public Image progressBarUI;
+
 
     [Header("Distance")]
     [SerializeField] private float totalDistance = 0f;
@@ -15,10 +18,12 @@ public class DistanceManager : MonoBehaviour
     [SerializeField] private bool showProgressLog = true;   // 인스펙터에서 켜기/끄기
     [SerializeField] private float progressLogInterval = 1f;
     private float progressLogTimer = 0f;
+    public float progressPercent = 0f; // 외부에서 진행도 퍼센트 확인용
 
     void Start()
     {
-        
+        if (progressBarUI != null) progressBarUI.fillAmount = 0f;
+        else Debug.LogWarning("[DistanceManager] progressBarUI가 연결되지 않음");
     }
 
     void Update()
@@ -26,7 +31,7 @@ public class DistanceManager : MonoBehaviour
         if (Time.timeScale == 0f) return;
 
         totalDistance += gearSpeedController.currentSpeed * Time.deltaTime;
-        progressUI.text = $"{totalDistance:F1} / {crossroadUI.CurrentTarget:F1} {totalDistance / crossroadUI.CurrentTarget * 100:F1}%";
+        progressUI.text = $"정착지({crossroadUI.CurrentTarget:F0})까지 {totalDistance / crossroadUI.CurrentTarget * 100:F1}%";
 
         if (showProgressLog)
         {
@@ -38,7 +43,11 @@ public class DistanceManager : MonoBehaviour
                     : "초기화 전";
 
                 Debug.Log($"[진행도] 현재 {totalDistance:F1} / 목표 {targetTxt} (속도 {gearSpeedController.currentSpeed:F2}, 기어 {gearSpeedController.currentGear + 1})");
-
+                // 진행도 퍼센트를 변수로 계산 (crossroadUI null 또는 목표 0 방지)
+                progressPercent = (crossroadUI != null && crossroadUI.CurrentTarget != 0f)
+                            ? (totalDistance / crossroadUI.CurrentTarget * 100f)
+                            : 0f;
+                progressBarUI.fillAmount = progressPercent / 100f;
                 // crossroadUI 참조/초기화 상태 확인
                 if (crossroadUI == null) Debug.LogError("[진행도] crossroadUI 참조 NULL!");
                 else if (!crossroadUI.IsInitialized) Debug.LogWarning("[진행도] crossroadUI 초기화 전!");

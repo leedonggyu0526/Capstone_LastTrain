@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "무제.sln"
+    "dotnet.defaultSolution": "Capstone_LastTrain.sln"
 }

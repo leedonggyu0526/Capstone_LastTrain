@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_ICE.jpg.meta
 guid: 7d34a51202a23d4408ef2a8dc3588d56
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -856085545168688419
     second: ice_0
+========
+guid: 2b9e6fd3a402bd4438cf15a159e23ac9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3884249258629791450
+    second: CAVE_ENTRANCE_0
+>>>>>>>> main:Assets/Resources/Sprites/EventImages/CAVE_ENTRANCE.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +109,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_ICE.jpg.meta
       name: ice_0
+========
+      name: CAVE_ENTRANCE_0
+>>>>>>>> main:Assets/Resources/Sprites/EventImages/CAVE_ENTRANCE.png.meta
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_ICE.jpg.meta
       spriteID: ddaafde7bb29e14f0800000000000000
       internalID: -856085545168688419
+========
+      spriteID: adef3bffe10a7e530800000000000000
+      internalID: 3884249258629791450
+>>>>>>>> main:Assets/Resources/Sprites/EventImages/CAVE_ENTRANCE.png.meta
       vertices: []
       indices: 
       edges: []
@@ -135,7 +153,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_ICE.jpg.meta
       ice_0: -856085545168688419
+========
+      CAVE_ENTRANCE_0: 3884249258629791450
+>>>>>>>> main:Assets/Resources/Sprites/EventImages/CAVE_ENTRANCE.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

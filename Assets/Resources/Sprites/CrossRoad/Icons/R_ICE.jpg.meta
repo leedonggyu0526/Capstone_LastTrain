@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Icons/R_ICE.jpg.meta
 guid: 690ce0f24e66e60419a6b901fbefd8c7
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -856085545168688419
     second: ice_0
+========
+guid: feaf4eb6ce19f844b8de207af1cb78de
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6058160962049726845
+    second: MonkeyWrench_0
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/MonkeyWrench.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +109,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Icons/R_ICE.jpg.meta
       name: ice_0
+========
+      name: MonkeyWrench_0
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/MonkeyWrench.png.meta
       rect:
         serializedVersion: 2
         x: 0
         y: 0
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Icons/R_ICE.jpg.meta
         width: 225
         height: 225
+========
+        width: 1024
+        height: 1024
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/MonkeyWrench.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +133,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Icons/R_ICE.jpg.meta
       spriteID: ddaafde7bb29e14f0800000000000000
       internalID: -856085545168688419
+========
+      spriteID: d79dc172c49e21450800000000000000
+      internalID: 6058160962049726845
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/MonkeyWrench.png.meta
       vertices: []
       indices: 
       edges: []
@@ -135,7 +158,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Icons/R_ICE.jpg.meta
       ice_0: -856085545168688419
+========
+      MonkeyWrench_0: 6058160962049726845
+>>>>>>>> main:Assets/Resources/Sprites/CardImages/MonkeyWrench.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
