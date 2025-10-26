@@ -11363,6 +11363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004816813}
   - component: {fileID: 2004816812}
+  - component: {fileID: 2004816814}
   m_Layer: 0
   m_Name: BackgroundScrolling
   m_TagString: Untagged
@@ -11385,6 +11386,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 530203430}
   interval: 15
   speed: 5
+  setBackground: {fileID: 2004816814}
 --- !u!4 &2004816813
 Transform:
   m_ObjectHideFlags: 0
@@ -11401,6 +11403,21 @@ Transform:
   - {fileID: 530203431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004816814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004816811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c53d168c3762484689a1e5a9dd97021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSpriteRenderer: {fileID: 530203430}
+  backgroundSprite: {fileID: 0}
+  fitToScreenOnStart: 1
 --- !u!1 &2035553370
 GameObject:
   m_ObjectHideFlags: 0

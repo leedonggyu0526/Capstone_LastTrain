@@ -9,6 +9,7 @@ public class BackgroundScrolling : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public float interval;
     public float speed = 1f;
+    public SetBackground setBackground;
 
     #endregion
 
@@ -17,6 +18,12 @@ public class BackgroundScrolling : MonoBehaviour
 
     private void Awake()
     {
+        // SetBackground 컴포넌트 찾기 (없으면 null로 유지)
+        if (setBackground == null)
+        {
+            setBackground = GetComponent<SetBackground>();
+        }
+
         var newSpriteRenderer = Instantiate<SpriteRenderer>(spriteRenderer);
         newSpriteRenderer.transform.SetParent(this.transform);
         spriteRenderers.Add(spriteRenderer);
@@ -38,7 +45,15 @@ public class BackgroundScrolling : MonoBehaviour
             if (sr != null) sr.sprite = newSprite;
 
         // 화면을 가득 채우도록 스케일 조정 및 간격 재설정
-        FitSpritesToScreen();
+        if (setBackground != null)
+        {
+            interval = setBackground.FitSpritesToScreen(spriteRenderers, transform, (count, _) => SortImage());
+        }
+        else
+        {
+            // SetBackground가 없으면 기본 동작
+            Debug.LogWarning("[BackgroundScrolling] SetBackground 컴포넌트가 없습니다. 스케일 조정을 건너뜁니다.");
+        }
 
         Debug.Log($"[BackgroundScrolling] 배경 교체: {newSprite.name}");
     }
@@ -82,50 +97,6 @@ public class BackgroundScrolling : MonoBehaviour
                 sr.transform.localPosition = new Vector3(newX, 0f, 0f);
                 firstIndex = spriteRenderers.IndexOf(sr);
             }
-        }
-    }
-
-    // 현재 카메라 화면을 가득 채우도록 스프라이트의 스케일을 조정하고 간격(interval)을 갱신
-    private void FitSpritesToScreen()
-    {
-        var cam = Camera.main;
-        if (cam == null) return;
-
-        // Orthographic 카메라 기준. Perspective면 간단히 폭 기준으로만 맞춤
-        float worldScreenHeight;
-        float worldScreenWidth;
-
-        if (cam.orthographic)
-        {
-            worldScreenHeight = cam.orthographicSize * 2f;
-            worldScreenWidth = worldScreenHeight * cam.aspect;
-        }
-        else
-        {
-            // 대략적인 근사치: 카메라와 배경의 Z거리 기준 화면 폭/높이 추정
-            float distance = Mathf.Abs(transform.position.z - cam.transform.position.z);
-            worldScreenHeight = 2f * distance * Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
-            worldScreenWidth = worldScreenHeight * cam.aspect;
-        }
-
-        // 각 스프라이트를 화면을 덮도록 동일 스케일 적용
-        foreach (var sr in spriteRenderers)
-        {
-            if (sr == null || sr.sprite == null) continue;
-            Vector2 spriteSize = sr.sprite.bounds.size; // world units (PPU 반영됨)
-            if (spriteSize.x <= 0f || spriteSize.y <= 0f) continue;
-
-            float scaleX = worldScreenWidth / spriteSize.x;
-            float scaleY = worldScreenHeight / spriteSize.y;
-            float scale = Mathf.Max(scaleX, scaleY); // cover 모드: 화면을 꽉 채우도록 더 큰 값 사용
-            sr.transform.localScale = new Vector3(scale, scale, 1f);
-        }
-
-        // 간격을 실제 스프라이트 폭으로 갱신하고 정렬 재수행
-        if (spriteRenderers.Count > 0 && spriteRenderers[0] != null)
-        {
-            interval = spriteRenderers[0].bounds.size.x;
-            SortImage();
         }
     }
 
