@@ -99,5 +99,4 @@ public class BackgroundScrolling : MonoBehaviour
             }
         }
     }
-
 }

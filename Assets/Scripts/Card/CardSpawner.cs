@@ -113,6 +113,23 @@ public class CardSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// [새로 추가된 메서드]
+    /// 리롤 버튼 클릭 시 호출되어 현재 손패를 완전히 지우고, 
+    /// 덱에 있는 카드 중 무작위로 새로운 손패를 채웁니다.
+    /// </summary>
+    public void RerollHand()
+    {
+        // 1. 현재 손패 슬롯의 데이터와 UI를 모두 초기화합니다.
+        ClearHandSlots();
+
+        // 2. 새로운 카드로 손패를 다시 채웁니다.
+        FillHandAtStart();
+
+        Debug.Log("[CardSpawner] 손패가 리롤되었습니다. 새로운 카드들이 배치됩니다.");
+    }
+
+
     // 카드 사용 시 호출 (손패 압축 로직)
     private void HandleCardUsed(string usedCardID)
     {
