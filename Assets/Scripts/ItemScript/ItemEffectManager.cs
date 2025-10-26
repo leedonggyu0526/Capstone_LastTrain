@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-// 직접적 효과 구현
+// 직접적 효과 구현 : 싱글톤
 public class ItemEffectManager : MonoBehaviour
 {
 
@@ -13,8 +13,10 @@ public class ItemEffectManager : MonoBehaviour
     // TODO :조정 영역 
     public void ApplyEffect(ItemEffect effect, ResourceType type, float value)
     {
+        if (effect == null) return;
         effect.Add(type, value);
-        activeEffects.Remove(effect);
+        if (!activeEffects.Contains(effect)) activeEffects.Add(effect);
+
     }
     public void RemoveEffect(ItemEffect effect, ResourceType type, float value)
     {

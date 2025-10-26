@@ -1,7 +1,7 @@
 using UnityEngine;
 using static ItemEffectManager;
 
-// 인터페이스 구현체 클래스 모음 : 인터페이스 종속, 생성자/add/remove/set 4함수 필수
+// 인터페이스(ItemEffect) 구현체 클래스 모음 : 인터페이스 종속, 생성자/add/remove/set 4함수 필수
 // 자원 생산량 증가 효과
 public class ResourceIncrease : ItemEffect
 {
@@ -48,10 +48,38 @@ public class MaxResourceIncrease : ItemEffect
 
     public void Add(ResourceType type, float value)
     {
-        Debug.Log("TODO : MaxResource 아이템 효과 적용");
+        int iv = Mathf.RoundToInt(value);
+        rm.IncreaseMaxCapacity(type, iv);
     }
     public void Remove(ResourceType type, float value)
     {
+        int iv = Mathf.RoundToInt(value);
+        rm.IncreaseMaxCapacity(type, -iv);
+    }
+    public void Set(ResourceType type, float value)
+    {
+    }
+
+}
+public class ConsumptionDecrease : ItemEffect
+{
+    private ResourceConsumer rc;
+
+    public ConsumptionDecrease(ResourceConsumer target)
+    {
+        rc = target;
+    }
+
+    public void Add(ResourceType type, float value)
+    {
+        int iv = Mathf.RoundToInt(value);
+        Debug.Log($"[Effects] ConsumptionDecrease.Add 호출 - type:{type}, float value:{value}, int iv:{iv}");
+        rc.DecreaseConsumption(type, iv);
+    }
+    public void Remove(ResourceType type, float value)
+    {
+        int iv = Mathf.RoundToInt(value);
+        rc.DecreaseConsumption(type, -iv);
     }
     public void Set(ResourceType type, float value)
     {

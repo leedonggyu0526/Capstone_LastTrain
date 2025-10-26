@@ -10846,7 +10846,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxID: 31
   rp: {fileID: 1959856272}
+  rc: {fileID: 1959856273}
   cor: 0.2
+  maxcor: 200
+  decrcor: 15
 --- !u!114 &1940293931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11057,7 +11060,7 @@ MonoBehaviour:
   - type: 1
     amountPerCycle: 100
   - type: 2
-    amountPerCycle: 0
+    amountPerCycle: 30
   - type: 3
     amountPerCycle: 0
   - type: 4
