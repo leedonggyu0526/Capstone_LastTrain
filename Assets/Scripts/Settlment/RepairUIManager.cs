@@ -137,7 +137,7 @@ public class RepairUIManager : UIManager
     /// </summary>
     private System.Collections.IEnumerator DeactivateAfterFade()
     {
-        yield return new WaitForSeconds(1f / fadeSpeed);
+        yield return new WaitForSecondsRealtime(1f / fadeSpeed);
         
         if (repairPanel != null)
         {

@@ -113,7 +113,7 @@ public class DepartureUIManager : UIManager
     /// </summary>
     private IEnumerator DeactivateAfterFade()
     {
-        yield return new WaitForSeconds(1f / fadeSpeed);
+        yield return new WaitForSecondsRealtime(1f / fadeSpeed);
         
         if (departurePanel != null)
         {

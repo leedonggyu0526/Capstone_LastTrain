@@ -28,8 +28,10 @@ public class CrossRoadOption
     public void SetSprites(){
         icon = Resources.Load<Sprite>("Sprites/CrossRoad/Icons/" + id);
         sceneBg = Resources.Load<Sprite>("Sprites/CrossRoad/SceneBackgrounds/" + id);
+        bg = Resources.Load<Sprite>("Sprites/CrossRoad/Backgrounds/Crossroad_Bg");
         if (icon == null) Debug.LogWarning($"[CrossRoadOption] 아이콘 로드 실패: Sprites/CrossRoad/Icons/{id}");
         if (sceneBg == null) Debug.LogWarning($"[CrossRoadOption] 씬배경 로드 실패: Sprites/CrossRoad/SceneBackgrounds/{id}");
+        if (bg == null) Debug.LogWarning($"[CrossRoadOption] 배경 로드 실패: Sprites/CrossRoad/Backgrounds/Crossroad_Bg");
     }
 }
 
