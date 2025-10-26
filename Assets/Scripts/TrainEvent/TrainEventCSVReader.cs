@@ -44,10 +44,10 @@ public class TrainEventCSVReader
                 // 줄을 콤마(,)로 나눔
                 string[] values = line.Split(',');
                 
-                // 최소 필드 개수 확인
-                if (values.Length < 9)
+                // 최소 필드 개수 확인 (13개 컬럼)
+                if (values.Length < 13)
                 {
-                    Debug.LogWarning($"라인 {i + 1}: 필드 개수가 부족합니다. 필요: 9개, 현재: {values.Length}개");
+                    Debug.LogWarning($"라인 {i + 1}: 필드 개수가 부족합니다. 필요: 13개, 현재: {values.Length}개");
                     continue;
                 }
 
@@ -69,17 +69,21 @@ public class TrainEventCSVReader
                 // 이미지 로딩 시도
                 Sprite eventImage = LoadEventImage(eventID);
 
-                // 이벤트 데이터 생성
+                // 이벤트 데이터 생성 (13개 컬럼: 이름, 설명, 선택지1~3, 선택지설명1~3, 요구사항1~3, 결과)
                 TrainEvent eventData = new TrainEvent(
                     eventImage, 
-                    values[1]?.Trim() ?? "", 
-                    values[2]?.Trim() ?? "", 
-                    values[3]?.Trim() ?? "", 
-                    values[4]?.Trim() ?? "", 
-                    values[5]?.Trim() ?? "", 
-                    values[6]?.Trim() ?? "", 
-                    values[7]?.Trim() ?? "", 
-                    values[8]?.Trim() ?? ""
+                    values[1]?.Trim() ?? "",  // 이벤트_이름
+                    values[2]?.Trim() ?? "",  // 이벤트_설명
+                    values[3]?.Trim() ?? "",  // 이벤트_선택지1
+                    values[4]?.Trim() ?? "",  // 이벤트_선택지1_설명
+                    values[5]?.Trim() ?? "",  // 이벤트_선택지1_요구사항
+                    values[6]?.Trim() ?? "",  // 이벤트_선택지2
+                    values[7]?.Trim() ?? "",  // 이벤트_선택지2_설명
+                    values[8]?.Trim() ?? "",  // 이벤트_선택지2_요구사항
+                    values[9]?.Trim() ?? "",  // 이벤트_선택지3
+                    values[10]?.Trim() ?? "", // 이벤트_선택지3_설명
+                    values[11]?.Trim() ?? "", // 이벤트_선택지3_요구사항
+                    values[12]?.Trim() ?? ""  // 이벤트_결과
                 );
 
                 // 이벤트 데이터 추가
