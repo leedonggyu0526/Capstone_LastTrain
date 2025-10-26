@@ -61,4 +61,22 @@ public class GearSpeedController : MonoBehaviour
             Debug.LogError("[Gear] BackgroundScrolling 미연결");
         }
     }
+
+    //이벤트 발생 시 속도저하
+    public void ApplySpeedDebuff(float debuffRate)
+    {
+        // 현재 속도를 기준으로 debuffRate만큼 낮춥니다.
+        currentSpeed = speeds[currentGear] * (1f - debuffRate);
+
+        // 배경 스크롤링에 적용
+        backgroundScrolling.speed = currentSpeed;
+    }
+
+    // 이벤트 해결 시 (DeactivateEvent):
+    public void ClearSpeedDebuff()
+    {
+        // 원래 기어 속도로 복구합니다.
+        currentSpeed = speeds[currentGear];
+        backgroundScrolling.speed = currentSpeed;
+    }
 }
