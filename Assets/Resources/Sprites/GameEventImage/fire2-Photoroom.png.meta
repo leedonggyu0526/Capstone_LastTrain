@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b4751fbdc462cbf4bbbbb97d16b8d2b1
+guid: 17a595b34ef847f4d884d7915dc4ad47
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1557013538026691241
-    second: UI_0
+      213: 2779250933430891502
+    second: fire2-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_0
+      name: fire2-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 33
-        width: 877
-        height: 425
+        x: 299
+        y: 190
+        width: 414
+        height: 647
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 755e173cf60646ae0800000000000000
-      internalID: -1557013538026691241
+      spriteID: ee332d4bff1e19620800000000000000
+      internalID: 2779250933430891502
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_0: -1557013538026691241
+      fire2-Photoroom_0: 2779250933430891502
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
