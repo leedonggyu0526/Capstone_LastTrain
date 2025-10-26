@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gang5-Photoroom_0: 7495658555729383949
+      gang5-Photoroom_1: -9148579519754747669
+      gang5-Photoroom_2: -4156305452750328031
+      gang5-Photoroom_3: -5037309999205983490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

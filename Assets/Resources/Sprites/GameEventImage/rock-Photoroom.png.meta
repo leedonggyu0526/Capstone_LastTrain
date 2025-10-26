@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rock-Photoroom_0: 4221047883544374053
+      rock-Photoroom_1: -4947972619662331947
+      rock-Photoroom_2: 8832723206957749281
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
