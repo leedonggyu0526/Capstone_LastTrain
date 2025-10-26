@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FIRE.png.meta
 guid: b44a23a03b2859043888569c2928d650
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1569325069990042925
     second: R_FIRE_0
+========
+guid: f96abacf9b7676045bf30945bc17b7e4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2278294707514106861
+    second: R_FOREST_0
+>>>>>>>> main:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FOREST.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +109,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FIRE.png.meta
       name: R_FIRE_0
+========
+      name: R_FOREST_0
+>>>>>>>> main:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FOREST.png.meta
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FIRE.png.meta
       spriteID: 3d2e02ad923a83ae0800000000000000
       internalID: -1569325069990042925
+========
+      spriteID: 31c18f0d80fd160e0800000000000000
+      internalID: -2278294707514106861
+>>>>>>>> main:Assets/Resources/Sprites/CrossRoad/Backgrounds/R_FOREST.png.meta
       vertices: []
       indices: 
       edges: []

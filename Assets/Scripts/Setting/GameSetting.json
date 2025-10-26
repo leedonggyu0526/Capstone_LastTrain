@@ -1,0 +1,14 @@
+{
+    "masterVolume": 0.7,
+    "isFullScreen": true,
+    "graphics": {
+<<<<<<< Updated upstream
+        "qualityLevel": 5
+    },
+    "language": "Korean"
+=======
+        "qualityLevel": 5,
+        "isVSyncOn": false
+    }
+>>>>>>> Stashed changes
+}

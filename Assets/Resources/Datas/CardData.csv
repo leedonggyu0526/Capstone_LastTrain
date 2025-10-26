@@ -1,13 +1,13 @@
 ﻿cardID,cardName,description,background,artwork,rarity,Fuel_price,Food_price,MachinePart_price
-1,gold,gold ticket,goldCard,food,Epic,100,100,100
-2,silver,silver ticket,silverCard,fuel,Rare,50,50,50
-3,copper,copper ticket,copperCard,gear,Common,10,10,10
-4,gold1,gold ticket2,goldCard,food,Epic,100,100,100
-5,silver1,silver ticket1,silverCard,fuel,Rare,50,50,50
-6,silver2,silver ticket2,silverCard,fuel,Rare,50,50,50
-7,silver3,silver ticket3,silverCard,fuel,Rare,50,50,50
-8,copper1,copper ticket1,copperCard,gear,Common,10,10,10
-9,copper2,copper ticket2,copperCard,gear,Common,10,10,10
-10,copper3,copper ticket3,copperCard,gear,Common,10,10,10
-11,copper4,copper ticket4,copperCard,gear,Common,10,10,10
-12,copper5,copper ticket5,copperCard,gear,Common,10,10,10
+10,폭풍,폭풍 대응,goldCard,food,Epic,100,100,100
+12,먼지폭풍,먼지폭풍대응,silverCard,fuel,Rare,50,50,50
+7,내부폭동,내부폭동대응,copperCard,gear,Common,10,10,10
+11,화염폭풍,화염폭풍대응,goldCard,food,Epic,100,100,100
+8,바위장애물,바위장애물대응,silverCard,fuel,Rare,50,50,50
+9,화염장애물,화염장애물대응,silverCard,fuel,Rare,50,50,50
+6,갱단습격,갱단습격대응,silverCard,fuel,Rare,50,50,50
+1,열차화염,열차화염대응,copperCard,gear,Common,10,10,10
+2,앤진기능고장,앤진기능고장대응,copperCard,gear,Common,10,10,10
+3,식량기능고장,식량기능고장대응,copperCard,gear,Common,10,10,10
+4,공장기능고장,공장기능고장대응,copperCard,gear,Common,10,10,10
+5,객실기능고장,객실기능고장대응,copperCard,gear,Common,10,10,10

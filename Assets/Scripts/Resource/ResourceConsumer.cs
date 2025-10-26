@@ -91,4 +91,23 @@ public class ResourceConsumer : MonoBehaviour
         else
             StartConsume();
     }
+
+    // 특정 자원 타입의 소비량을 감소시킴 (첫 매칭 항목에 대해 적용)
+    public void DecreaseConsumption(ResourceType type, int value)
+    {
+        if (value <= 0) return;
+
+        for (int i = 0; i < consumptions.Count; i++){
+            if (consumptions[i].type == type)
+            {
+                ResourceConsumption rc = consumptions[i];
+                rc.amountPerCycle = Mathf.Max(0, rc.amountPerCycle - value);
+                consumptions[i] = rc;
+                Debug.Log($"[ResourceConsumer] {type} 소비량 감소: -{value} => {rc.amountPerCycle}");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[ResourceConsumer] 소비 항목 없음: {type}");
+    }
 }

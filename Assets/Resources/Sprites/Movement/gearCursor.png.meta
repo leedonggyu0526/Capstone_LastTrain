@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/SettlementImages/선택지.png.meta
+guid: e68802e2d47572745aa824c6735d60b9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -613291973464549958
+    second: "\uC120\uD0DD\uC9C0_0"
+========
 guid: 472beff5879462c42bbb628ea4e65351
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5179638697254474636
     second: gearCursor_0
+>>>>>>>> main:Assets/Resources/Sprites/Movement/gearCursor.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,6 +109,17 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/SettlementImages/선택지.png.meta
+      name: "\uC120\uD0DD\uC9C0_0"
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 264
+        width: 1074
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+========
       name: gearCursor_0
       rect:
         serializedVersion: 2
@@ -109,14 +129,20 @@ TextureImporter:
         height: 617
       alignment: 9
       pivot: {x: 0.5, y: 0.24}
+>>>>>>>> main:Assets/Resources/Sprites/Movement/gearCursor.png.meta
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/SettlementImages/선택지.png.meta
+      spriteID: ab51c0213362d77f0800000000000000
+      internalID: -613291973464549958
+========
       spriteID: 47ca7493c0a3e18b0800000000000000
       internalID: -5179638697254474636
+>>>>>>>> main:Assets/Resources/Sprites/Movement/gearCursor.png.meta
       vertices: []
       indices: 
       edges: []
@@ -125,7 +151,11 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bdef7af8164413548a85a9332c0c91e9
+<<<<<<<< HEAD:Assets/Resources/Sprites/SettlementImages/선택지.png.meta
+    spriteID: 6e8507a0ce75df542b6c081d5fac99be
+========
+    spriteID: 6865352d09424a54d86a28c053686f06
+>>>>>>>> main:Assets/Resources/Sprites/Movement/gearCursor.png.meta
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +165,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Resources/Sprites/SettlementImages/선택지.png.meta
+      "\uC120\uD0DD\uC9C0_0": -613291973464549958
+========
       gearCursor_0: -5179638697254474636
+>>>>>>>> main:Assets/Resources/Sprites/Movement/gearCursor.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

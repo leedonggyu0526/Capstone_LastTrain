@@ -1,0 +1,37 @@
+eventID이벤트id이벤트의 고유 식별 번호
+eventName이벤트이름UI에 표시될 이벤트의 이름
+effectType_1효과타입_1첫 번째 효과의 유형 (예: DAMAGE_DURATION)
+effectValue_1효과값_1첫 번째 효과의 구체적인 수치 (예: 8.0, 0.25)
+effectTarget_1효과대상_1첫 번째 효과가 적용될 대상 (예: TRAIN_HP, ENGINE)
+duration효과기간효과가 지속되는 시간 (초). INF는 무한 지속을 의미합니다.
+------------------------------------
+DAMAGE_DURATION	지속 대미지. 효과값은 초당 받는 대미지입니다.
+DAMAGE_INSTANT	즉시 대미지. 효과값은 한 번에 받는 고정 대미지입니다.
+DEBUFF_RATE	생산량 비율 저하. 효과값은 0.0~1.0 사이의 비율입니다. (예: 0.25는 25% 저하)
+DEBUFF_SPEED	열차 속도 비율 저하. 효과값은 0.0~1.0 사이의 비율입니다.
+PASSENGER_DEBUFF	승객 수 비율 저하. 주의: 이 값은 일정 주기마다 승객을 감소시키는 비율로 해석해야 합니다. (예: 0.05는 5% 감소)
+DECREASE_AMOUNT	자원 고정 수치 감소. 효과값만큼 자원을 즉시 감소시킵니다.
+------------------------------------
+TRAIN_HP
+열차 전체의 **체력(Health Points)**입니다. 
+DAMAGE_DURATION이나 DAMAGE_INSTANT와 같은 피해 효과가 적용될 때 사용됩니다
+ENGINE
+열차의 엔진 모듈 또는 연료 생산 기능을 대상으로 합니다. 
+DEBUFF_RATE 효과가 적용되면 연료 생산량이 줄어들 수 있습니다.
+FOOD
+열차 내 식량 생산 시설을 대상으로 합니다. 
+DEBUFF_RATE 효과가 적용되면 식량 생산 속도가 저하됩니다.
+FACTORY
+열차 내 기계 부품 생산 시설을 대상으로 합니다. 
+DEBUFF_RATE 효과가 적용되면 부품 생산 속도가 저하됩니다.
+PASSENGER
+열차 내 승객 수 또는 객실 모듈을 대상으로 합니다. 
+PASSENGER_DEBUFF와 같은 효과가 적용되어 승객이 이탈하거나 감소합니다.
+RANDOM_RESOURCE
+현재 열차가 보유한 모든 리소스 (연료, 식량, 부품 등) 중 무작위 하나를 대상으로 합니다. 
+DECREASE_AMOUNT와 같은 효과와 함께 사용됩니다.
+TRAIN
+열차 자체의 전반적인 기능을 대상으로 합니다. 
+주로 DEBUFF_SPEED 효과와 함께 사용되어 열차의 이동 속도에 직접적인 영향을 줍니다.
+ALL_PRODUCER
+모든 생산 시설 (ENGINE, FOOD, FACTORY 등)을 동시에 대상으로 합니다. 광범위한 DEBUFF_RATE 효과를 적용할 때 사용됩니다.

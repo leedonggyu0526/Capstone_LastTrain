@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/Movement/gearCursor.png.meta
+guid: 472beff5879462c42bbb628ea4e65351
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5179638697254474636
+    second: gearCursor_0
+========
 guid: 0f595ba5cc645a14b82d0b02bcc2e371
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1328324072035983204
     second: "\uC0C1\uC810_0"
+>>>>>>>> main:Assets/Resources/Sprites/SettlementImages/상점.png.meta
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +109,40 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Sprites/Movement/gearCursor.png.meta
+      name: gearCursor_0
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 187
+        width: 255
+        height: 617
+      alignment: 9
+      pivot: {x: 0.5, y: 0.24}
+========
       name: "\uC0C1\uC810_0"
       rect:
         serializedVersion: 2
-        x: 360
-        y: 211
-        width: 1200
-        height: 667
+        x: 361
+        y: 212
+        width: 1198
+        height: 665
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+>>>>>>>> main:Assets/Resources/Sprites/SettlementImages/상점.png.meta
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
+<<<<<<<< HEAD:Assets/Resources/Sprites/Movement/gearCursor.png.meta
+      spriteID: 47ca7493c0a3e18b0800000000000000
+      internalID: -5179638697254474636
+========
       spriteID: c90e1b35b48d09de0800000000000000
       internalID: -1328324072035983204
+>>>>>>>> main:Assets/Resources/Sprites/SettlementImages/상점.png.meta
       vertices: []
       indices: 
       edges: []
@@ -125,7 +151,11 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+<<<<<<<< HEAD:Assets/Resources/Sprites/Movement/gearCursor.png.meta
+    spriteID: bdef7af8164413548a85a9332c0c91e9
+========
+    spriteID: 74eaff1d7faf3894991f3d1b4ec28ca6
+>>>>>>>> main:Assets/Resources/Sprites/SettlementImages/상점.png.meta
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +164,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+<<<<<<<< HEAD:Assets/Resources/Sprites/Movement/gearCursor.png.meta
+      gearCursor_0: -5179638697254474636
+========
+      "\uC0C1\uC810_0": -1328324072035983204
+>>>>>>>> main:Assets/Resources/Sprites/SettlementImages/상점.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

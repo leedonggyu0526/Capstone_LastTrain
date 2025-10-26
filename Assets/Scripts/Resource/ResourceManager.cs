@@ -102,17 +102,21 @@ public class ResourceManager : MonoBehaviour
         Debug.Log($"{type} -{amount} 소비 후 {resources[type]} (Max {maxCapacities[type]})");
         return true;
     }
-
-    public bool SetResource(ResourceType type, int amount)
+       // 최대 용량 증가 (amount <= 0 이면 아무 동작 안 함)
+    public bool IncreaseMaxCapacity(ResourceType type, int amount, bool adjustCurrent = true)
     {
-        if (!resources.ContainsKey(type))
-        {
-            Debug.LogWarning($"{type} 리소스가 존재하지 않습니다!");
-            return false;
-        }
+        if (amount <= 0) return false;
 
-        resources[type] = Mathf.Clamp(amount, 0, maxCapacities[type]);
-        Debug.Log($"{type} {amount} 설정 후 {resources[type]} (Max {maxCapacities[type]})");
+        if (maxCapacities.ContainsKey(type))
+            maxCapacities[type] += amount;
+        else
+            maxCapacities[type] = amount;
+
+        // 현재 보유량이 새 최대값을 넘지 않도록 조정(옵션)
+        if (adjustCurrent && resources.ContainsKey(type))
+            resources[type] = Mathf.Clamp(resources[type], 0, maxCapacities[type]);
+
+        Debug.Log($"[ResourceManager] {type} MaxCapacity 증가: +{amount} => {maxCapacities[type]}");
         return true;
     }
 }
