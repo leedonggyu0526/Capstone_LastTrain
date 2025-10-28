@@ -94,6 +94,10 @@ public class ResourceManager : MonoBehaviour
 
         if (resources[type] < amount)
         {
+            if(type == ResourceType.Durability)
+            {
+                this.SetResource(ResourceType.Durability, 0);
+            }
             Debug.LogWarning($"{type} 부족! 현재량: {resources[type]}");
             return false;
         }
